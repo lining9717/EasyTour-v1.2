@@ -15,9 +15,10 @@ import android.widget.Toast;
 public class RegisterTourist extends Activity {
     private EditText et_r_t_user_name;
     private EditText et_r_t_psw;
-    private EditText et_r_t_psw_for_sure;
+    private EditText et_r_t_real_name;
+    private EditText et_r_t_ID;
+    private EditText et_r_t_phone;
     private Button btn_r_t_ok;
-    private Button btn_r_t_cancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,20 +34,23 @@ public class RegisterTourist extends Activity {
             }
         });
 
-        btn_r_t_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
-
+    /*
+    when pushed the back button , go back
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+    /*
+    changed the layout delete the cancel button and rename the id of views
+     */
     public void init(){
-        et_r_t_user_name = findViewById(R.id.et_r_t_user_name);
-        et_r_t_psw = findViewById(R.id.et_r_t_psw);
-        et_r_t_psw_for_sure = findViewById(R.id.et_r_t_psw_for_sure);
-        btn_r_t_ok = findViewById(R.id.btn_r_t_ok);
-        btn_r_t_cancel = findViewById(R.id.btn_r_t_cancel);
+        et_r_t_user_name = findViewById(R.id.et_tourist_user_name);
+        et_r_t_psw = findViewById(R.id.et_tourist__psw);
+        et_r_t_real_name = findViewById(R.id.et_tourist_real_name);
+        et_r_t_ID = findViewById(R.id.et_tourist_ID);
+        et_r_t_phone = findViewById(R.id.et_tourist_tel);
+        btn_r_t_ok = findViewById(R.id.btn_tourist_ok);
     }
 }

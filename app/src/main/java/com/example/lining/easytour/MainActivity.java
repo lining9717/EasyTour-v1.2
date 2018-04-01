@@ -2,8 +2,6 @@ package com.example.lining.easytour;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,7 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ArrayList<Lobby_Item> lobby_items = new ArrayList<>();
+    private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
     private Spinner sp_time;
     private Spinner sp_place;
 
@@ -67,8 +65,8 @@ public class MainActivity extends AppCompatActivity
         initSpinner(sp_time,time);
 
         generateListContent();
-        Lobby_Item_Adapter lobby_item_adapter = new Lobby_Item_Adapter(getBaseContext(),R.layout.order_item,lobby_items);
-        ListView listView = findViewById(R.id.listView);
+        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(),R.layout.order_item,lobby_items);
+        ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
         listView.setAdapter(lobby_item_adapter);
     }
 
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             String date = element.substring(2,6);
             String content = element.substring(6,8);
             int day = Integer.parseInt(element.substring(8));
-            lobby_items.add(new Lobby_Item(title,date,content,day));
+            lobby_items.add(new LobbyItem(title,date,content,day));
         }
     }
 

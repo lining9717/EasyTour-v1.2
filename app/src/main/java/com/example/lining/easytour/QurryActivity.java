@@ -14,7 +14,7 @@ public class QurryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qurry);
-        lv_to_be_finished = (ListView) findViewById(R.id.listview);
+        lv_to_be_finished = (ListView) findViewById(R.id.orders_listview);/*changed the name of the orders ListView*/
         MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
     }

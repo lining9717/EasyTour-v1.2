@@ -22,7 +22,7 @@
             android:id="@+id/main_list_tv_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Desctiption"
+            android:text="文章标题"
             android:textSize="20sp" />
     </LinearLayout>
 

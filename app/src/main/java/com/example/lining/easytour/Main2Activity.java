@@ -36,7 +36,7 @@ public class Main2Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        lv_list_postpaper = (ListView) findViewById(R.id.main_list_view);
+        lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
         MyMainArrayAdapter adapter = new MyMainArrayAdapter(Main2Activity.this,0,getPostPaperData());
         lv_list_postpaper.setAdapter(adapter);
     }
