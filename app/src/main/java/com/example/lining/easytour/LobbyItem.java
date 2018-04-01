@@ -4,13 +4,13 @@ package com.example.lining.easytour;
  * Created by lining on 2018/3/24.
  */
 
-public class Lobby_Item {
+public class LobbyItem {
     String title;
     String date;
     String content;
     int day;
 
-    public Lobby_Item(String title, String date, String content, int day) {
+    public LobbyItem(String title, String date, String content, int day) {
         this.title = title;
         this.date = date;
         this.content = content;
