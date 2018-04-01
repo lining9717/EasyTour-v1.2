@@ -9,7 +9,7 @@ import org.w3c.dom.Text;
  * Created by lining on 2018/3/24.
  */
 
-public class Lobby_View_Holder {
+public class LobbyViewHolder {
      TextView title;
      TextView date;
      TextView content;

@@ -14,9 +14,9 @@ import java.util.List;
  * Created by lining on 2018/3/24.
  */
 
-public class Lobby_Item_Adapter extends ArrayAdapter<Lobby_Item> {
+public class LobbyItemAdapter extends ArrayAdapter<LobbyItem> {
     private int resource;
-    public Lobby_Item_Adapter(@NonNull Context context, int resource, @NonNull List<Lobby_Item> objects) {
+    public LobbyItemAdapter(@NonNull Context context, int resource, @NonNull List<LobbyItem> objects) {
         super(context, resource, objects);
         this.resource = resource;
     }
@@ -24,12 +24,12 @@ public class Lobby_Item_Adapter extends ArrayAdapter<Lobby_Item> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Lobby_Item lobby_item = getItem(position);
+        LobbyItem lobby_item = getItem(position);
         View view;
-        Lobby_View_Holder view_holder;
+        LobbyViewHolder view_holder;
         if(convertView == null){
             view = LayoutInflater.from(getContext()).inflate(resource,parent,false);
-            view_holder = new Lobby_View_Holder();
+            view_holder = new LobbyViewHolder();
             view_holder.title = view.findViewById(R.id.order_item_title);
             view_holder.content = view.findViewById(R.id.order_item_content);
             view_holder.date = view.findViewById(R.id.order_item_date);
@@ -38,7 +38,7 @@ public class Lobby_Item_Adapter extends ArrayAdapter<Lobby_Item> {
             view.setTag(view_holder);
         }else{
             view = convertView;
-            view_holder = (Lobby_View_Holder)view.getTag();
+            view_holder = (LobbyViewHolder)view.getTag();
         }
         view_holder.title.setText(lobby_item.getTitle());
         view_holder.content.setText(lobby_item.getContent());
