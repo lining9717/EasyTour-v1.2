@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         generateListContent();
         LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(),R.layout.order_item,lobby_items);
-        ListView listView = findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
         listView.setAdapter(lobby_item_adapter);
     }
 

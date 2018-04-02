@@ -19,7 +19,6 @@ public class RegisterGuider extends Activity {
     private EditText et_r_g_ID;
     private EditText et_r_g_tel;
     private Button btn_r_g_ok;
-    private Button btn_r_g_cancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,13 +31,14 @@ public class RegisterGuider extends Activity {
                 Toast.makeText(RegisterGuider.this,"Coding...",Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        btn_r_g_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    /*
+    when pushed the back button , go back
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public void init(){
@@ -48,6 +48,6 @@ public class RegisterGuider extends Activity {
         et_r_g_ID = findViewById(R.id.et_r_g_ID);
         et_r_g_tel = findViewById(R.id.et_r_g_tel);
         btn_r_g_ok = findViewById(R.id.btn_r_g_ok);
-        btn_r_g_cancel = findViewById(R.id.btn_r_g_cancel);
+
     }
 }

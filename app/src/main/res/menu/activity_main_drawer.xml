@@ -7,19 +7,24 @@
         <item
             android:id="@+id/lobby"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Lobby" />
+            android:title="任务大厅" />
         <item
             android:id="@+id/order"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Order" />
+            android:title="我的订单" />
         <item
             android:id="@+id/message"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Message" />
+            android:title="消息记录" />
         <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Setting" />
+            android:title="个人设置" />
+        <item
+            android:id="@+id/quite"
+            android:icon="@drawable/ic_menu_send"
+            android:title="退出登陆"
+            />
     </group>
 
 </menu>

@@ -8,5 +8,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorButton1">#3ffcad1b</color>
     <color name="colorButton2">#3f7b72e8</color>
-    <color name="colorButton3">#50ffffff</color>
+    <color name="colorButton3">#50999292</color>
+    <color name="colorNone">#00000000</color>
 </resources>
