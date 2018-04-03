@@ -16,7 +16,6 @@ public class RegisterTourist extends Activity {
     private EditText et_r_t_user_name;
     private EditText et_r_t_psw;
     private EditText et_r_t_real_name;
-    private EditText et_r_t_ID;
     private EditText et_r_t_phone;
     private Button btn_r_t_ok;
 
@@ -48,8 +47,7 @@ public class RegisterTourist extends Activity {
     public void init(){
         et_r_t_user_name = findViewById(R.id.et_tourist_user_name);
         et_r_t_psw = findViewById(R.id.et_tourist__psw);
-        et_r_t_real_name = findViewById(R.id.et_tourist_real_name);
-        et_r_t_ID = findViewById(R.id.et_tourist_ID);
+        et_r_t_real_name = findViewById(R.id.et_tourist_confirm_psw);
         et_r_t_phone = findViewById(R.id.et_tourist_tel);
         btn_r_t_ok = findViewById(R.id.btn_tourist_ok);
     }

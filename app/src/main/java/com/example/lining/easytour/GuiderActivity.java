@@ -15,7 +15,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity
+public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ListView lv_list_postpaper;
@@ -37,7 +37,7 @@ public class Main2Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
-        MyMainArrayAdapter adapter = new MyMainArrayAdapter(Main2Activity.this,0,getPostPaperData());
+        MyMainArrayAdapter adapter = new MyMainArrayAdapter(GuiderActivity.this,0,getPostPaperData());
         lv_list_postpaper.setAdapter(adapter);
     }
 
@@ -92,19 +92,19 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.nav_qurryorder) {
             Intent intent = new Intent();
-            intent.setClass(Main2Activity.this,QurryActivity.class);
+            intent.setClass(GuiderActivity.this,QurryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();
-            intent.setClass(Main2Activity.this,SendOrderActivity.class);
+            intent.setClass(GuiderActivity.this,SendOrderActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_message) {
             Intent intent = new Intent();
-            intent.setClass(Main2Activity.this,MessageActivity.class);
+            intent.setClass(GuiderActivity.this,MessageActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent();
-            intent.setClass(Main2Activity.this,TouristSettingActivity.class);
+            intent.setClass(GuiderActivity.this,TouristSettingActivity.class);
             startActivity(intent);
         }
 

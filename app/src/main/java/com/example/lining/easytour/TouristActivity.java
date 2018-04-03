@@ -20,7 +20,7 @@ import android.widget.ViewFlipper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+public class TouristActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
     private Spinner sp_time;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TouristActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this,"Coding",Toast.LENGTH_SHORT).show();
+            Toast.makeText(TouristActivity.this,"Coding",Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -150,13 +150,13 @@ public class MainActivity extends AppCompatActivity
                 super.onBackPressed();
             }
         } else if (id == R.id.order) {
-            Intent intent = new Intent(MainActivity.this,QurryActivity.class);
+            Intent intent = new Intent(TouristActivity.this,QurryActivity.class);
             startActivity(intent);
         } else if (id == R.id.message) {
-            Intent intent = new Intent(MainActivity.this,MessageActivity.class);
+            Intent intent = new Intent(TouristActivity.this,MessageActivity.class);
             startActivity(intent);
         } else if(id == R.id.setting){
-            Intent intent = new Intent(MainActivity.this,TouristSettingActivity.class);
+            Intent intent = new Intent(TouristActivity.this,TouristSettingActivity.class);
             startActivity(intent);
         }
 

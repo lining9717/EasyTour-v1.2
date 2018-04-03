@@ -2,16 +2,20 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp">
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="注册个人信息"
         android:gravity="center"
+        android:text="注册个人信息"
         android:textSize="25sp"
-        />
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp" />
     <EditText
         android:id="@+id/et_tourist_user_name"
         android:layout_width="match_parent"
@@ -47,7 +51,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/et_tourist_real_name"
+        android:id="@+id/et_tourist_confirm_psw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -55,27 +59,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="真实姓名"
+        android:hint="确认密码"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_tourist__psw"
         app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/et_tourist_ID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="身份证ID"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_tourist_real_name" />
 
     <EditText
         android:id="@+id/et_tourist_tel"
@@ -88,10 +78,10 @@
         android:ems="10"
         android:hint="电话号码"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_tourist_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_tourist_ID"
+        app:layout_constraintTop_toTopOf="@+id/et_tourist__psw"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -107,7 +97,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_guide_tel"
+        app:layout_constraintTop_toBottomOf="@+id/et_tourist_tel"
         app:layout_constraintVertical_bias="0.0" />
 
 
