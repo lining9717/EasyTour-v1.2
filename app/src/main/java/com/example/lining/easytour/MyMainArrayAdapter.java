@@ -60,7 +60,7 @@ public class MyMainArrayAdapter extends ArrayAdapter<Postpaper> {
             viewHolder=new ViewHolder();
             LayoutInflater mInflater=LayoutInflater.from(context);
             convertView = mInflater.inflate(R.layout.signt, null);
-            viewHolder.content = (TextView) convertView.findViewById(R.id.main_list_tv_content);
+            viewHolder.content = (TextView) convertView.findViewById(R.id.tourist_list_tv_content);
             convertView.setTag(viewHolder);
         }
         else

@@ -18,7 +18,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main2">Easy Tour</string>
+    <string name="title_activity_main2">大厅</string>
 
     <string name="become_a_guider">I want to be a Guider</string>
 </resources>

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name=".GuiderActivity"
+            android:name=".TouristActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TouristSettingActivity" />
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".TouristActivity"
+            android:name=".GuiderActivity"
             android:label="任务大厅"
             android:theme="@style/AppTheme.NoActionBar"
             >

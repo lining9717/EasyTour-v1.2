@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/main_list_tv_content"
+            android:id="@+id/tourist_list_tv_content"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/p4"
