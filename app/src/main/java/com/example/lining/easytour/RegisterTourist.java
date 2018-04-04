@@ -29,11 +29,12 @@ public class RegisterTourist extends Activity {
         btn_r_t_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegisterTourist.this,"Coding",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterTourist.this, "Coding", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
     /*
     when pushed the back button , go back
      */
@@ -41,10 +42,11 @@ public class RegisterTourist extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
     /*
     changed the layout delete the cancel button and rename the id of views
      */
-    public void init(){
+    public void init() {
         et_r_t_user_name = findViewById(R.id.et_tourist_user_name);
         et_r_t_psw = findViewById(R.id.et_tourist__psw);
         et_r_t_real_name = findViewById(R.id.et_tourist_confirm_psw);

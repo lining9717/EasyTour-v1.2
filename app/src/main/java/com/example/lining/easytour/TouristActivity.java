@@ -27,33 +27,31 @@ public class TouristActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
-        MyMainArrayAdapter adapter = new MyMainArrayAdapter(TouristActivity.this,0,getPostPaperData());
+        lv_list_postpaper = findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
+        MyMainArrayAdapter adapter = new MyMainArrayAdapter(TouristActivity.this, 0, getPostPaperData());
         lv_list_postpaper.setAdapter(adapter);
-
 
 
     }
 
     private List<Postpaper> getPostPaperData() {
-        List<Postpaper> list= new ArrayList<Postpaper>();
-        int[] images = new int[]{R.drawable.p1,R.drawable.p2,R.drawable.p3,R.drawable.p4,R.drawable.p5};
-        for(int i=0;i<5;i++)
-        {
-            Postpaper p = new Postpaper(images[i],"Description"+Integer.toString(i));
+        List<Postpaper> list = new ArrayList<Postpaper>();
+        int[] images = new int[]{R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5};
+        for (int i = 0; i < 5; i++) {
+            Postpaper p = new Postpaper(images[i], "Description" + Integer.toString(i));
             list.add(p);
         }
         return list;
@@ -61,7 +59,7 @@ public class TouristActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -99,23 +97,23 @@ public class TouristActivity extends AppCompatActivity
 
         if (id == R.id.nav_qurryorder) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this,QurryActivity.class);
+            intent.setClass(TouristActivity.this, QurryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this,SendOrderActivity.class);
+            intent.setClass(TouristActivity.this, SendOrderActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_message) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this,MessageActivity.class);
+            intent.setClass(TouristActivity.this, MessageActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this,TouristSettingActivity.class);
+            intent.setClass(TouristActivity.this, TouristSettingActivity.class);
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

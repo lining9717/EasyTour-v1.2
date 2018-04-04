@@ -28,7 +28,7 @@ public class RegisterGuider extends Activity {
         btn_r_g_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegisterGuider.this,"Coding...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterGuider.this, "Coding...", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -41,7 +41,7 @@ public class RegisterGuider extends Activity {
         super.onBackPressed();
     }
 
-    public void init(){
+    public void init() {
         et_r_g_user_name = findViewById(R.id.et_r_g_user_name);
         et_r_g_psw = findViewById(R.id.et_r_g_psw);
         et_r_g_real_name = findViewById(R.id.et_r_g_real_name);

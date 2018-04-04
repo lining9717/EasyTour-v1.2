@@ -9,8 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="">
+        android:gravity=""
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,71 +32,85 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginTop="30dp"
             android:gravity="center"
-            android:layout_marginTop="30dp">
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logotemp" />
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:text="用户昵称"/>
+                    android:text="用户昵称" />
+
                 <EditText
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:text="手机号码"/>
+                    android:text="手机号码" />
+
                 <EditText
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:text="真实姓名"/>
+                    android:text="真实姓名" />
+
                 <EditText
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:text="个性签名"/>
+                    android:text="个性签名" />
+
                 <EditText
                     android:layout_width="200sp"
                     android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:scrollbars="vertical"/>
+                    android:scrollbars="vertical"
+                    android:singleLine="false" />
             </LinearLayout>
+
             <Button
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="更新"
-                android:textSize="25sp"
                 android:layout_marginTop="20dp"
-                android:onClick="btnUpdate"/>
+                android:onClick="btnUpdate"
+                android:text="更新"
+                android:textSize="25sp" />
 
         </LinearLayout>
     </LinearLayout>

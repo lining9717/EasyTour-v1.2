@@ -5,20 +5,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="become_a_tourist">I want to be a tourist</string>
+    <string name="become_a_tourist">I am tourist</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Sign up</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="error_invalid_email">Invalid email address.</string>
+    <string name="error_invalid_password">Your password is too short.</string>
+    <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_field_required">Filled can`t be blank</string>
+    <string name="permission_rationale">"Access to your contacts is needed for email address auto-completion"</string>
     <string name="title_activity_main2">大厅</string>
-
-    <string name="become_a_guider">I want to be a Guider</string>
+    <string name="become_a_guider">Wanna be Tour Guide</string>
 </resources>

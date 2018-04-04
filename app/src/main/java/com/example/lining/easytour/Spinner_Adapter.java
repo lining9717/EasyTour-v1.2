@@ -18,6 +18,7 @@ import java.util.List;
 public class Spinner_Adapter extends BaseAdapter {
     List<String> datas = new ArrayList<>();
     Context mContext;
+
     public Spinner_Adapter(Context context) {
         mContext = context;
 
@@ -30,12 +31,12 @@ public class Spinner_Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return datas==null?0:datas.size();
+        return datas == null ? 0 : datas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return datas==null?null:datas.get(position);
+        return datas == null ? null : datas.get(position);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class Spinner_Adapter extends BaseAdapter {
         return convertView;
     }
 
-    private static class ViewHodler{
+    private static class ViewHodler {
         TextView mTextView;
     }
 }

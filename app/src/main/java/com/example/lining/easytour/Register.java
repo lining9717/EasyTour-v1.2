@@ -14,7 +14,7 @@ import android.widget.Button;
 public class Register extends Activity {
     private Button btn_become_tourist;
     private Button btn_become_guider;
-    private Button btn_goback;
+    private Button btn_go_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class Register extends Activity {
         btn_become_tourist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this,RegisterTourist.class);
-                startActivity(intent);
+
+                startActivity(new Intent(Register.this, RegisterTourist.class));
 
             }
         });
@@ -35,13 +35,12 @@ public class Register extends Activity {
         btn_become_guider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this,RegisterGuider.class);
-                startActivity(intent);
+                startActivity(new Intent(Register.this, RegisterGuider.class));
 
             }
         });
 
-        btn_goback.setOnClickListener(new View.OnClickListener() {
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -50,9 +49,9 @@ public class Register extends Activity {
     }
 
 
-    public void init(){
+    public void init() {
         btn_become_guider = findViewById(R.id.btn_become_guider);
         btn_become_tourist = findViewById(R.id.btn_become_tourist);
-        btn_goback = findViewById(R.id.btn_goback);
+        btn_go_back = findViewById(R.id.btn_goback);
     }
 }
