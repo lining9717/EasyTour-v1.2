@@ -97,7 +97,13 @@ public class Login extends Activity {
     }
 
     public void guiderlogin(){
+        Intent intent = new Intent(Login.this, GuiderActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
+    public void btnForgetKeyword(View view) {
+        Toast.makeText(this,"Refind the word",Toast.LENGTH_SHORT).show();
     }
 
 

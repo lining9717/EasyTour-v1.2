@@ -2,6 +2,8 @@ package com.example.lining.easytour;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,19 +12,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawerLayout;
-    private ListView lv_list_postpaper;
+    private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
+    private Spinner sp_time;
+    private Spinner sp_place;
+    private ViewFlipper viewFlipper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
+        init();
+    }
+
+    public void init(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,25 +44,71 @@ public class GuiderActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
-        MyMainArrayAdapter adapter = new MyMainArrayAdapter(GuiderActivity.this,0,getPostPaperData());
-        lv_list_postpaper.setAdapter(adapter);
+        List<String> place = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            place.add("CQU");
+        }
+
+        List<String> time = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            time.add("3/26/2018");
+        }
+
+        sp_time = findViewById(R.id.spinner_time);
+        sp_place = findViewById(R.id.spinner_place);
+        initSpinner(sp_place,place);
+        initSpinner(sp_time,time);
+
+        generateListContent();
+        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(),R.layout.order_item,lobby_items);
+        ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
+        listView.setAdapter(lobby_item_adapter);
+
+        viewFlipper= (ViewFlipper) findViewById(R.id.guider_vf_lobby);
+        setViewFlipper(viewFlipper);
+    }
+    private void setViewFlipper(ViewFlipper viewFlipper) {
+        for (int i = 0; i < 3; i++) {
+            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
+            viewFlipper.addView(view);
+        }
+    }
+    public void initSpinner(Spinner spinner,List<String> data){
+        final List<String> datas = data;
+        Spinner_Adapter spinner_adapter = new Spinner_Adapter(this);
+        spinner.setAdapter(spinner_adapter);
+
+        spinner_adapter.setDatas(datas);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(GuiderActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    private List<Postpaper> getPostPaperData() {
-        List<Postpaper> list= new ArrayList<Postpaper>();
-        int[] images = new int[]{R.drawable.p1,R.drawable.p2,R.drawable.p3,R.drawable.p4,R.drawable.p5};
-        for(int i=0;i<5;i++)
-        {
-            Postpaper p = new Postpaper(images[i],"Description"+Integer.toString(i));
-            list.add(p);
+
+
+    private void generateListContent(){
+        final String[] list = {"重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3"};
+        for(String element:list){
+            String title = element.substring(0,2);
+            String date = element.substring(2,6);
+            String content = element.substring(6,8);
+            int day = Integer.parseInt(element.substring(8));
+            lobby_items.add(new LobbyItem(title,date,content,day));
         }
-        return list;
     }
+
 
     @Override
     public void onBackPressed() {
@@ -65,7 +123,7 @@ public class GuiderActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -78,7 +136,7 @@ public class GuiderActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Toast.makeText(GuiderActivity.this,"Coding",Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -90,21 +148,21 @@ public class GuiderActivity extends AppCompatActivity
         // Handle navigation view order_item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_qurryorder) {
-            Intent intent = new Intent();
-            intent.setClass(GuiderActivity.this,QurryActivity.class);
+        if (id == R.id.lobby) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        } else if (id == R.id.order) {
+            Intent intent = new Intent(GuiderActivity.this,QurryActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_sendorder) {
-            Intent intent = new Intent();
-            intent.setClass(GuiderActivity.this,SendOrderActivity.class);
+        } else if (id == R.id.message) {
+            Intent intent = new Intent(GuiderActivity.this,MessageActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_message) {
-            Intent intent = new Intent();
-            intent.setClass(GuiderActivity.this,MessageActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_setting) {
-            Intent intent = new Intent();
-            intent.setClass(GuiderActivity.this,TouristSettingActivity.class);
+        } else if(id == R.id.setting){
+            Intent intent = new Intent(GuiderActivity.this,TouristSettingActivity.class);
             startActivity(intent);
         }
 
@@ -112,5 +170,4 @@ public class GuiderActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

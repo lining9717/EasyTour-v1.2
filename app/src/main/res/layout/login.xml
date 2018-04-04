@@ -7,13 +7,17 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     >
-    <TextView
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EasyTour"
-        android:textSize="50sp"
-        android:gravity="center"
-        />
+        android:src="@drawable/et_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032"  />
     <EditText
         android:id="@+id/et_account"
         android:layout_width="match_parent"
@@ -23,12 +27,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:hint="账号"
+        style="?android:attr/textViewStyle"
+        android:background="@drawable/shape"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.232"
+
+        />
 
     <EditText
         android:id="@+id/et_psw"
@@ -39,13 +48,15 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="密码"
+        android:background="@drawable/shape"
+        android:textSize="25sp"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_account"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintVertical_bias="0.089" />
 
     <Button
         android:id="@+id/btn_sign_in"
@@ -56,6 +67,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="登陆"
+
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +85,7 @@
         android:layout_marginTop="8dp"
         android:text="注册"
         android:textSize="20sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +101,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="忘记密码？"
+        android:onClick="btnForgetKeyword"
         android:background="@color/colorNone"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
