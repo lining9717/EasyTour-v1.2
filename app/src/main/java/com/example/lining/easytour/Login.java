@@ -50,9 +50,9 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 if (rbt_guider.isChecked()) {
-                    guiderlogin();
+                    tourGuideLogin();
                 } else {
-                    touristlogin();
+                    touristLogin();
                 }
             }
         });
@@ -60,8 +60,8 @@ public class Login extends Activity {
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Register.class);
-                startActivity(intent);
+
+                startActivity(new Intent(Login.this, Register.class));
             }
         });
 
@@ -89,21 +89,20 @@ public class Login extends Activity {
     }
 
 
-
-    public void touristlogin(){
+    public void touristLogin() {
         progressDialog.show();
         String url = "http://118.89.18.136/EasyTour-bk/touristlogin.php/";
         new TouristLogin().execute(url);
     }
 
-    public void guiderlogin(){
+    public void tourGuideLogin() {
         Intent intent = new Intent(Login.this, GuiderActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void btnForgetKeyword(View view) {
-        Toast.makeText(this,"Refind the word",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Refind the word", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -122,7 +121,7 @@ public class Login extends Activity {
                 httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
                 // 服务器发给客户端的相应，有一个相应码： 相应码为200，正常； 相应码为404，客户端错误； 相应码为505，服务器端错误。
-                Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
+                Log.i("getStatusCode():", "------>" + httpResponse.getStatusLine().getStatusCode());
                 if (httpResponse.getStatusLine().getStatusCode() == 200) {
                     result = EntityUtils.toString(httpResponse.getEntity());
                 }
@@ -138,10 +137,10 @@ public class Login extends Activity {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
 
-            if(!aBoolean){
+            if (!aBoolean) {
                 progressDialog.dismiss();
                 Toast.makeText(Login.this, "密码或用户名错误", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 Intent intent = new Intent(Login.this, TouristActivity.class);
                 startActivity(intent);
                 finish();

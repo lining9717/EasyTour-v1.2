@@ -21,19 +21,19 @@ public class MessageItemAdapter extends ArrayAdapter<Message> {
     private Context context;
 
     public MessageItemAdapter(Context context, int resourceId, List<Message> objects) {
-        super(context,resourceId,objects);
+        super(context, resourceId, objects);
         // TODO Auto-generated constructor stub
-        this.objects=objects;
-        this.context=context;
+        this.objects = objects;
+        this.context = context;
     }
 
-    private static class ViewHolder
-    {
+    private static class ViewHolder {
         ImageView mimage;
         TextView mcontent;
         TextView mtitle;
         TextView mtime;
     }
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
@@ -56,24 +56,20 @@ public class MessageItemAdapter extends ArrayAdapter<Message> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         MessageItemAdapter.ViewHolder viewHolder = null;
-        if(convertView==null)
-        {
-            viewHolder=new MessageItemAdapter.ViewHolder();
-            LayoutInflater mInflater=LayoutInflater.from(context);
+        if (convertView == null) {
+            viewHolder = new MessageItemAdapter.ViewHolder();
+            LayoutInflater mInflater = LayoutInflater.from(context);
             convertView = mInflater.inflate(R.layout.message_item, null);
             viewHolder.mimage = (ImageView) convertView.findViewById(R.id.mess_item_image);
             viewHolder.mtitle = (TextView) convertView.findViewById(R.id.mess_item_title);
             viewHolder.mcontent = (TextView) convertView.findViewById(R.id.mess_item_content);
             viewHolder.mtime = (TextView) convertView.findViewById(R.id.mess_item_date);
             convertView.setTag(viewHolder);
-        }
-        else
-        {
+        } else {
             viewHolder = (MessageItemAdapter.ViewHolder) convertView.getTag();
         }
         Message message = objects.get(position);
-        if(null!=message)
-        {
+        if (null != message) {
             viewHolder.mimage.setImageResource(message.getPicture());
             viewHolder.mtitle.setText(message.getTitle());
             viewHolder.mcontent.setText(message.getContent());

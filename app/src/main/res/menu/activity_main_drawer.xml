@@ -23,8 +23,7 @@
         <item
             android:id="@+id/quite"
             android:icon="@drawable/ic_menu_send"
-            android:title="退出登陆"
-            />
+            android:title="退出登陆" />
     </group>
 
 </menu>

@@ -14,6 +14,6 @@ public class TouristSettingActivity extends AppCompatActivity {
     }
 
     public void btnUpdate(View view) {
-        Toast.makeText(TouristSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
+        Toast.makeText(TouristSettingActivity.this, "Updating the new information", Toast.LENGTH_SHORT).show();
     }
 }

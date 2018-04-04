@@ -27,6 +27,7 @@ public class GuiderActivity extends AppCompatActivity
     private Spinner sp_time;
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +35,17 @@ public class GuiderActivity extends AppCompatActivity
         init();
     }
 
-    public void init(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    public void init() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         List<String> place = new ArrayList<>();
@@ -59,24 +60,26 @@ public class GuiderActivity extends AppCompatActivity
 
         sp_time = findViewById(R.id.spinner_time);
         sp_place = findViewById(R.id.spinner_place);
-        initSpinner(sp_place,place);
-        initSpinner(sp_time,time);
+        initSpinner(sp_place, place);
+        initSpinner(sp_time, time);
 
         generateListContent();
-        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(),R.layout.order_item,lobby_items);
+        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(), R.layout.order_item, lobby_items);
         ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
         listView.setAdapter(lobby_item_adapter);
 
-        viewFlipper= (ViewFlipper) findViewById(R.id.guider_vf_lobby);
+        viewFlipper = findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
     }
+
     private void setViewFlipper(ViewFlipper viewFlipper) {
         for (int i = 0; i < 3; i++) {
             View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
             viewFlipper.addView(view);
         }
     }
-    public void initSpinner(Spinner spinner,List<String> data){
+
+    public void initSpinner(Spinner spinner, List<String> data) {
         final List<String> datas = data;
         Spinner_Adapter spinner_adapter = new Spinner_Adapter(this);
         spinner.setAdapter(spinner_adapter);
@@ -97,22 +100,21 @@ public class GuiderActivity extends AppCompatActivity
     }
 
 
-
-    private void generateListContent(){
-        final String[] list = {"重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3"};
-        for(String element:list){
-            String title = element.substring(0,2);
-            String date = element.substring(2,6);
-            String content = element.substring(6,8);
+    private void generateListContent() {
+        final String[] list = {"重大3/25虎溪3", "重大3/25虎溪3", "重大3/25虎溪3", "重大3/25虎溪3", "重大3/25虎溪3", "重大3/25虎溪3", "重大3/25虎溪3"};
+        for (String element : list) {
+            String title = element.substring(0, 2);
+            String date = element.substring(2, 6);
+            String content = element.substring(6, 8);
             int day = Integer.parseInt(element.substring(8));
-            lobby_items.add(new LobbyItem(title,date,content,day));
+            lobby_items.add(new LobbyItem(title, date, content, day));
         }
     }
 
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -136,7 +138,7 @@ public class GuiderActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(GuiderActivity.this,"Coding",Toast.LENGTH_SHORT).show();
+            Toast.makeText(GuiderActivity.this, "Coding", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -149,24 +151,24 @@ public class GuiderActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.lobby) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
                 super.onBackPressed();
             }
         } else if (id == R.id.order) {
-            Intent intent = new Intent(GuiderActivity.this,QurryActivity.class);
+            Intent intent = new Intent(GuiderActivity.this, QurryActivity.class);
             startActivity(intent);
         } else if (id == R.id.message) {
-            Intent intent = new Intent(GuiderActivity.this,MessageActivity.class);
+            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
             startActivity(intent);
-        } else if(id == R.id.setting){
-            Intent intent = new Intent(GuiderActivity.this,TouristSettingActivity.class);
+        } else if (id == R.id.setting) {
+            Intent intent = new Intent(GuiderActivity.this, TouristSettingActivity.class);
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
