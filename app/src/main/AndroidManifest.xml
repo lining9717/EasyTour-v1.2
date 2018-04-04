@@ -42,7 +42,7 @@
 
         <activity
             android:name=".TouristActivity"
-            android:label="LOBBY"
+            android:label="任务大厅"
             android:theme="@style/AppTheme.NoActionBar"
             >
         </activity>
