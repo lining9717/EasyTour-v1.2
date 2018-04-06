@@ -21,7 +21,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,33 +92,29 @@ public class Login extends Activity {
         progressDialog.setMessage("正在连接，请稍后....");
     }
 
-
-
     public void touristlogin(){
         progressDialog.show();
-        String url = "http://118.89.18.136/EasyTour-bk/touristlogin.php/";
-        new TouristLogin().execute(url);
+
+        new TouristLogin().execute();
     }
 
     public void guiderlogin(){
-        Intent intent = new Intent(Login.this, GuiderActivity.class);
-        startActivity(intent);
-        finish();
+        progressDialog.show();
+        new GuiderLogin().execute();
     }
 
     public void btnForgetKeyword(View view) {
         Toast.makeText(this,"Refind the word",Toast.LENGTH_SHORT).show();
     }
 
-
-    private class TouristLogin extends AsyncTask<String, Void, Boolean> {
-
+    private class TouristLogin extends AsyncTask<String, Void, String[]> {
         @Override
-        protected Boolean doInBackground(String... strings) {
+        protected String[] doInBackground(String... strings) {
+            String uri = "http://118.89.18.136/EasyTour-bk/touristlogin.php/";
             String account = et_account.getText().toString().trim();
             String psw = et_psw.getText().toString().trim();
-            String result = null;
-            HttpPost httpRequest = new HttpPost(strings[0]);
+            StringBuilder result = new StringBuilder();
+            HttpPost httpRequest = new HttpPost(uri);
             List params = new ArrayList();
             params.add(new BasicNameValuePair("username", account));
             params.add(new BasicNameValuePair("password", psw));
@@ -124,25 +124,127 @@ public class Login extends Activity {
                 // 服务器发给客户端的相应，有一个相应码： 相应码为200，正常； 相应码为404，客户端错误； 相应码为505，服务器端错误。
                 Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
                 if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                    result = EntityUtils.toString(httpResponse.getEntity());
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                    for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
+                        result.append(s);
+                    }
                 }
+                Log.i("result","------->"+result.toString());
+                //从json中取出数据
+                JSONObject mObject = new JSONObject(result.toString());
+                int code = mObject.getInt("code");
+                String message = mObject.getString("message");
+                JSONObject mData = mObject.getJSONObject("data");
+                if(code == 0){
+                    Log.i("fail message","------>"+message);
+                    return new String[]{"false"};
+                }
+                String[] returndata = new String[5];
+                returndata[0] = "success";
+                returndata[1] = mData.getString("username");
+                returndata[2] = mData.getString("introduce");
+                returndata[3] = mData.getString("tel");
+                returndata[4] = mData.getString("photo");
+
+                if(code == 1 && message.equals("Login success"))
+                    return returndata;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (result.equals("Login succeed"))
-                return true;
-            return false;
+            return new String[]{"false"};
         }
 
+        /**
+         * * 这个strings就是返回的用户数据,与上面相对应
+         * strings[0]->返回的状态信息
+         * strings[1]->username
+         * strings[2]->introduce:个人介绍
+         * strings[3]->tel
+         * strings[4]->用户头像，现在还没有头像，先不用管
+         * @param strings
+         */
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-
-            if(!aBoolean){
+        protected void onPostExecute(String[] strings) {
+            super.onPostExecute(strings);
+            if(strings[0].equals("false")) {
                 progressDialog.dismiss();
                 Toast.makeText(Login.this, "密码或用户名错误", Toast.LENGTH_SHORT).show();
             }else{
+                /*
+                * 从这里可以用Intent传递到下一个activity
+                */
                 Intent intent = new Intent(Login.this, TouristActivity.class);
+                startActivity(intent);
+                finish();
+                progressDialog.dismiss();
+            }
+        }
+    }
+
+    private class GuiderLogin extends AsyncTask<String, Void, String[]> {
+        @Override
+        protected String[] doInBackground(String... strings) {
+            String uri = "http://118.89.18.136/EasyTour-bk/guiderlogin.php/";
+            String account = et_account.getText().toString().trim();
+            String psw = et_psw.getText().toString().trim();
+            StringBuilder result = new StringBuilder();
+            HttpPost httpRequest = new HttpPost(uri);
+            List params = new ArrayList();
+            params.add(new BasicNameValuePair("username", account));
+            params.add(new BasicNameValuePair("password", psw));
+            try {
+                httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+                // 服务器发给客户端的相应，有一个相应码： 相应码为200，正常； 相应码为404，客户端错误； 相应码为505，服务器端错误。
+                Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                    for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
+                        result.append(s);
+                    }
+                }
+                Log.i("result","------->"+result.toString());
+                //从json中取出数据
+                JSONObject mObject = new JSONObject(result.toString());
+                int code = mObject.getInt("code");
+                String message = mObject.getString("message");
+                JSONObject mData = mObject.getJSONObject("data");
+                if(code == 0){
+                    Log.i("fail message","------>"+message);
+                    return new String[]{"false"};
+                }
+                String[] returndata = new String[9];
+                returndata[0] = "success";
+                returndata[1] = mData.getString("guidername");
+                returndata[2] = mData.getString("introduce");
+                returndata[3] = mData.getString("realname");
+                returndata[4] = mData.getString("tel");
+                returndata[5] = mData.getString("photo");
+                returndata[6] = mData.getString("place");
+                returndata[7] = mData.getString("star");
+                returndata[8] = mData.getString("IDnumber");
+                if(code == 1 && message.equals("Login success"))
+                    return returndata;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new String[]{"false"};
+        }
+
+
+        /**
+         * @param strings
+         * 与tourist类似，一共有8个信息，对用doInBackground中的returndata
+         */
+        @Override
+        protected void onPostExecute(String[] strings) {
+            super.onPostExecute(strings);
+            if(strings[0].equals("false")){
+                progressDialog.dismiss();
+                Toast.makeText(Login.this, "密码或用户名错误", Toast.LENGTH_SHORT).show();
+            }else{
+                //从这里传递
+                Intent intent = new Intent(Login.this, GuiderActivity.class);
                 startActivity(intent);
                 finish();
                 progressDialog.dismiss();
