@@ -139,6 +139,7 @@
         android:background="@drawable/button_select"
         android:textSize="25sp"
         android:text="接受订单"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:onClick="btnResiveOrder"/>
 </LinearLayout>

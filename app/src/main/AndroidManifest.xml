@@ -21,13 +21,21 @@
             android:name=".TouristActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TouristSettingActivity" />
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".SendOrderActivity" />
-        <activity android:name=".QurryActivity" />
+        <activity
+            android:name=".TouristSettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SendOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QurryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,20 +55,27 @@
 
         <activity
             android:name=".Register"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterGuider"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterTourist"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GuiderActivity"
             android:label="任务大厅"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".OrderActivity" />
-        <activity android:name=".BoardActivity" />
-        <activity android:name=".TalkActivity"></activity>
+        <activity
+            android:name=".OrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BoardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TalkActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GuiderSettingActivity"></activity>
     </application>
 
 </manifest>

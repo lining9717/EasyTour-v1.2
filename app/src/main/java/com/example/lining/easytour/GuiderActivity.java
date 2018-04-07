@@ -172,7 +172,7 @@ AdapterView.OnItemClickListener{
             Intent intent = new Intent(GuiderActivity.this,MessageActivity.class);
             startActivity(intent);
         } else if(id == R.id.setting){
-            Intent intent = new Intent(GuiderActivity.this,TouristSettingActivity.class);
+            Intent intent = new Intent(GuiderActivity.this,GuiderSettingActivity.class);
             startActivity(intent);
         }else if(id == R.id.quite){
             Intent intent = new Intent(GuiderActivity.this,Login.class);

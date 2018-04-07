@@ -98,10 +98,9 @@
         android:ems="10"
         android:hint="电话号码"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btn_tourist_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_tourist_confirm_psw"
+        app:layout_constraintTop_toBottomOf="@+id/et_tourist_confirm_psw"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
