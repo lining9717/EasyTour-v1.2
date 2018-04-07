@@ -1,6 +1,7 @@
 package com.example.lining.easytour;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+AdapterView.OnItemClickListener{
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
     private Spinner sp_time;
     private Spinner sp_place;
@@ -33,7 +36,12 @@ public class GuiderActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         init();
     }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(GuiderActivity.this,OrderActivity.class);
+        startActivity(intent);
 
+    }
     public void init(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,13 +77,17 @@ public class GuiderActivity extends AppCompatActivity
 
         viewFlipper= (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
+
+        listView.setOnItemClickListener(this);
     }
+
     private void setViewFlipper(ViewFlipper viewFlipper) {
         for (int i = 0; i < 3; i++) {
             View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
             viewFlipper.addView(view);
         }
     }
+
     public void initSpinner(Spinner spinner,List<String> data){
         final List<String> datas = data;
         Spinner_Adapter spinner_adapter = new Spinner_Adapter(this);
@@ -96,10 +108,8 @@ public class GuiderActivity extends AppCompatActivity
         });
     }
 
-
-
     private void generateListContent(){
-        final String[] list = {"重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3","重大3/25虎溪3"};
+        final String[] list = {"重大3/20虎溪3","重大3/21虎溪3","重大3/22虎溪3","重大3/23虎溪3","重大3/24虎溪3","重大3/25虎溪3","重大3/26虎溪3"};
         for(String element:list){
             String title = element.substring(0,2);
             String date = element.substring(2,6);
@@ -164,6 +174,10 @@ public class GuiderActivity extends AppCompatActivity
         } else if(id == R.id.setting){
             Intent intent = new Intent(GuiderActivity.this,TouristSettingActivity.class);
             startActivity(intent);
+        }else if(id == R.id.quite){
+            Intent intent = new Intent(GuiderActivity.this,Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
