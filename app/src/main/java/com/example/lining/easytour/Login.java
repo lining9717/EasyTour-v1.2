@@ -94,7 +94,6 @@ public class Login extends Activity {
 
     public void touristlogin(){
         progressDialog.show();
-
         new TouristLogin().execute();
     }
 

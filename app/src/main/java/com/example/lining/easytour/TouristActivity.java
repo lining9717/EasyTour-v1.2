@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TouristActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        AdapterView.OnItemClickListener{
     private DrawerLayout drawerLayout;
     private ListView lv_list_postpaper;
 
@@ -43,8 +45,14 @@ public class TouristActivity extends AppCompatActivity
         lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
         MyMainArrayAdapter adapter = new MyMainArrayAdapter(TouristActivity.this,0,getPostPaperData());
         lv_list_postpaper.setAdapter(adapter);
+        lv_list_postpaper.setOnItemClickListener(this);
 
 
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(TouristActivity.this,BoardActivity.class);
+        startActivity(intent);
 
     }
 
@@ -113,6 +121,10 @@ public class TouristActivity extends AppCompatActivity
             Intent intent = new Intent();
             intent.setClass(TouristActivity.this,TouristSettingActivity.class);
             startActivity(intent);
+        }else if(id == R.id.nav_quite){
+            Intent intent = new Intent(TouristActivity.this,Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

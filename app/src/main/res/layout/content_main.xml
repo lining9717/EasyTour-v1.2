@@ -16,6 +16,7 @@
         android:flipInterval="3000"
         android:inAnimation="@anim/anim_come_in"
         android:outAnimation="@anim/anim_get_out"
+        android:autoStart="true"
         ></ViewFlipper>
     <LinearLayout
         android:layout_width="match_parent"

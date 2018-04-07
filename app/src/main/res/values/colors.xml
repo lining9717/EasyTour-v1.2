@@ -12,4 +12,9 @@
     <color name="colorNone">#00000000</color>
     <color name="colorGray">#dedede</color>
     <color name="colorTGray">#3fdedede</color>
+    <color name="colorLightBlueNone">#a068d0ea</color>
+    <color name="colorLightBlueBar">#5b5bf4</color>
+    <color name="colorBlack">#000000</color>
+    <color name="white">#FFF</color>
+    <color name="whiteb">#f7f7f7</color>
 </resources>

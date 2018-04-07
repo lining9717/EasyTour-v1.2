@@ -3,6 +3,10 @@
 
     <!-- 本xml名：button_select.xml, 设置按钮按下去的效果，实际上就是不同的图片 -->
     <item
+        android:topLeftRadius="10dip"
+        android:topRightRadius="10dip"
+        android:bottomRightRadius="10dip"
+        android:bottomLeftRadius="10dip"
         android:drawable="@color/colorTGray" android:state_pressed="false"></item>
     <item
         android:topLeftRadius="10dip"
