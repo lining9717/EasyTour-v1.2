@@ -38,7 +38,7 @@
     <string name="UserName_GuiderMain">UserName</string>
     <string name="SendOrder_TouristMain">SendOrder</string>
     <string name="Tourist_Login">Tourist</string>
-    <string name="Guider_Login">Guide</string>
+    <string name="Guider_Login">Guider</string>
     <string name="SingUp_Login">SingUp</string>
     <string name="SingIn_Login">SingIn</string>
     <string name="SingUpInformation">Information</string>

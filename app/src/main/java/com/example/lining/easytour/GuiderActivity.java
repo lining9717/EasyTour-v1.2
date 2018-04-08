@@ -1,8 +1,10 @@
 package com.example.lining.easytour;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +45,50 @@ public class GuiderActivity extends AppCompatActivity
             "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
     private int[] image = new int[]{R.drawable.a1,R.drawable.a2,R.drawable.a3};
     private String[] title = new String[]{"苏州旅游注意事项，老游客总结的经验！","急救知识学习","导游服务规范"};
+    private NavigationView navigationView;
+    private TextView tv_name;
+    private TextView tv_intro;
+    private TextView tv_tel;
+    private TextView tv_place;
+    private String name;
+    private String intro;
+    private String tel;
+    private String place;
+    private String all_orders_data;
+
 private ViewHolder viewHolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("guidername");
+        intro = intent.getStringExtra("introduce");
+        tel = intent.getStringExtra("tel");
+        place = intent.getStringExtra("place");
+
+        if(place.equals("")){
+            place = " ";
+        }
+
+
+        navigationView = findViewById(R.id.nav_view);
+        View navigationview = navigationView.getHeaderView(0);
+        tv_name = navigationview.findViewById(R.id.tv_guide_name);
+        tv_intro = navigationview.findViewById(R.id.tv_intro);
+        tv_tel = navigationview.findViewById(R.id.tv_tel);
+        tv_place = navigationview.findViewById(R.id.tv_addr);
+        tv_name.setText(name+"");
+        tv_intro.setText(intro+"");
+        tv_tel.setText(tel+"");
+        tv_place.setText(place+"");
+
+       // new GetOrders().execute();
+       // Log.i("orders:","------->"+all_orders_data);
         init();
     }
+
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,7 +129,7 @@ private ViewHolder viewHolder;
         ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
         listView.setAdapter(lobby_item_adapter);
 
-        viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
+        viewFlipper = findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
 
 
@@ -116,7 +162,7 @@ private ViewHolder viewHolder;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GuiderActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(GuiderActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -208,5 +254,33 @@ private ViewHolder viewHolder;
                 startActivity(intent);
             }
         });
+    }
+
+
+    private class GetOrders extends AsyncTask<String,Void,String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String uri = "http://118.89.18.136/EasyTour-bk/getorders.php/";
+            String result = null;
+            HttpPost httpRequest = new HttpPost(uri);
+            try {
+                HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+                Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    result = EntityUtils.toString(httpResponse.getEntity());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            all_orders_data = s;
+        }
     }
 }

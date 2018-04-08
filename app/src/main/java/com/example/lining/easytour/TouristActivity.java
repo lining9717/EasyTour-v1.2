@@ -30,7 +30,6 @@ public class TouristActivity extends AppCompatActivity
     "http://blog.sina.com.cn/s/blog_6980a1350102vn87.html?tj=1","http://blog.sina.com.cn/s/blog_485c50390102wyv2.html?tj=1"};
     private String[] title = new String[]{"你所不知道的小清新天堂——泰国拜县","维拉蔓豪vilamendhoo岛：我的完美海岛度假","罗维尼：不止有亚德里亚海上最美的夕阳"};
     private int[] images = new int[]{R.drawable.n1, R.drawable.n2, R.drawable.n3};
-
     private String username;
     private String introduce;
     private String tel;

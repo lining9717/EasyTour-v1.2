@@ -235,6 +235,10 @@ public class Login extends Activity {
             }else{
                 //从这里传递
                 Intent intent = new Intent(Login.this, GuiderActivity.class);
+                intent.putExtra("guidername",strings[1]);
+                intent.putExtra("introduce",strings[2]);
+                intent.putExtra("tel",strings[4]);
+                intent.putExtra("place",strings[6]);
                 startActivity(intent);
                 finish();
                 progressDialog.dismiss();
