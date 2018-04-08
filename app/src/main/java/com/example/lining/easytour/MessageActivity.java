@@ -1,7 +1,10 @@
 package com.example.lining.easytour;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -11,7 +14,7 @@ import java.util.List;
  *
  */
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,12 @@ public class MessageActivity extends AppCompatActivity {
         ListView mLvMessage = findViewById(R.id.message_listview);
         MessageItemAdapter adapter = new MessageItemAdapter(MessageActivity.this,0,getMessageData());
         mLvMessage.setAdapter(adapter);
+        mLvMessage.setOnItemClickListener(this);
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(MessageActivity.this,TalkActivity.class);
+        startActivity(intent);
     }
 
     private List<Message> getMessageData() {

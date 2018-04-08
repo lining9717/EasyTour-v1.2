@@ -18,16 +18,16 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main2">大厅</string>
+    <string name="title_activity_main2">Recommend</string>
     <string name="private_setting">Setting</string>
 
     <string name="become_a_guider">I want to be a Guider</string>
     <string name="UserName_Setting">UserName</string>
     <string name="PhoneNum_Setting">Phone</string>
-    <string name="RealName_Setting">RealName</string>
+    <string name="Location_Setting">Location</string>
     <string name="Description_Setting">Resume</string>
     <string name="Update_Setting">Update</string>
-    <string name="TalkOrder_GuiderMain">TalkOrder</string>
+    <string name="TakOrder_GuiderMain">Take Order</string>
     <string name="Customer_NUM_GuiderMain">Customer NUM：</string>
     <string name="Description">Description</string>
     <string name="End_Date_GuiderMain">018-03-01</string>
@@ -46,4 +46,5 @@
     <string name="confirm_password">Confirm PassWord</string>
     <string name="real_name">Real Name</string>
     <string name="id_number">ID Number</string>
+    <string name="Order_Status">Status:</string>
 </resources>

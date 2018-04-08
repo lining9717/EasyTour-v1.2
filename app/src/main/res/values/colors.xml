@@ -20,4 +20,5 @@
     <color name="TOD">#ff9864</color>
     <color name="FIN">#4c93e9</color>
     <color name="colorTextColor">#f0ffffff</color>
+    <color name="colorBackGroundBlue">#5b9ad4</color>
 </resources>

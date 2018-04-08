@@ -40,19 +40,12 @@ public class Register extends Activity {
 
             }
         });
-
-        btn_goback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
 
     public void init(){
         btn_become_guider = findViewById(R.id.btn_become_guider);
         btn_become_tourist = findViewById(R.id.btn_become_tourist);
-        btn_goback = findViewById(R.id.btn_goback);
+
     }
 }

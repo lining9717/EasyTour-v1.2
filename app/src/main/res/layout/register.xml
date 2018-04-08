@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="20dp"
     android:weightSum="5"
-    >
+    tools:context=".Register">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/SingUp_Login"
         android:layout_gravity="center"
         android:textAllCaps="true"
-        android:textSize="30dp"
+        android:textSize="35sp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         />
 
@@ -38,16 +40,5 @@
         android:background="@color/colorButton2"
         />
 
-    <Button
-        android:id="@+id/btn_goback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="Cancel"
-        android:textSize="25sp"
-        android:textAllCaps="true"
-        android:background="@color/colorNone"
 
-        />
 </LinearLayout>

@@ -6,102 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".GuiderSettingActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:src="@drawable/ic_menu_manage" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/private_setting"
-                android:textSize="35sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="30dp">
-            <ImageView
-                android:id="@+id/g_setting_iv_icon"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/logotemp"
-                android:onClick="ivGChangeUserIcon"/>
+            android:gravity="">
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/UserName_Setting"/>
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PhoneNum_Setting"/>
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/RealName_Setting"/>
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Description_Setting"/>
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:scrollbars="vertical"/>
-            </LinearLayout>
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Update_Setting"
-                android:textSize="25sp"
-                android:layout_marginTop="20dp"
-                android:onClick="btnUpdate"
-                android:textColor="@color/colorTextColor"
-                android:background="@drawable/button_selector"/>
+                android:gravity="center">
 
+                <ImageView
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:src="@drawable/ic_menu_manage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/private_setting"
+                    android:textSize="35sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="30dp">
+                <ImageView
+                    android:id="@+id/g_setting_iv_icon"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logotemp">
+
+                </ImageView>
+                    <!--android:onClick="ivGChangeUserIcon"-->
+                    />
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="100sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/UserName_Setting"/>
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="100sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/PhoneNum_Setting"/>
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="100sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Location_Setting"/>
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="100sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Description_Setting"/>
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false"
+                        android:scrollbars="vertical"/>
+                </LinearLayout>
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Update_Setting"
+                    android:textSize="25sp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="btnUpdate"
+                    android:textColor="@color/colorTextColor"
+                    android:background="@drawable/button_selector"/>
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

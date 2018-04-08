@@ -142,11 +142,13 @@ public class TouristActivity extends AppCompatActivity
             intent.setClass(TouristActivity.this,SendOrderActivity.class);
             intent.putExtra("username",username);
             startActivity(intent);
-        } else if (id == R.id.nav_message) {
-            Intent intent = new Intent();
-            intent.setClass(TouristActivity.this, MessageActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_setting) {
+        }
+        //else if (id == R.id.nav_message) {
+//            Intent intent = new Intent();
+//            intent.setClass(TouristActivity.this, MessageActivity.class);
+//            startActivity(intent);
+//        }
+            else if (id == R.id.nav_setting) {
             Intent intent = new Intent();
             intent.setClass(TouristActivity.this, TouristSettingActivity.class);
             startActivity(intent);

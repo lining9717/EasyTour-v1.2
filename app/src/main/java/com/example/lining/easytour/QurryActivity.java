@@ -1,10 +1,12 @@
 package com.example.lining.easytour;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 
 public class QurryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView lv_to_be_finished;
+    private Button TBDbutton,Fbutton;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +24,12 @@ public class QurryActivity extends AppCompatActivity implements AdapterView.OnIt
         MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
         lv_to_be_finished.setOnItemClickListener(this);
+        TBDbutton = findViewById(R.id.btn_to_be_finished);
+        Fbutton = findViewById(R.id.btn_finished_order);
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(QurryActivity.this,OrderActivity.class);
+        Intent intent = new Intent(QurryActivity.this,OrderDetailActivity.class);
         startActivity(intent);
     }
     private List<Order> getDataFinished() {
@@ -51,10 +57,12 @@ public class QurryActivity extends AppCompatActivity implements AdapterView.OnIt
     public void btnToBeFinished(View view) {
         MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
+
     }
 
     public void btnFinishedOrder(View view) {
         MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
+
     }
 }
