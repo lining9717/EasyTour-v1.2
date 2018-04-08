@@ -7,9 +7,11 @@ package com.example.lining.easytour;
 public class Postpaper {
     private int mImage;
     private String mContent;
-    public Postpaper(int Image,String Content){
+    private String mUrl;
+    public Postpaper(int Image,String Content,String Url){
         mImage = Image;
         mContent = Content;
+        mUrl = Url;
     }
     public int getPicture() {
         return mImage;
@@ -21,6 +23,12 @@ public class Postpaper {
         return mContent;
     }
     public void setmContent(String mTitle) {
-        this.mContent = mContent;
+        this.mContent = mTitle;
+    }
+    public String getmUrl() {
+        return mUrl;
+    }
+    public void setmUrl(String mUrl) {
+        this.mUrl = mUrl;
     }
 }

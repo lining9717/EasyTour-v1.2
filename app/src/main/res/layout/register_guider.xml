@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:scrollbars="vertical"
     >
     <ImageView
         android:id="@+id/register_giv_usericon"
@@ -16,13 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.152"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/icon"
         android:background="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@+id/g_tv_title"
         />
     <TextView
+        android:id="@+id/g_tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="注册个人信息"
+        android:text="@string/SingUpInformation"
         android:gravity="center"
         android:textSize="25sp"
         tools:layout_editor_absoluteX="131dp"
@@ -32,7 +35,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03"/>
+        app:layout_constraintVertical_bias="0.03"
+        />
 
     <EditText
         android:id="@+id/et_r_g_user_name"
@@ -43,14 +47,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="用户名"
+        android:hint="@string/UserName_Setting"
         android:maxLength="16"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintTop_toBottomOf="@+id/register_giv_usericon"/>
 
     <EditText
         android:id="@+id/et_r_g_psw"
@@ -62,7 +67,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="密码"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +84,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="确认密码"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +101,7 @@
         android:layout_marginTop="8dp"
         android:maxLength="16"
         android:ems="10"
-        android:hint="真实姓名"
+        android:hint="@string/real_name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +117,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="身份证ID"
+        android:hint="@string/id_number"
         android:inputType="textPersonName"
         android:maxLength="18"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="电话号码"
+        android:hint="@string/PhoneNum_Setting"
         android:inputType="textPersonName"
         android:maxLength="11"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +150,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:text="注册"
+        android:text="@string/SingUp_Login"
+        android:background="@drawable/button_selector"
+        android:textColor="@color/colorTextColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

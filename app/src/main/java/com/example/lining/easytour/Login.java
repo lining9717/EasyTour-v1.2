@@ -68,14 +68,6 @@ public class Login extends Activity {
                 startActivity(intent);
             }
         });
-
-        btn_exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.exit(1);
-            }
-        });
-
     }
 
     private void init() {
@@ -86,7 +78,7 @@ public class Login extends Activity {
         radio = findViewById(R.id.radio);
         btn_sign_in = findViewById(R.id.btn_sign_in);
         btn_sign_up = findViewById(R.id.btn_sign_up);
-        btn_exit = findViewById(R.id.btn_exit);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Prompt");
         progressDialog.setMessage("Connecting...");
@@ -100,10 +92,6 @@ public class Login extends Activity {
     public void guiderlogin(){
         progressDialog.show();
         new GuiderLogin().execute();
-    }
-
-    public void btnForgetKeyword(View view) {
-        Toast.makeText(this,"Refind the word",Toast.LENGTH_SHORT).show();
     }
 
     private class TouristLogin extends AsyncTask<String, Void, String[]> {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.lining.easytour.TouristActivity"
+    tools:context="com.example.lining.easytour.GuiderActivity"
     tools:showIn="@layout/app_bar_main"
     >
     <ViewFlipper
@@ -17,6 +17,7 @@
         android:inAnimation="@anim/anim_come_in"
         android:outAnimation="@anim/anim_get_out"
         android:autoStart="true"
+        android:onClick="btnClickViewFlipper"
         ></ViewFlipper>
     <LinearLayout
         android:layout_width="match_parent"

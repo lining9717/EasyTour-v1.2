@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发布订单"
+                android:text="@string/SendOrder_TouristMain"
                 android:textSize="35sp" />
         </LinearLayout>
 
@@ -146,12 +146,16 @@
             </Spinner>
         </LinearLayout>
             <Button
+
                 android:id="@+id/send_order"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Send"
+                android:textSize="25sp"
+                android:textColor="@color/colorTextColor"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:onClick="btnSendOrder"/>
+                android:onClick="btnSendOrder"
+                android:background="@drawable/button_selector"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

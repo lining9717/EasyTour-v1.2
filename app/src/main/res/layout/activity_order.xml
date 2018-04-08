@@ -23,7 +23,7 @@
             android:id="@+id/order_user_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="用户名"
+            android:text="@string/UserName_GuiderMain"
             android:textSize="25sp"
             android:gravity="center|left"
             android:ellipsize="end"
@@ -37,12 +37,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单号："
+            android:text="@string/OrderNUM_GuiderMain"
             android:textSize="20sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="订单号"
+            android:text="ordernum"
             android:textSize="20sp"
             android:scrollbars="vertical"/>
     </LinearLayout>
@@ -55,13 +55,13 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="地点："
+        android:text="@string/Location_GuiderMain"
         android:textSize="20sp"/>
     <TextView
         android:id="@+id/order_tv_localdes"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="具体描述"
+        android:text="@string/Description"
         android:textSize="20sp"
         android:scrollbars="vertical"/>
 
@@ -74,7 +74,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="时间："
+            android:text="@string/Time_GuiderMain"
             android:textSize="20sp"/>
         <RelativeLayout
             android:id="@+id/order_time_table"
@@ -86,21 +86,21 @@
                 android:id="@+id/order_tv_Starttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2018年03月01日"
+                android:text="@string/StartDate_GuiderMain"
                 android:layout_alignParentLeft="true"
                 android:textSize="20sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="至"
+                android:text="to"
 
                 android:textSize="20sp"/>
             <TextView
                 android:id="@+id/order_tv_Endtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="018年03月01日"
+                android:text="@string/End_Date_GuiderMain"
                 android:layout_alignParentRight="true"
                 android:textSize="20sp"/>
         </RelativeLayout>
@@ -108,7 +108,7 @@
     android:id="@+id/order_tv_timedes"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:text="具体描述"
+    android:text="@string/Description"
     android:textSize="20sp"
     android:scrollbars="vertical"
     />
@@ -123,22 +123,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="同行人数："
+            android:text="@string/Customer_NUM_GuiderMain"
             />
         <TextView
             android:id="@+id/order_tv_customernum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3人"
+            android:text="3"
             android:textSize="20sp"/>
     </LinearLayout>
     <Button
         android:id="@+id/order_btn_resive"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_select"
+        android:background="@drawable/button_selector"
         android:textSize="25sp"
-        android:text="接受订单"
+        android:text="@string/TalkOrder_GuiderMain"
+        android:textColor="@color/colorTextColor"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:onClick="btnResiveOrder"/>
