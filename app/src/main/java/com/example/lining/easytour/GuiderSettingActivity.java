@@ -15,7 +15,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -25,6 +24,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -40,13 +40,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TouristSettingActivity extends AppCompatActivity {
+public class GuiderSettingActivity extends AppCompatActivity {
     /*PO*/
     //定义图片的Uri
     private Uri photoUri;
     //图片文件路径
     private String picPath;
-    private TouristSettingActivity context;
+    private GuiderSettingActivity context;
     private PopupWindow mPopWindow;
     private ImageView showImageView;
 
@@ -69,27 +69,28 @@ public class TouristSettingActivity extends AppCompatActivity {
     //裁剪后显示照片
     private ImageView imageView;
     //动态获取权限监听
-    private static PermissionListener mtSettingListener;
+    private static PermissionListener mgSettingListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tourist_setting);
+        setContentView(R.layout.activity_guider_setting);
         init();
     }
+
     private void init() {
         this.context = this;
-        showImageView = (ImageView) findViewById(R.id.t_setting_iv_icon);
+        showImageView = (ImageView) findViewById(R.id.g_setting_iv_icon);
 
         cachPath=getDiskCacheDir(this)+ "/crop_image.jpg";
         cacheFile =getCacheFile(new File(getDiskCacheDir(this)),"crop_image.jpg");
-        imageView= (ImageView) findViewById(R.id.t_setting_iv_icon);
+        imageView= (ImageView) findViewById(R.id.g_setting_iv_icon);
     }
+
     public void btnUpdate(View view) {
-        Toast.makeText(TouristSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
+        Toast.makeText(GuiderSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
     }
 
-
-    public void ivTChangeUserIcon(View view) {
+    public void ivGChangeUserIcon(View view) {
         showUploadAvatarDialog();
     }
     private void showUploadAvatarDialog() {
@@ -188,7 +189,7 @@ public class TouristSettingActivity extends AppCompatActivity {
         } else {
 
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            imageUri = FileProvider.getUriForFile(TouristSettingActivity.this, "com.wing.phototest.fileprovider", cameraFile);
+            imageUri = FileProvider.getUriForFile(GuiderSettingActivity.this, "com.wing.phototest.fileprovider", cameraFile);
 
         }
         // 启动相机程序
@@ -368,17 +369,17 @@ public class TouristSettingActivity extends AppCompatActivity {
     }
     public void requestRuntimePermission(String[] permissions, PermissionListener listener) {
 
-        mtSettingListener = listener;
+        mgSettingListener = listener;
         List<String> permissionList = new ArrayList<>();
         for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(GuiderSettingActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
                 permissionList.add(permission);
             }
         }
         if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionList.toArray(new String[permissionList.size()]), 1);
+            ActivityCompat.requestPermissions(GuiderSettingActivity.this, permissionList.toArray(new String[permissionList.size()]), 1);
         } else {
-            mtSettingListener.onGranted();
+            mgSettingListener.onGranted();
         }
     }
     @TargetApi(23)
@@ -397,9 +398,9 @@ public class TouristSettingActivity extends AppCompatActivity {
                         }
                     }
                     if (deniedPermissions.isEmpty()) {
-                        mtSettingListener.onGranted();
+                        mgSettingListener.onGranted();
                     } else {
-                        mtSettingListener.onDenied(deniedPermissions);
+                        mgSettingListener.onDenied(deniedPermissions);
                     }
                 }
                 break;
