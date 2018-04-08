@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -24,11 +25,35 @@ public class TouristActivity extends AppCompatActivity
         AdapterView.OnItemClickListener{
     private DrawerLayout drawerLayout;
     private ListView lv_list_postpaper;
+    private String username;
+    private String introduce;
+    private String tel;
+    private TextView tv_name;
+    private TextView tv_intro;
+    private TextView tv_tel;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        introduce = intent.getStringExtra("introduce");
+        tel = intent.getStringExtra("tel");
+
+        navigationView = findViewById(R.id.nav_view);
+        View navigationview = navigationView.getHeaderView(0);
+        tv_name = navigationview.findViewById(R.id.tv_guide_name);
+        tv_intro = navigationview.findViewById(R.id.tv_intro);
+        tv_tel = navigationview.findViewById(R.id.tv_tel);
+
+        tv_name.setText(username+"");
+        tv_intro.setText(introduce+"");
+        tv_tel.setText(tel+"");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,11 +116,6 @@ public class TouristActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -112,6 +132,7 @@ public class TouristActivity extends AppCompatActivity
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();
             intent.setClass(TouristActivity.this,SendOrderActivity.class);
+            intent.putExtra("username",username);
             startActivity(intent);
         } else if (id == R.id.nav_message) {
             Intent intent = new Intent();

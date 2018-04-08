@@ -144,11 +144,6 @@ AdapterView.OnItemClickListener{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(GuiderActivity.this,"Coding",Toast.LENGTH_SHORT).show();
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

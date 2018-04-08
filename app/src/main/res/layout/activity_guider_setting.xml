@@ -94,7 +94,7 @@
             <Button
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="更新"
+                android:text="完成"
                 android:textSize="25sp"
                 android:layout_marginTop="20dp"
                 android:onClick="btnUpdate"/>
