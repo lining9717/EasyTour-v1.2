@@ -80,8 +80,8 @@ public class Login extends Activity {
         btn_sign_up = findViewById(R.id.btn_sign_up);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("提示");
-        progressDialog.setMessage("正在连接，请稍后....");
+        progressDialog.setTitle("Prompt");
+        progressDialog.setMessage("Connecting...");
     }
 
     public void touristlogin(){
@@ -155,12 +155,15 @@ public class Login extends Activity {
             super.onPostExecute(strings);
             if(strings[0].equals("false")) {
                 progressDialog.dismiss();
-                Toast.makeText(Login.this, "密码或用户名错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Password or username wrong", Toast.LENGTH_SHORT).show();
             }else{
                 /*
                 * 从这里可以用Intent传递到下一个activity
                 */
                 Intent intent = new Intent(Login.this, TouristActivity.class);
+                intent.putExtra("username",strings[1]);
+                intent.putExtra("introduce",strings[2]);
+                intent.putExtra("tel",strings[3]);
                 startActivity(intent);
                 finish();
                 progressDialog.dismiss();
@@ -228,7 +231,7 @@ public class Login extends Activity {
             super.onPostExecute(strings);
             if(strings[0].equals("false")){
                 progressDialog.dismiss();
-                Toast.makeText(Login.this, "密码或用户名错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Password or username wrong", Toast.LENGTH_SHORT).show();
             }else{
                 //从这里传递
                 Intent intent = new Intent(Login.this, GuiderActivity.class);

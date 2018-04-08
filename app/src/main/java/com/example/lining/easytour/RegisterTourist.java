@@ -536,14 +536,14 @@ public class RegisterTourist extends Activity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             if(integer == 0){
-                Toast.makeText(RegisterTourist.this,"注册失败,服务器错误",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterTourist.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
             }
             if(integer == 1){
-                Toast.makeText(RegisterTourist.this,"注册成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterTourist.this,"Sign up successful",Toast.LENGTH_LONG).show();
                 finish();
             }
             if(integer == 2){
-                Toast.makeText(RegisterTourist.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterTourist.this,"Username exists",Toast.LENGTH_SHORT).show();
             }
 
         }
