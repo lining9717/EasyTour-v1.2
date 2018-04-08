@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TouristSettingActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,8 +41,9 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logotemp"
-                android:onClick="ivTChangeUserIcon"/>
+                android:src="@drawable/logotemp">
+            </ImageView>
+                <!--android:onClick="ivTChangeUserIcon"/>-->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -72,7 +75,7 @@
                 <TextView
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:text="@string/RealName_Setting"/>
+                    android:text="@string/Location_Setting"/>
                 <EditText
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
@@ -98,10 +101,12 @@
                 android:textSize="25sp"
                 android:background="@drawable/button_selector"
                 android:textColor="@color/colorTextColor"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:onClick="btnUpdate"/>
 
         </LinearLayout>
     </LinearLayout>
+</ScrollView>
+
 
 </RelativeLayout>

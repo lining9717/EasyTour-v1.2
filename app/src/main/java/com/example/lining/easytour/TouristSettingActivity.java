@@ -85,7 +85,7 @@ public class TouristSettingActivity extends AppCompatActivity {
 //        imageView= (ImageView) findViewById(R.id.t_setting_iv_icon);
     }
     public void btnUpdate(View view) {
-        Toast.makeText(TouristSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
+
     }
 
 

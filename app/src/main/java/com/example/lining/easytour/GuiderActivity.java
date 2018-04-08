@@ -31,12 +31,13 @@ public class GuiderActivity extends AppCompatActivity
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
     private int order;
-    private String[] url= new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
+    private String[] url = new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
             "http://blog.sina.com.cn/s/blog_73be7ad10102xbcv.html",
             "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
-    private int[] image = new int[]{R.drawable.a1,R.drawable.a2,R.drawable.a3};
-    private String[] title = new String[]{"苏州旅游注意事项，老游客总结的经验！","急救知识学习","导游服务规范"};
-private ViewHolder viewHolder;
+    private int[] image = new int[]{R.drawable.a1, R.drawable.a2, R.drawable.a3};
+    private String[] title = new String[]{"苏州旅游注意事项，老游客总结的经验！", "急救知识学习", "导游服务规范"};
+    private ViewHolder viewHolder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +90,14 @@ private ViewHolder viewHolder;
 
         listView.setOnItemClickListener(this);
     }
-    private static class ViewHolder
-    {
+
+    private static class ViewHolder {
         TextView content;
     }
+
     private void setViewFlipper(ViewFlipper viewFlipper) {
         for (int i = 0; i < url.length; i++) {
-            viewHolder=new ViewHolder();
+            viewHolder = new ViewHolder();
             View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
             viewHolder.content = (TextView) view.findViewById(R.id.tourist_list_tv_content);
             view.setTag(viewHolder);
@@ -116,7 +118,7 @@ private ViewHolder viewHolder;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GuiderActivity.this, "Click " + datas.get(position), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -180,10 +182,12 @@ private ViewHolder viewHolder;
         } else if (id == R.id.order) {
             Intent intent = new Intent(GuiderActivity.this, QurryActivity.class);
             startActivity(intent);
-        } else if (id == R.id.message) {
-            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.setting) {
+        }
+//        else if (id == R.id.message) {
+//            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
+//            startActivity(intent);
+//        }
+        else if (id == R.id.setting) {
             Intent intent = new Intent(GuiderActivity.this, GuiderSettingActivity.class);
             startActivity(intent);
         } else if (id == R.id.quite) {
@@ -199,14 +203,8 @@ private ViewHolder viewHolder;
 
     public void btnClickViewFlipper(View view) {
         order = viewFlipper.getDisplayedChild();
-        viewFlipper.getCurrentView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(GuiderActivity.this,BoardActivity.class);
-                intent.putExtra("url",url[order]);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(GuiderActivity.this, BoardActivity.class);
+        intent.putExtra("url", url[order]);
+        startActivity(intent);
     }
 }

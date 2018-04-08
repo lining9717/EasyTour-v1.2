@@ -64,7 +64,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GuiderActivity"
-            android:label="任务大厅"
+            android:label="Market"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OrderActivity"
@@ -75,7 +75,8 @@
         <activity
             android:name=".TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GuiderSettingActivity"></activity>
+        <activity android:name=".GuiderSettingActivity" />
+        <activity android:name=".OrderDetailActivity"></activity>
     </application>
 
 </manifest>

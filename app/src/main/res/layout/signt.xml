@@ -23,6 +23,9 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:hint="null"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textStyle="bold"
             />
 
     </LinearLayout>

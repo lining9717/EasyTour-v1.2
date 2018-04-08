@@ -7,23 +7,23 @@
         <item
             android:id="@+id/nav_qurryorder"
             android:icon="@drawable/ic_menu_camera"
-            android:title="已达成订单" />
+            android:title="Orders" />
         <item
             android:id="@+id/nav_sendorder"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="发布订单" />
-        <item
-            android:id="@+id/nav_message"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="消息记录" />
+            android:title="Hire" />
+        <!--<item-->
+            <!--android:id="@+id/nav_message"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Message" />-->
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_manage"
-            android:title="个人设置" />
+            android:title="Setting" />
         <item
             android:id="@+id/nav_quite"
             android:icon="@drawable/ic_menu_send"
-            android:title="退出登录" />
+            android:title="Quite" />
     </group>
 
 </menu>
