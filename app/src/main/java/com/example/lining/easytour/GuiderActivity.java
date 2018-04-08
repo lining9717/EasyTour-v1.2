@@ -54,7 +54,6 @@ public class GuiderActivity extends AppCompatActivity
     private String intro;
     private String tel;
     private String place;
-    private String all_orders_data;
 
 private ViewHolder viewHolder;
     @Override
@@ -70,8 +69,6 @@ private ViewHolder viewHolder;
         if(place.equals("")){
             place = " ";
         }
-
-
         navigationView = findViewById(R.id.nav_view);
         View navigationview = navigationView.getHeaderView(0);
         tv_name = navigationview.findViewById(R.id.tv_guide_name);
@@ -82,9 +79,6 @@ private ViewHolder viewHolder;
         tv_intro.setText(intro+"");
         tv_tel.setText(tel+"");
         tv_place.setText(place+"");
-
-       // new GetOrders().execute();
-       // Log.i("orders:","------->"+all_orders_data);
         init();
     }
 
@@ -254,33 +248,5 @@ private ViewHolder viewHolder;
                 startActivity(intent);
             }
         });
-    }
-
-
-    private class GetOrders extends AsyncTask<String,Void,String> {
-
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/getorders.php/";
-            String result = null;
-            HttpPost httpRequest = new HttpPost(uri);
-            try {
-                HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
-                Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
-                if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                    result = EntityUtils.toString(httpResponse.getEntity());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            all_orders_data = s;
-        }
     }
 }
