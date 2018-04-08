@@ -74,6 +74,9 @@ public class MyMainArrayAdapter extends ArrayAdapter<Postpaper> {
 //                viewHolder.content.setBackground(order.getPicture());
 //            }
             viewHolder.content.setText(order.getmContent());
+            viewHolder.content.setBackgroundResource(order.getPicture());
+            viewHolder.content.setHint(order.getmUrl());
+
         }
 
         return convertView;

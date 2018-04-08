@@ -15,7 +15,7 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:gravity="center"
-            android:text="拍照"
+            android:text="Camera"
             android:textColor="#333333"
             android:textSize="20sp" />
 
@@ -26,7 +26,7 @@
             android:layout_below="@+id/tv_take_photo_popu"
             android:background="@color/white"
             android:gravity="center"
-            android:text="从相册上传"
+            android:text="Album"
             android:textColor="#333333"
             android:textSize="20sp" />
 
@@ -37,7 +37,7 @@
             android:layout_below="@+id/tv_photo_album_popu"
             android:background="@color/white"
             android:gravity="center"
-            android:text="取消"
+            android:text="Cancel"
             android:textColor="#333333"
             android:textSize="20sp" />
 

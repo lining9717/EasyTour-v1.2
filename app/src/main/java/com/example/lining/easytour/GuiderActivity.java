@@ -25,24 +25,32 @@ import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-AdapterView.OnItemClickListener{
+        AdapterView.OnItemClickListener {
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
     private Spinner sp_time;
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
+    private int order;
+    private String[] url= new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
+            "http://blog.sina.com.cn/s/blog_73be7ad10102xbcv.html",
+            "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
+    private int[] image = new int[]{R.drawable.a1,R.drawable.a2,R.drawable.a3};
+    private String[] title = new String[]{"苏州旅游注意事项，老游客总结的经验！","急救知识学习","导游服务规范"};
+private ViewHolder viewHolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(GuiderActivity.this,OrderActivity.class);
+        Intent intent = new Intent(GuiderActivity.this, OrderActivity.class);
         startActivity(intent);
-
     }
-    public void init(){
+
+    public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,28 +75,38 @@ AdapterView.OnItemClickListener{
 
         sp_time = findViewById(R.id.spinner_time);
         sp_place = findViewById(R.id.spinner_place);
-        initSpinner(sp_place,place);
-        initSpinner(sp_time,time);
+        initSpinner(sp_place, place);
+        initSpinner(sp_time, time);
 
         generateListContent();
-        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(),R.layout.order_item,lobby_items);
+        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(), R.layout.order_item, lobby_items);
         ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
         listView.setAdapter(lobby_item_adapter);
 
-        viewFlipper= (ViewFlipper) findViewById(R.id.guider_vf_lobby);
+        viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
+
 
         listView.setOnItemClickListener(this);
     }
-
+    private static class ViewHolder
+    {
+        TextView content;
+    }
     private void setViewFlipper(ViewFlipper viewFlipper) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < url.length; i++) {
+            viewHolder=new ViewHolder();
             View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
+            viewHolder.content = (TextView) view.findViewById(R.id.tourist_list_tv_content);
+            view.setTag(viewHolder);
+            viewHolder.content.setText(title[i]);
+            viewHolder.content.setBackgroundResource(image[i]);
+            viewHolder.content.setHint(url[i]);
             viewFlipper.addView(view);
         }
     }
 
-    public void initSpinner(Spinner spinner,List<String> data){
+    public void initSpinner(Spinner spinner, List<String> data) {
         final List<String> datas = data;
         Spinner_Adapter spinner_adapter = new Spinner_Adapter(this);
         spinner.setAdapter(spinner_adapter);
@@ -108,14 +126,14 @@ AdapterView.OnItemClickListener{
         });
     }
 
-    private void generateListContent(){
-        final String[] list = {"重大3/20虎溪3","重大3/21虎溪3","重大3/22虎溪3","重大3/23虎溪3","重大3/24虎溪3","重大3/25虎溪3","重大3/26虎溪3"};
-        for(String element:list){
-            String title = element.substring(0,2);
-            String date = element.substring(2,6);
-            String content = element.substring(6,8);
+    private void generateListContent() {
+        final String[] list = {"重大3/20虎溪3", "重大3/21虎溪3", "重大3/22虎溪3", "重大3/23虎溪3", "重大3/24虎溪3", "重大3/25虎溪3", "重大3/26虎溪3"};
+        for (String element : list) {
+            String title = element.substring(0, 2);
+            String date = element.substring(2, 6);
+            String content = element.substring(6, 8);
             int day = Integer.parseInt(element.substring(8));
-            lobby_items.add(new LobbyItem(title,date,content,day));
+            lobby_items.add(new LobbyItem(title, date, content, day));
         }
     }
 
@@ -145,9 +163,9 @@ AdapterView.OnItemClickListener{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(GuiderActivity.this,"Coding",Toast.LENGTH_SHORT).show();
-        }
+//        if (id == R.id.action_settings) {
+//            Toast.makeText(GuiderActivity.this,"Coding",Toast.LENGTH_SHORT).show();
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -166,16 +184,16 @@ AdapterView.OnItemClickListener{
                 super.onBackPressed();
             }
         } else if (id == R.id.order) {
-            Intent intent = new Intent(GuiderActivity.this,QurryActivity.class);
+            Intent intent = new Intent(GuiderActivity.this, QurryActivity.class);
             startActivity(intent);
         } else if (id == R.id.message) {
-            Intent intent = new Intent(GuiderActivity.this,MessageActivity.class);
+            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
             startActivity(intent);
-        } else if(id == R.id.setting){
-            Intent intent = new Intent(GuiderActivity.this,GuiderSettingActivity.class);
+        } else if (id == R.id.setting) {
+            Intent intent = new Intent(GuiderActivity.this, GuiderSettingActivity.class);
             startActivity(intent);
-        }else if(id == R.id.quite){
-            Intent intent = new Intent(GuiderActivity.this,Login.class);
+        } else if (id == R.id.quite) {
+            Intent intent = new Intent(GuiderActivity.this, Login.class);
             startActivity(intent);
             finish();
         }
@@ -183,5 +201,18 @@ AdapterView.OnItemClickListener{
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void btnClickViewFlipper(View view) {
+        order = viewFlipper.getDisplayedChild();
+        viewFlipper.getCurrentView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(GuiderActivity.this,BoardActivity.class);
+                intent.putExtra("url",url[order]);
+                startActivity(intent);
+            }
+        });
     }
 }

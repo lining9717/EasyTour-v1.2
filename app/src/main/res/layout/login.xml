@@ -26,7 +26,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:hint="账号"
+        android:hint="UserName"
         style="?android:attr/textViewStyle"
         android:background="@drawable/shape"
         android:textSize="25sp"
@@ -47,7 +47,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="密码"
+        android:hint="PassWord"
         android:background="@drawable/shape"
         android:textSize="25sp"
         android:inputType="textPassword"
@@ -66,8 +66,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="登陆"
-
+        android:text="@string/SingIn_Login"
+        android:textColor="@color/colorTextColor"
+        android:background="@drawable/button_selector"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,38 +78,22 @@
 
     <Button
         android:id="@+id/btn_sign_up"
+        android:textColor="@color/colorTextColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="注册"
+        android:text="@string/SingUp_Login"
         android:textSize="20sp"
-
+        android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
         app:layout_constraintVertical_bias="0.09" />
 
-    <Button
-        android:id="@+id/btn_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="忘记密码？"
-        android:onClick="btnForgetKeyword"
-        android:background="@color/colorNone"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up"
-        app:layout_constraintVertical_bias="0.14" />
 
     <RadioGroup
         android:id="@+id/radio"
@@ -133,7 +118,7 @@
             android:layout_weight="1"
             android:checked="true"
             android:gravity="center_vertical"
-            android:text="游客" />
+            android:text="@string/Tourist_Login" />
 
         <RadioButton
             android:id="@+id/rbt_guider"
@@ -141,7 +126,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="导游" />
+            android:text="@string/Guider_Login" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

@@ -19,9 +19,12 @@
             android:layout_height="200dp"
             android:background="@drawable/p4"
             android:gravity="bottom"
-            android:text="文章标题"
+            android:text="title"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:hint="null"
+            />
+
     </LinearLayout>
 
 

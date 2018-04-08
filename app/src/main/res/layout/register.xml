@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="注册"
+        android:text="@string/SingUp_Login"
         android:layout_gravity="center"
         android:textAllCaps="true"
         android:textSize="30dp"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="返回"
+        android:text="Cancel"
         android:textSize="25sp"
         android:textAllCaps="true"
         android:background="@color/colorNone"
