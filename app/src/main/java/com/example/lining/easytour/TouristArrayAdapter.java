@@ -5,22 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/3/24.
+ * Created by Administrator on 2018/3/26.
  */
 
-public class MyArrayAdapter extends ArrayAdapter<Order> {
+public class TouristArrayAdapter extends ArrayAdapter<Postpaper> {
     private int resoureId;
-    private List<Order> objects;
+    private List<Postpaper> objects;
     private Context context;
 
 
-    public MyArrayAdapter(Context context, int resourceId, List<Order> objects) {
+    public TouristArrayAdapter(Context context, int resourceId, List<Postpaper> objects) {
         super(context, resourceId, objects);
         // TODO Auto-generated constructor stub
         this.objects=objects;
@@ -29,11 +28,7 @@ public class MyArrayAdapter extends ArrayAdapter<Order> {
 
     private static class ViewHolder
     {
-        ImageView imageView;
-        TextView title;
         TextView content;
-        TextView date;
-        TextView time;
     }
 
     @Override
@@ -43,7 +38,7 @@ public class MyArrayAdapter extends ArrayAdapter<Order> {
     }
 
     @Override
-    public Order getItem(int position) {
+    public Postpaper getItem(int position) {
         // TODO Auto-generated method stub
         return objects.get(position);
     }
@@ -62,29 +57,22 @@ public class MyArrayAdapter extends ArrayAdapter<Order> {
         {
             viewHolder=new ViewHolder();
             LayoutInflater mInflater=LayoutInflater.from(context);
-            convertView = mInflater.inflate(R.layout.order_item, null);
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.order_item_image);
-            viewHolder.title = (TextView) convertView.findViewById(R.id.order_item_title);
-            viewHolder.content = (TextView) convertView.findViewById(R.id.order_item_content);
-            viewHolder.date = (TextView) convertView.findViewById(R.id.order_item_date);
-            viewHolder.time = (TextView) convertView.findViewById(R.id.order_item_days);
+            convertView = mInflater.inflate(R.layout.sight_item, null);
+            viewHolder.content = (TextView) convertView.findViewById(R.id.tourist_list_tv_content);
             convertView.setTag(viewHolder);
         }
         else
         {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Order order = objects.get(position);
+        Postpaper order = objects.get(position);
         if(null!=order)
         {
-            viewHolder.imageView.setBackgroundResource(order.getPicture());
-            viewHolder.title.setText(order.getTitle());
-            viewHolder.content.setText(order.getContent());
-            viewHolder.time.setText(order.getTime());
-            viewHolder.date.setText(order.getDate());
+            viewHolder.content.setText(order.getmContent());
+            viewHolder.content.setBackgroundResource(order.getPicture());
+            viewHolder.content.setHint(order.getmUrl());
         }
 
         return convertView;
     }
-
 }

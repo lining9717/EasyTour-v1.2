@@ -12,16 +12,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QurryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class QueryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView lv_to_be_finished;
     private Button TBDbutton,Fbutton;
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qurry);
+        setContentView(R.layout.activity_query);
         lv_to_be_finished = (ListView) findViewById(R.id.orders_listview);/*changed the name of the orders ListView*/
-        MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
         lv_to_be_finished.setOnItemClickListener(this);
         TBDbutton = findViewById(R.id.btn_to_be_finished);
@@ -29,7 +29,7 @@ public class QurryActivity extends AppCompatActivity implements AdapterView.OnIt
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(QurryActivity.this,OrderDetailActivity.class);
+        Intent intent = new Intent(QueryActivity.this,OrderDetailActivity.class);
         startActivity(intent);
     }
     private List<Order> getDataFinished() {
@@ -55,13 +55,13 @@ public class QurryActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     public void btnToBeFinished(View view) {
-        MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }
 
     public void btnFinishedOrder(View view) {
-        MyArrayAdapter adapter = new MyArrayAdapter(QurryActivity.this,0,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }

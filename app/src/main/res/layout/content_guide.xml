@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.lining.easytour.GuiderActivity"
-    tools:showIn="@layout/app_bar_main"
+    tools:showIn="@layout/app_bar_guide"
     >
     <ViewFlipper
         android:layout_width="match_parent"

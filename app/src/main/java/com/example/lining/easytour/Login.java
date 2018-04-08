@@ -20,8 +20,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -47,7 +45,7 @@ public class Login extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         init();
 
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +233,10 @@ public class Login extends Activity {
             }else{
                 //从这里传递
                 Intent intent = new Intent(Login.this, GuiderActivity.class);
+                intent.putExtra("guidername",strings[1]);
+                intent.putExtra("introduce",strings[2]);
+                intent.putExtra("tel",strings[4]);
+                intent.putExtra("place",strings[6]);
                 startActivity(intent);
                 finish();
                 progressDialog.dismiss();

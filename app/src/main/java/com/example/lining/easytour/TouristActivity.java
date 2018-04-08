@@ -8,14 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ public class TouristActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_tourist);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -75,7 +73,7 @@ public class TouristActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         lv_list_postpaper = (ListView) findViewById(R.id.tourist_listview);/*changed the name of tourist list view*/
-        MyMainArrayAdapter adapter = new MyMainArrayAdapter(TouristActivity.this, 0, getPostPaperData());
+        TouristArrayAdapter adapter = new TouristArrayAdapter(TouristActivity.this, 0, getPostPaperData());
         lv_list_postpaper.setAdapter(adapter);
         lv_list_postpaper.setOnItemClickListener(this);
 
@@ -134,7 +132,7 @@ public class TouristActivity extends AppCompatActivity
 
         if (id == R.id.nav_qurryorder) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this, QurryActivity.class);
+            intent.setClass(TouristActivity.this, QueryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();
@@ -143,11 +141,11 @@ public class TouristActivity extends AppCompatActivity
             intent.putExtra("username",username);
             startActivity(intent);
         }
-        //else if (id == R.id.nav_message) {
-//            Intent intent = new Intent();
-//            intent.setClass(TouristActivity.this, MessageActivity.class);
-//            startActivity(intent);
-//        }
+        else if (id == R.id.nav_message) {
+            Intent intent = new Intent();
+            intent.setClass(TouristActivity.this, MessageActivity.class);
+            startActivity(intent);
+        }
             else if (id == R.id.nav_setting) {
             Intent intent = new Intent();
             intent.setClass(TouristActivity.this, TouristSettingActivity.class);

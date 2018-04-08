@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="地点"
+                android:text="@string/send_order_location"
                 android:layout_gravity="center_vertical"
                 android:textSize="25sp" />
             <LinearLayout
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="开始"
+                android:text="@string/send_order_start"
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"/>
 
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="结束"
+                android:text="@string/send_order_end"
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"/>
 
@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="同行人数"
+                android:text="@string/send_order_people"
                 android:textSize="25sp" />
             <Spinner
                 android:id="@+id/spin_number"

@@ -27,7 +27,7 @@
     <string name="Location_Setting">Location</string>
     <string name="Description_Setting">Resume</string>
     <string name="Update_Setting">Update</string>
-    <string name="TakOrder_GuiderMain">Take Order</string>
+    <string name="AcceptOrder_GuiderMain">Accept Order</string>
     <string name="Customer_NUM_GuiderMain">Customer NUM：</string>
     <string name="Description">Description</string>
     <string name="End_Date_GuiderMain">018-03-01</string>
@@ -47,4 +47,15 @@
     <string name="real_name">Real Name</string>
     <string name="id_number">ID Number</string>
     <string name="Order_Status">Status:</string>
+    <string name="guider_market">Market</string>
+    <string name="send_order_location">Location</string>
+    <string name="send_order_start">Start</string>
+    <string name="send_order_end">End</string>
+    <string name="send_order_people">People</string>
+    <string name="menu_orders">Orders</string>
+    <string name="menu_release_order">Release Order</string>
+    <string name="menu_message">Message</string>
+    <string name="menu_setting">Setting</string>
+    <string name="menu_exit">Exit</string>
+    <string name="menu_market">Market</string>
 </resources>

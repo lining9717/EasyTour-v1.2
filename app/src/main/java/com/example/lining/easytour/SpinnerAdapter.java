@@ -15,10 +15,10 @@ import java.util.List;
  * Created by lining on 2018/3/26.
  */
 
-public class Spinner_Adapter extends BaseAdapter {
+public class SpinnerAdapter extends BaseAdapter {
     List<String> datas = new ArrayList<>();
     Context mContext;
-    public Spinner_Adapter(Context context) {
+    public SpinnerAdapter(Context context) {
         mContext = context;
 
     }

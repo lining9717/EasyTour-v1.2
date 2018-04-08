@@ -31,7 +31,7 @@
             android:name=".SendOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".QurryActivity"
+            android:name=".QueryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
@@ -42,17 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.lining.easytour.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -64,7 +53,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GuiderActivity"
-            android:label="Market"
+            android:label="@string/guider_market"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OrderActivity"
@@ -75,8 +64,11 @@
         <activity
             android:name=".TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GuiderSettingActivity" />
-        <activity android:name=".OrderDetailActivity"></activity>
-    </application>
+        <activity android:name=".GuiderSettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+    <activity android:name=".OrderDetailActivity"
+        android:theme="@style/AppTheme.NoActionBar"/>
+</application>
 
 </manifest>

@@ -7,23 +7,23 @@
         <item
             android:id="@+id/lobby"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Market" />
+            android:title="@string/menu_market" />
         <item
             android:id="@+id/order"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Orders" />
-        <!--<item-->
-            <!--android:id="@+id/message"-->
-            <!--android:icon="@drawable/ic_menu_slideshow"-->
-            <!--android:title="Message" />-->
+            android:title="@string/menu_orders" />
+        <item
+            android:id="@+id/message"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_message" />
         <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Setting" />
+            android:title="@string/menu_setting" />
         <item
             android:id="@+id/quite"
             android:icon="@drawable/ic_menu_send"
-            android:title="Quite"
+            android:title="@string/menu_exit"
             />
     </group>
 

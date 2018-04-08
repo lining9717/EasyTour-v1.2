@@ -1,7 +1,6 @@
 package com.example.lining.easytour;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -25,8 +23,11 @@ import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener
+//        , View.OnTouchListener
+{
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
+    private float startX;
     private Spinner sp_time;
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
@@ -37,11 +38,39 @@ public class GuiderActivity extends AppCompatActivity
     private int[] image = new int[]{R.drawable.a1, R.drawable.a2, R.drawable.a3};
     private String[] title = new String[]{"苏州旅游注意事项，老游客总结的经验！", "急救知识学习", "导游服务规范"};
     private ViewHolder viewHolder;
+    private NavigationView navigationView;
+    private TextView tv_name;
+    private TextView tv_intro;
+    private TextView tv_tel;
+    private TextView tv_place;
+    private String name;
+    private String intro;
+    private String tel;
+    private String place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_guide);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("guidername");
+        intro = intent.getStringExtra("introduce");
+        tel = intent.getStringExtra("tel");
+        place = intent.getStringExtra("place");
+
+        if(place.equals("")){
+            place = " ";
+        }
+        navigationView = findViewById(R.id.nav_view);
+        View navigationview = navigationView.getHeaderView(0);
+        tv_name = navigationview.findViewById(R.id.tv_guide_name);
+        tv_intro = navigationview.findViewById(R.id.tv_intro);
+        tv_tel = navigationview.findViewById(R.id.tv_tel);
+        tv_place = navigationview.findViewById(R.id.tv_addr);
+        tv_name.setText(name+"");
+        tv_intro.setText(intro+"");
+        tv_tel.setText(tel+"");
+        tv_place.setText(place+"");
         init();
     }
 
@@ -50,6 +79,7 @@ public class GuiderActivity extends AppCompatActivity
         Intent intent = new Intent(GuiderActivity.this, OrderActivity.class);
         startActivity(intent);
     }
+    //监听手势滑动
 
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,6 +121,7 @@ public class GuiderActivity extends AppCompatActivity
         listView.setOnItemClickListener(this);
     }
 
+
     private static class ViewHolder {
         TextView content;
     }
@@ -98,7 +129,7 @@ public class GuiderActivity extends AppCompatActivity
     private void setViewFlipper(ViewFlipper viewFlipper) {
         for (int i = 0; i < url.length; i++) {
             viewHolder = new ViewHolder();
-            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.signt, null);
+            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.sight_item, null);
             viewHolder.content = (TextView) view.findViewById(R.id.tourist_list_tv_content);
             view.setTag(viewHolder);
             viewHolder.content.setText(title[i]);
@@ -110,7 +141,7 @@ public class GuiderActivity extends AppCompatActivity
 
     public void initSpinner(Spinner spinner, List<String> data) {
         final List<String> datas = data;
-        Spinner_Adapter spinner_adapter = new Spinner_Adapter(this);
+        SpinnerAdapter spinner_adapter = new SpinnerAdapter(this);
         spinner.setAdapter(spinner_adapter);
 
         spinner_adapter.setDatas(datas);
@@ -118,12 +149,10 @@ public class GuiderActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -180,13 +209,13 @@ public class GuiderActivity extends AppCompatActivity
                 super.onBackPressed();
             }
         } else if (id == R.id.order) {
-            Intent intent = new Intent(GuiderActivity.this, QurryActivity.class);
+            Intent intent = new Intent(GuiderActivity.this, QueryActivity.class);
             startActivity(intent);
         }
-//        else if (id == R.id.message) {
-//            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
-//            startActivity(intent);
-//        }
+        else if (id == R.id.message) {
+            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.setting) {
             Intent intent = new Intent(GuiderActivity.this, GuiderSettingActivity.class);
             startActivity(intent);

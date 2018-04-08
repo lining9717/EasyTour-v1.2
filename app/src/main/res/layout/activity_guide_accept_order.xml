@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_selector"
         android:textSize="25sp"
-        android:text="@string/TakOrder_GuiderMain"
+        android:text="@string/AcceptOrder_GuiderMain"
         android:textColor="@color/colorTextColor"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
