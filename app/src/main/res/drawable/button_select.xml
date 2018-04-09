@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 本xml名：button_select.xml, 设置按钮按下去的效果，实际上就是不同的图片 -->
+    <item
+        android:topLeftRadius="10dip"
+        android:topRightRadius="10dip"
+        android:bottomRightRadius="10dip"
+        android:bottomLeftRadius="10dip"
+        android:drawable="@color/colorTGray" android:state_pressed="false"></item>
+    <item
+        android:topLeftRadius="10dip"
+        android:topRightRadius="10dip"
+        android:bottomRightRadius="10dip"
+        android:bottomLeftRadius="10dip"
+        android:drawable="@color/colorLightBlue"
+        android:state_pressed="true"></item>
+
+</selector>

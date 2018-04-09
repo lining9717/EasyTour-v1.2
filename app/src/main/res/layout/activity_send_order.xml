@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendOrderActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:src="@drawable/ic_menu_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SendOrder_TouristMain"
+                android:textSize="35sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_order_location"
+                android:layout_gravity="center_vertical"
+                android:textSize="25sp" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spin_provence"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Spinner>
+                <Spinner
+                    android:id="@+id/spin_city"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Spinner>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/descript_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="the description of the location"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:maxLength="50"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_order_start"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"/>
+
+            <com.example.lining.easytour.TimePicker
+                android:id="@+id/start_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                app:layout_id="@layout/time_picker_big"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_order_end"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"/>
+
+            <com.example.lining.easytour.TimePicker
+                android:id="@+id/end_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                app:layout_id="@layout/time_picker_big"/>
+
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/descript_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="the description of the time"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:maxLength="50"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_order_people"
+                android:textSize="25sp" />
+            <Spinner
+                android:id="@+id/spin_number"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </Spinner>
+        </LinearLayout>
+            <Button
+
+                android:id="@+id/send_order"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:textSize="25sp"
+                android:textColor="@color/colorTextColor"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:onClick="btnSendOrder"
+                android:background="@drawable/button_selector"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
