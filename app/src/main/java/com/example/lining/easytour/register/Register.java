@@ -30,6 +30,7 @@ public class Register extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(Register.this,RegisterTourist.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -39,6 +40,7 @@ public class Register extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(Register.this,RegisterGuider.class);
                 startActivity(intent);
+                finish();
 
             }
         });

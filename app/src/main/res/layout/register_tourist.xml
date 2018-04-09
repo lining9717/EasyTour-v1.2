@@ -35,7 +35,6 @@
                 android:id="@+id/register_tiv_usericon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/ic_launcher_background"
                 android:onClick="btnChangeTUserIcon"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/icon2"

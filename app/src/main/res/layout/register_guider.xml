@@ -44,7 +44,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/icon"
-                android:background="@drawable/ic_launcher_background"
                 app:layout_constraintTop_toBottomOf="@+id/g_tv_title"
                 />
 

@@ -1,6 +1,7 @@
 package com.example.lining.easytour.register;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lining.easytour.R;
+import com.example.lining.easytour.photo.ClipBaseActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -28,16 +31,19 @@ import java.util.regex.Pattern;
  * Created by lining on 2018/3/24.
  */
 
-public class RegisterTourist extends Activity {
+public class RegisterTourist extends ClipBaseActivity {
     private EditText et_r_t_user_name;
     private EditText et_r_t_psw;
     private EditText et_r_t_conform_psw;
     private EditText et_r_t_phone;
     private Button btn_r_t_ok;
+    private ImageView ivHeadImg;
     private String username;
     private String psw;
     private String confirm_psw;
     private String tel;
+
+
     public static final String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 
     @Override
@@ -81,6 +87,18 @@ public class RegisterTourist extends Activity {
         });
 
     }
+
+    @Override
+    public void errorLoadImg() {
+        Toast.makeText(RegisterTourist.this,"Load images error",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setImg(Bitmap img, String path) {
+        ivHeadImg.setImageBitmap(img);
+        // TODO: 2018/4/9 上传头像和路径
+    }
+
     /*
     when pushed the back button , go back
      */
@@ -97,8 +115,13 @@ public class RegisterTourist extends Activity {
         et_r_t_conform_psw = findViewById(R.id.et_tourist_confirm_psw);
         et_r_t_phone = findViewById(R.id.et_tourist_tel);
         btn_r_t_ok = findViewById(R.id.btn_tourist_ok);
-
-
+        ivHeadImg = findViewById(R.id.register_tiv_usericon);
+        ivHeadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(ivHeadImg);
+            }
+        });
     }
 
     /**

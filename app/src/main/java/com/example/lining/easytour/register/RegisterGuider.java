@@ -1,6 +1,7 @@
 package com.example.lining.easytour.register;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lining.easytour.R;
+import com.example.lining.easytour.photo.ClipBaseActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -29,13 +32,14 @@ import java.util.regex.Pattern;
  * Created by lining on 2018/3/24.
  */
 
-public class RegisterGuider extends Activity {
+public class RegisterGuider extends ClipBaseActivity {
     private EditText et_r_g_user_name;
     private EditText et_r_g_psw;
     private EditText et_r_g_confirm_psw;
     private EditText et_r_g_real_name;
     private EditText et_r_g_ID;
     private EditText et_r_g_tel;
+    private ImageView ivHeadImg;
     private Button btn_r_g_ok;
     private String username;
     private String psw;
@@ -102,6 +106,17 @@ public class RegisterGuider extends Activity {
         });
     }
 
+    @Override
+    public void errorLoadImg() {
+
+    }
+
+    @Override
+    public void setImg(Bitmap img, String path) {
+        ivHeadImg.setImageBitmap(img);
+        // TODO: 2018/4/9 上传头像和路径 
+    }
+
     /*
     when pushed the back button , go back
      */
@@ -118,6 +133,13 @@ public class RegisterGuider extends Activity {
         et_r_g_ID = findViewById(R.id.et_r_g_ID);
         et_r_g_tel = findViewById(R.id.et_r_g_tel);
         btn_r_g_ok = findViewById(R.id.btn_r_g_ok);
+        ivHeadImg = findViewById(R.id.register_giv_usericon);
+        ivHeadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(ivHeadImg);
+            }
+        });
 
     }
     /**

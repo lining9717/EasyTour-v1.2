@@ -58,4 +58,8 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_exit">Exit</string>
     <string name="menu_market">Market</string>
+    <string name="notifyTitle">notice</string>
+    <string name="notifyMsg">need permission</string>
+    <string name="cancel">cancel</string>
+    <string name="setting">setting</string>
 </resources>
