@@ -1,4 +1,4 @@
-package com.example.lining.easytour.photo.clip.clip_image;
+package com.example.lining.easytour.clip.clip_image;
 
 import android.content.Context;
 import android.graphics.Canvas;

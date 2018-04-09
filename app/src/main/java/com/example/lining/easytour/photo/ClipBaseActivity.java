@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lining.easytour.R;
-import com.example.lining.easytour.photo.clip.AcClipImg;
+import com.example.lining.easytour.clip.AcClipImg;
 
 
 import java.io.File;

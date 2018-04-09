@@ -1,4 +1,4 @@
-package com.example.lining.easytour.photo.clip;
+package com.example.lining.easytour.clip;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lining.easytour.R;
-import com.example.lining.easytour.photo.clip.clip_image.ClipImageLayout;
-import com.example.lining.easytour.photo.clip.clip_image.ImageTools;
+import com.example.lining.easytour.clip.clip_image.ClipImageLayout;
+import com.example.lining.easytour.clip.clip_image.ImageTools;
 
 
 import java.io.File;

@@ -70,7 +70,7 @@
     <activity android:name=".orders.OrderDetailActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".photo.clip.AcClipImg"
+        <activity android:name=".clip.AcClipImg"
             android:theme="@style/AppTheme.NoActionBar"/>
 </application>
 
