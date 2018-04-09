@@ -2,7 +2,9 @@ package com.example.lining.easytour.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,15 +37,14 @@ import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        AdapterView.OnItemClickListener
-//        , View.OnTouchListener
-{
+        AdapterView.OnItemClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
     private float startX;
     private Spinner sp_time;
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
     private int order;
+    private float endX;
     private String[] url = new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
             "http://blog.sina.com.cn/s/blog_73be7ad10102xbcv.html",
             "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
@@ -57,7 +60,7 @@ public class GuiderActivity extends AppCompatActivity
     private String intro;
     private String tel;
     private String place;
-
+    private GestureDetector detector;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,8 @@ public class GuiderActivity extends AppCompatActivity
         tv_intro.setText(intro+"");
         tv_tel.setText(tel+"");
         tv_place.setText(place+"");
+
+        detector = new GestureDetector(this);
         init();
     }
 
@@ -126,9 +131,114 @@ public class GuiderActivity extends AppCompatActivity
 
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
-
+        viewFlipper.setOnTouchListener(this);
 
         listView.setOnItemClickListener(this);
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                startX = event.getX();
+
+                break;
+            case MotionEvent.ACTION_UP:
+
+                endX = event.getX();
+                order = viewFlipper.getDisplayedChild();
+
+                if(order > 0 && endX > startX){// 查看前一页的广告
+
+                    viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_left_in));
+                    viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_right_out));
+                    viewFlipper.showPrevious();
+                }
+
+                else if(order < url.length && endX < startX){// 查看后一页的广告
+
+                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                        R.anim.anim_left_in));
+                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                        R.anim.anim_right_out));
+                viewFlipper.showNext();
+                }
+                break;
+        }
+        return true;
+    }
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        viewFlipper.setAutoStart(false);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                startX = event.getX();
+
+                break;
+            case MotionEvent.ACTION_UP:
+
+                endX = event.getX();
+                order = viewFlipper.getDisplayedChild();
+
+                if(order > 0 && endX > startX){// 查看前一页的广告
+
+                    viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_left_in));
+                    viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_right_out));
+                    viewFlipper.showPrevious();
+
+                }
+
+                else if(order < url.length && endX < startX){// 查看后一页的广告
+
+                    viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_right_in));
+                    viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_left_out));
+                    viewFlipper.showNext();
+                }
+                viewFlipper.setAutoStart(true);
+                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                        R.anim.anim_right_in));
+                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                        R.anim.anim_left_out));
+                break;
+        }
+        return true;
     }
 
 
