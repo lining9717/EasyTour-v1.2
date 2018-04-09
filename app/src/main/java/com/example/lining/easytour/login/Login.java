@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.login;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,6 +13,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.lining.easytour.guide.GuiderActivity;
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.tourist.TouristActivity;
+import com.example.lining.easytour.register.Register;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.chat.Message;
 
 import java.util.List;
 

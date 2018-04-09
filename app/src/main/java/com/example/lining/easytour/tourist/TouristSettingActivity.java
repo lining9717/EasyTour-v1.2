@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.tourist;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -34,6 +34,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.lining.easytour.R;
 
 import java.io.File;
 import java.io.IOException;

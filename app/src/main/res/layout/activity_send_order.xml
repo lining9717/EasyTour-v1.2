@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendOrderActivity">
+    tools:context=".orders.SendOrderActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"/>
 
-            <com.example.lining.easytour.TimePicker
+            <com.example.lining.easytour.orders.TimePicker
                 android:id="@+id/start_time"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -109,7 +109,7 @@
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"/>
 
-            <com.example.lining.easytour.TimePicker
+            <com.example.lining.easytour.orders.TimePicker
                 android:id="@+id/end_time"
                 android:layout_width="0dp"
                 android:layout_weight="1"

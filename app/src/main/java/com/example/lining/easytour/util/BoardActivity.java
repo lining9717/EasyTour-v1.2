@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.util;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import com.example.lining.easytour.R;
 
 public class BoardActivity extends AppCompatActivity {
 

@@ -18,23 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".TouristActivity"
+            android:name=".tourist.TouristActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TouristSettingActivity"
+            android:name=".tourist.TouristSettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MessageActivity"
+            android:name=".chat.MessageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SendOrderActivity"
+            android:name=".orders.SendOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".QueryActivity"
+            android:name=".orders.QueryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login"
+            android:name=".login.Login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,31 +43,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".register.Register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterGuider"
+            android:name=".register.RegisterGuider"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterTourist"
+            android:name=".register.RegisterTourist"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".GuiderActivity"
+            android:name=".guide.GuiderActivity"
             android:label="@string/guider_market"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OrderActivity"
+            android:name=".orders.OrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".BoardActivity"
+            android:name=".util.BoardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TalkActivity"
+            android:name=".chat.TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GuiderSettingActivity"
+        <activity android:name=".guide.GuiderSettingActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
-    <activity android:name=".OrderDetailActivity"
+    <activity android:name=".orders.OrderDetailActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
 </application>
 

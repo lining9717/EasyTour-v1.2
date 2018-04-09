@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,16 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.example.lining.easytour.util.BoardActivity;
+import com.example.lining.easytour.adapter.LobbyItem;
+import com.example.lining.easytour.adapter.LobbyItemAdapter;
+import com.example.lining.easytour.chat.MessageActivity;
+import com.example.lining.easytour.orders.QueryActivity;
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.adapter.SpinnerAdapter;
+import com.example.lining.easytour.login.Login;
+import com.example.lining.easytour.orders.OrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;

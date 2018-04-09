@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.orders;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.lining.easytour.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -32,8 +34,8 @@ public class SendOrderActivity extends AppCompatActivity {
     private String numofpeople;
     private String starttime;
     private String endtime;
-    private com.example.lining.easytour.TimePicker startday;
-    private com.example.lining.easytour.TimePicker endday;
+    private TimePicker startday;
+    private TimePicker endday;
     private Spinner spinner_province;
     private Spinner spinner_city;
     private Spinner spinner_number;

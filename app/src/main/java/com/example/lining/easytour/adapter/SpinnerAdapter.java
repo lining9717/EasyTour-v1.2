@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.lining.easytour.R;
 
 import java.util.ArrayList;
 import java.util.List;

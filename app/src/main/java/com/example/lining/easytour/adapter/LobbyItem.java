@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.adapter;
 
 /**
  * Created by lining on 2018/3/24.

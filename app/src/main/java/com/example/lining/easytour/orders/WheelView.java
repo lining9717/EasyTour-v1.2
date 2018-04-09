@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.orders;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.lining.easytour.R;
 
 import java.util.ArrayList;
 

@@ -1,17 +1,15 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.orders;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
+import com.example.lining.easytour.R;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class TimePicker extends LinearLayout {
     private WheelView mWheelMinute;

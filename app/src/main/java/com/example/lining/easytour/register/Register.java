@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.register;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.lining.easytour.R;
 
 /**
  * Created by lining on 2018/3/24.

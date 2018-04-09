@@ -1,9 +1,11 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.orders;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.lining.easytour.R;
 
 public class OrderActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.adapter;
 
 import android.widget.ImageView;
 import android.widget.TextView;

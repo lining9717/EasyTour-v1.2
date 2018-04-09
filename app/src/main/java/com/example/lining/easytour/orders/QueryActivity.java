@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.orders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.adapter.QueryArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

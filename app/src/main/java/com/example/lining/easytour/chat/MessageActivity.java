@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.adapter.MessageItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

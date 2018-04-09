@@ -1,4 +1,4 @@
-package com.example.lining.easytour;
+package com.example.lining.easytour.tourist;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.lining.easytour.util.BoardActivity;
+import com.example.lining.easytour.util.Postpaper;
+import com.example.lining.easytour.R;
+import com.example.lining.easytour.adapter.TouristArrayAdapter;
+import com.example.lining.easytour.chat.MessageActivity;
+import com.example.lining.easytour.login.Login;
+import com.example.lining.easytour.orders.QueryActivity;
+import com.example.lining.easytour.orders.SendOrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
