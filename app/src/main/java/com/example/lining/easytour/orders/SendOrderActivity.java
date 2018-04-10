@@ -79,7 +79,7 @@ public class SendOrderActivity extends AppCompatActivity {
     }
 
     public void btnSendOrder(View view) {
-         place = spinner_province.getSelectedItem().toString()+spinner_city.getSelectedItem().toString();
+         place = spinner_province.getSelectedItem().toString()+" "+spinner_city.getSelectedItem().toString();
          place_description = et_location_des.getText().toString();
          time_description = et_time_des.getText().toString();
          numofpeople = spinner_number.getSelectedItem().toString();

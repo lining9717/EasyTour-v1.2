@@ -23,8 +23,8 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query);
-        lv_to_be_finished = (ListView) findViewById(R.id.orders_listview);/*changed the name of the orders ListView*/
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataFinished());
+        lv_to_be_finished = findViewById(R.id.orders_listview);
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
         lv_to_be_finished.setOnItemClickListener(this);
         TBDbutton = findViewById(R.id.btn_to_be_finished);

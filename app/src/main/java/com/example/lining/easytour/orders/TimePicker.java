@@ -1,6 +1,7 @@
 package com.example.lining.easytour.orders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -9,54 +10,81 @@ import android.widget.LinearLayout;
 
 import com.example.lining.easytour.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TimePicker extends LinearLayout {
-    private WheelView mWheelMinute;
     private WheelView mWheelDay;
-    private WheelView mWheelHour;
+    private WheelView mWheelYear;
+    private WheelView mWheelMonth;
+    private int mYear;
+    private int mMonth;
     private int mDay;
-    private int mHour;
-    private int mMinute;
     private int layout_id;
-    private WheelView.OnSelectListener mMinuteListener = new WheelView.OnSelectListener() {
-        @Override
-        public void endSelect(int minute, String text) {
-           mMinute = minute;
-        }
-
-        @Override
-        public void selecting(int id, String text) {
-        }
-    };
+    private Calendar calendar;
     private WheelView.OnSelectListener mDayListener = new WheelView.OnSelectListener() {
         @Override
         public void endSelect(int day, String text) {
-            mDay = day;
+           mDay = day;
         }
 
         @Override
         public void selecting(int day, String text) {
         }
     };
-    private WheelView.OnSelectListener mHourListener = new WheelView.OnSelectListener() {
+    private WheelView.OnSelectListener mYearListener = new WheelView.OnSelectListener() {
         @Override
-        public void endSelect(int hour, String text) {
-            mHour = hour;
+        public void endSelect(int year, String text) {
+            mYear = year;
         }
 
         @Override
-        public void selecting(int day, String text) {
+        public void selecting(int year, String text) {
+        }
+    };
+    private WheelView.OnSelectListener mMonthListener = new WheelView.OnSelectListener() {
+        @Override
+        public void endSelect(int month, String text) {
+            mMonth = month;
+            String select = getMonthData().get(mMonth);
+            int selectmonth = Integer.parseInt((select).substring(select.length()-1));
+            int currentmonth = calendar.get(Calendar.MONTH)+1;
+            if(selectmonth == currentmonth){
+                mWheelDay.setData(getDayData());
+                mWheelDay.setDefault(0);
+                return;
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.MONTH, selectmonth-1);
+            int MaxDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            ArrayList<String> list = new ArrayList<String>();
+            for(int i=1;i<=MaxDay;i++) {
+                if (i < 10)
+                    list.add("0" + i);
+                else
+                    list.add(i + "");
+            }
+            mWheelDay.setData(list);
+            mWheelDay.setDefault(0);
+        }
+
+        @Override
+        public void selecting(int month, String text) {
         }
     };
     private Context mContext;
 
     public TimePicker(Context context) {
         this(context, null);
+        calendar = Calendar.getInstance();
     }
 
     public TimePicker(Context context, AttributeSet attrs) {
         super(context, attrs);
+        calendar = Calendar.getInstance();
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TimePicker);
         int lenght = array.getIndexCount();
         for (int i = 0; i < lenght; i++) {
@@ -66,6 +94,7 @@ public class TimePicker extends LinearLayout {
             }
         }
         array.recycle();
+
     }
 
 
@@ -74,16 +103,16 @@ public class TimePicker extends LinearLayout {
         super.onFinishInflate();
         mContext = getContext();
         LayoutInflater.from(mContext).inflate(layout_id, this);
-        mWheelMinute = (WheelView) findViewById(R.id.minute);
         mWheelDay = (WheelView) findViewById(R.id.day);
-        mWheelHour = (WheelView) findViewById(R.id.hour);
-        mWheelMinute.setOnSelectListener(mMinuteListener);
+        mWheelYear = (WheelView) findViewById(R.id.year);
+        mWheelMonth = (WheelView) findViewById(R.id.month);
         mWheelDay.setOnSelectListener(mDayListener);
-        mWheelHour.setOnSelectListener(mHourListener);
+        mWheelYear.setOnSelectListener(mYearListener);
+        mWheelMonth.setOnSelectListener(mMonthListener);
         setDate(System.currentTimeMillis());
+        mWheelYear.setDefault(0);
+        mWheelMonth.setDefault(0);
         mWheelDay.setDefault(0);
-        mWheelHour.setDefault(3);
-        mWheelMinute.setDefault(7);
     }
 
 
@@ -94,41 +123,58 @@ public class TimePicker extends LinearLayout {
      * @param date
      */
     public void setDate(long date) {
-        mWheelMinute.setData(getDayData());
-        mWheelDay.setData(getYearData());
-        mWheelHour.setData(getMonthData());
+        mWheelDay.setData(getDayData());
+        mWheelYear.setData(getYearData());
+        mWheelMonth.setData(getMonthData());
     }
 
     private ArrayList<String> getYearData() {
         ArrayList<String> list = new ArrayList<String>();
-        list.add("2018");
-        list.add("2019");
-        list.add("2020");
-        list.add("2021");
+        for(int i=0;i<4;i++){
+            list.add((calendar.get(Calendar.YEAR)+i)+"");
+        }
         return list;
     }
 
 
     private ArrayList<String> getMonthData() {
         ArrayList<String> list = new ArrayList<String>();
-        for(int i =1 ; i < 13;i++) {
-            list.add("" + i);
+        int month = calendar.get(Calendar.MONTH)+1;
+        for(int i=month;i<=12;i++){
+            if(i<10)
+                list.add("0"+i);
+            else
+                list.add(i+"");
         }
         return list;
     }
 
     private ArrayList<String> getDayData() {
         ArrayList<String> list = new ArrayList<String>();
-        for(int i =1 ; i < 31;i++) {
-            list.add("" + i);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int daysOfMonth = 31;
+        try {
+            daysOfMonth = getDaysOfMonth(sdf.parse(sdf.format(calendar.getTime())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for(int i=day;i<=daysOfMonth;i++) {
+            if (i < 10)
+                list.add("0" + i);
+            else
+                list.add(i + "");
         }
         return list;
     }
 
     public String toString() {
-        Log.i("mDay","-------->"+mDay);
-        Log.i("mDay","-------->"+mHour);
-        Log.i("mDay","-------->"+mMinute);
-        return getYearData().get(mDay) + "-" + getMonthData().get(mHour) + "-" + getDayData().get(mMinute);
+        return getYearData().get(mYear) + "-" + getMonthData().get(mMonth) + "-" + getDayData().get(mYear);
+    }
+
+    public int getDaysOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 }

@@ -13,15 +13,15 @@
         android:orientation="horizontal">
 
         <com.example.lining.easytour.orders.WheelView
+            android:id="@+id/year"
+            style="@style/wheelViewStylebig" />
+
+        <com.example.lining.easytour.orders.WheelView
+            android:id="@+id/month"
+            style="@style/wheelViewStylebig" />
+
+        <com.example.lining.easytour.orders.WheelView
             android:id="@+id/day"
-            style="@style/wheelViewStylebig" />
-
-        <com.example.lining.easytour.orders.WheelView
-            android:id="@+id/hour"
-            style="@style/wheelViewStylebig" />
-
-        <com.example.lining.easytour.orders.WheelView
-            android:id="@+id/minute"
             style="@style/wheelViewStylebig" />
     </LinearLayout>
 </LinearLayout>

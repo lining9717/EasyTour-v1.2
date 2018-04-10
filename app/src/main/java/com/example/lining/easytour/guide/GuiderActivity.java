@@ -1,7 +1,9 @@
 package com.example.lining.easytour.guide;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,29 +18,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-
+import com.example.lining.easytour.adapter.QueryArrayAdapter;
+import com.example.lining.easytour.orders.Order;
 import com.example.lining.easytour.util.BoardActivity;
-import com.example.lining.easytour.adapter.LobbyItem;
-import com.example.lining.easytour.adapter.LobbyItemAdapter;
 import com.example.lining.easytour.chat.MessageActivity;
 import com.example.lining.easytour.orders.QueryActivity;
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.adapter.SpinnerAdapter;
 import com.example.lining.easytour.login.Login;
 import com.example.lining.easytour.orders.OrderActivity;
-
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AdapterView.OnItemClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
-    private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
+    private ListView orders_list_view;
     private float startX;
     private Spinner sp_time;
     private Spinner sp_place;
@@ -65,6 +74,7 @@ public class GuiderActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+
         Intent intent = getIntent();
         name = intent.getStringExtra("guidername");
         intro = intent.getStringExtra("introduce");
@@ -85,6 +95,7 @@ public class GuiderActivity extends AppCompatActivity
         tv_tel.setText(tel+"");
         tv_place.setText(place+"");
 
+        new GetOrders().execute();
         detector = new GestureDetector(this);
         init();
     }
@@ -124,17 +135,20 @@ public class GuiderActivity extends AppCompatActivity
         initSpinner(sp_place, place);
         initSpinner(sp_time, time);
 
-        generateListContent();
-        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(), R.layout.order_item, lobby_items);
-        ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
-        listView.setAdapter(lobby_item_adapter);
+
+        orders_list_view = findViewById(R.id.guider_listView);
+        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuiderActivity.this,R.layout.order_item,generateListContent());
+        orders_list_view.setAdapter(orders_adapter);
 
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
         viewFlipper.setOnTouchListener(this);
 
-        listView.setOnItemClickListener(this);
+        orders_list_view.setOnItemClickListener(this);
     }
+
+
+    //滑动广告
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -176,7 +190,6 @@ public class GuiderActivity extends AppCompatActivity
 
     @Override
     public void onShowPress(MotionEvent e) {
-
     }
 
     @Override
@@ -198,7 +211,6 @@ public class GuiderActivity extends AppCompatActivity
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         viewFlipper.setAutoStart(false);
@@ -277,15 +289,15 @@ public class GuiderActivity extends AppCompatActivity
         });
     }
 
-    private void generateListContent() {
-        final String[] list = {"重大3/20虎溪3", "重大3/21虎溪3", "重大3/22虎溪3", "重大3/23虎溪3", "重大3/24虎溪3", "重大3/25虎溪3", "重大3/26虎溪3"};
-        for (String element : list) {
-            String title = element.substring(0, 2);
-            String date = element.substring(2, 6);
-            String content = element.substring(6, 8);
-            int day = Integer.parseInt(element.substring(8));
-            lobby_items.add(new LobbyItem(title, date, content, day));
-        }
+    private ArrayList<Order> generateListContent() {
+
+        ArrayList<Order> list = new ArrayList<>();
+
+
+
+
+
+        return list;
     }
 
 
@@ -355,5 +367,58 @@ public class GuiderActivity extends AppCompatActivity
         Intent intent = new Intent(GuiderActivity.this, BoardActivity.class);
         intent.putExtra("url", url[order]);
         startActivity(intent);
+    }
+
+
+    private class GetOrders extends AsyncTask<String,Void,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            String uri = "http://118.89.18.136/EasyTour-bk/getorders.php/";
+            StringBuilder result = new StringBuilder();
+            HttpPost httpRequest = new HttpPost(uri);
+            try {
+                HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+                Log.i("getStatusCode():","--------------------------------------->"+httpResponse.getStatusLine().getStatusCode());
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                    for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
+                        result.append(s);
+                    }
+                }
+                //获取数据
+                JSONObject mObject = new JSONObject(result.toString());
+                JSONArray data = mObject.getJSONArray("data");
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strings) {
+            super.onPostExecute(strings);
+
+        }
+    }
+
+
+
+    /**
+     *字符串的日期格式的计算
+     */
+    public static int daysBetween(String smdate,String bdate) throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sdf.parse(smdate));
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(sdf.parse(bdate));
+        long time2 = cal.getTimeInMillis();
+        long between_days=(time2-time1)/(1000*3600*24);
+
+        return Integer.parseInt(String.valueOf(between_days));
     }
 }
