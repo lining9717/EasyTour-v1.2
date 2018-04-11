@@ -6,12 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".orders.OrderActivity"
     android:orientation="vertical"
+
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightBlueBar"
         android:orientation="horizontal"
+
         >
         <ImageButton
             android:id="@+id/order_user_iocn"
@@ -35,14 +38,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/OrderNUM_GuiderMain"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:textSize="20sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ordernum"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:scrollbars="vertical"/>
@@ -52,28 +58,37 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Order_Status"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:textSize="20sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ordernum"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:scrollbars="vertical"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
-<LinearLayout
+    <View
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:background="#d9d9d9"
+        />
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="10dp">
     <TextView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Location_GuiderMain"
+
         android:textSize="20sp"/>
     <TextView
         android:id="@+id/order_tv_localdes"
@@ -84,6 +99,11 @@
         android:scrollbars="vertical"/>
 
 </LinearLayout>
+    <View
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:background="#d9d9d9"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -132,6 +152,11 @@
     />
 
     </LinearLayout>
+    <View
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:background="#d9d9d9"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
