@@ -12,17 +12,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_send"/>
+        android:gravity="center"
+        android:background="@color/colorLightBlueBar">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message"
+            android:text="@string/menu_message"
             android:textSize="35sp"
-            />
+            android:textColor="@color/colorGray"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"

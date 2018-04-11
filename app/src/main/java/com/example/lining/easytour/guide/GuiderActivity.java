@@ -16,12 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.example.lining.easytour.Refresh.GuideMainRefreshableView;
 import com.example.lining.easytour.util.BoardActivity;
 import com.example.lining.easytour.adapter.LobbyItem;
 import com.example.lining.easytour.adapter.LobbyItemAdapter;
@@ -39,12 +39,15 @@ public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AdapterView.OnItemClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     private ArrayList<LobbyItem> lobby_items = new ArrayList<>();
+    private ArrayList<LobbyItem> clean_items = new ArrayList<>();
     private float startX;
     private Spinner sp_time;
     private Spinner sp_place;
     private ViewFlipper viewFlipper;
     private int order;
     private float endX;
+    private float startY;
+    private float endY;
     private String[] url = new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
             "http://blog.sina.com.cn/s/blog_73be7ad10102xbcv.html",
             "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
@@ -61,6 +64,8 @@ public class GuiderActivity extends AppCompatActivity
     private String tel;
     private String place;
     private GestureDetector detector;
+    GuideMainRefreshableView guideMainRefreshableView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +76,7 @@ public class GuiderActivity extends AppCompatActivity
         tel = intent.getStringExtra("tel");
         place = intent.getStringExtra("place");
 
-        if(place.equals("")){
+        if (place.equals("")) {
             place = " ";
         }
         navigationView = findViewById(R.id.nav_view);
@@ -80,14 +85,52 @@ public class GuiderActivity extends AppCompatActivity
         tv_intro = navigationview.findViewById(R.id.tv_intro);
         tv_tel = navigationview.findViewById(R.id.tv_tel);
         tv_place = navigationview.findViewById(R.id.tv_addr);
-        tv_name.setText(name+"");
-        tv_intro.setText(intro+"");
-        tv_tel.setText(tel+"");
-        tv_place.setText(place+"");
+        tv_name.setText(name + "");
+        tv_intro.setText(intro + "");
+        tv_tel.setText(tel + "");
+        tv_place.setText(place + "");
 
+        guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.refreshable_view);
+        guideMainRefreshableView.listView = (ListView) findViewById(R.id.guider_listView);
+        guideMainRefreshableView.setOnRefreshListener(new GuideMainRefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    ListViewDataUpdate();/*更新列表数据*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                guideMainRefreshableView.finishRefreshing();
+            }
+        }, 0);
         detector = new GestureDetector(this);
         init();
     }
+
+    private void ListViewDataUpdate() {
+        lobby_items = CleanListView();
+        getOrderData();
+        LobbyItemAdapter lobby_item_adapter = new LobbyItemAdapter(getBaseContext(), R.layout.order_item, lobby_items);
+        ListView listView = findViewById(R.id.guider_listView);/*changed the name of guider list view*/
+        listView.setAdapter(lobby_item_adapter);
+    }
+    private void getOrderData() {
+        final String[] list = {"重大4/20虎溪3", "重大4/21虎溪3", "重大4/22虎溪3", "重大4/23虎溪3", "重大4/24虎溪3", "重大4/25虎溪3", "重大4/26虎溪3"};
+        for (String element : list) {
+            String title = element.substring(0, 2);
+            String date = element.substring(2, 6);
+            String content = element.substring(6, 8);
+            int day = Integer.parseInt(element.substring(8));
+            lobby_items.add(new LobbyItem(title, date, content, day));
+        }
+
+    }
+
+    private ArrayList<LobbyItem> CleanListView() {
+        return clean_items;
+    }
+
+    ;
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -135,40 +178,43 @@ public class GuiderActivity extends AppCompatActivity
 
         listView.setOnItemClickListener(this);
     }
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
                 startX = event.getX();
+                startX = event.getY();
 
                 break;
             case MotionEvent.ACTION_UP:
 
                 endX = event.getX();
+                endY = event.getY();
                 order = viewFlipper.getDisplayedChild();
 
-                if(order > 0 && endX > startX){// 查看前一页的广告
+                if (order > 0 && endX > startX) {// 查看前一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_left_in));
                     viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_right_out));
                     viewFlipper.showPrevious();
-                }
+                } else if (order < url.length && endX < startX) {// 查看后一页的广告
 
-                else if(order < url.length && endX < startX){// 查看后一页的广告
-
-                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
-                        R.anim.anim_left_in));
-                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
-                        R.anim.anim_right_out));
-                viewFlipper.showNext();
+                    viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_left_in));
+                    viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_right_out));
+                    viewFlipper.showNext();
                 }
                 break;
         }
         return true;
     }
+
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
@@ -213,7 +259,7 @@ public class GuiderActivity extends AppCompatActivity
                 endX = event.getX();
                 order = viewFlipper.getDisplayedChild();
 
-                if(order > 0 && endX > startX){// 查看前一页的广告
+                if (order > 0 && endX > startX) {// 查看前一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_left_in));
@@ -221,9 +267,7 @@ public class GuiderActivity extends AppCompatActivity
                             R.anim.anim_right_out));
                     viewFlipper.showPrevious();
 
-                }
-
-                else if(order < url.length && endX < startX){// 查看后一页的广告
+                } else if (order < url.length && endX < startX) {// 查看后一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_right_in));
@@ -331,12 +375,10 @@ public class GuiderActivity extends AppCompatActivity
         } else if (id == R.id.order) {
             Intent intent = new Intent(GuiderActivity.this, QueryActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.message) {
+        } else if (id == R.id.message) {
             Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.setting) {
+        } else if (id == R.id.setting) {
             Intent intent = new Intent(GuiderActivity.this, GuiderSettingActivity.class);
             startActivity(intent);
         } else if (id == R.id.quite) {

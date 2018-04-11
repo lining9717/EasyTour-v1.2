@@ -55,7 +55,9 @@
                 android:layout_height="wrap_content"
                 android:text="重庆"
                 android:textStyle="bold"
+                android:layout_marginBottom="5dp"
                 />
+
 
         </LinearLayout>
 
@@ -70,12 +72,13 @@
         android:isIndicator="true"
         style="@style/foodRatingBar"
         />
-
     <TextView
         android:id="@+id/tv_intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="小杨同学为你服务。"
         android:textStyle="bold"/>
+
+
 
 </LinearLayout>
