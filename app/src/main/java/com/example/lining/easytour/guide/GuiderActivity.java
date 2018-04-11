@@ -34,8 +34,11 @@ import com.example.lining.easytour.orders.OrderActivity;
 import com.example.lining.easytour.util.SerializableHashMap;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +53,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.lining.easytour.util.ToolUtil.daysBetween;
+
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AdapterView.OnItemClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     private ListView orders_list_view;
     private float startX;
-    private Spinner sp_time;
-    private Spinner sp_place;
     private ViewFlipper viewFlipper;
     private int order;
     private float endX;
@@ -116,24 +119,9 @@ public class GuiderActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        List<String> place = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            place.add("CQU");
-        }
-
-        List<String> time = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            time.add("3/26/2018");
-        }
-
-        sp_time = findViewById(R.id.spinner_time);
-        sp_place = findViewById(R.id.spinner_place);
-        initSpinner(sp_place, place);
-        initSpinner(sp_time, time);
         orders_list_view = findViewById(R.id.guider_listView);
         QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuiderActivity.this,R.layout.order_item, generateListContent());
         orders_list_view.setAdapter(orders_adapter);
@@ -155,6 +143,7 @@ public class GuiderActivity extends AppCompatActivity
         serializableHashMap.setMap((HashMap<String, String>)map);
         Bundle bundle = new Bundle();
         bundle.putSerializable("message",serializableHashMap);
+        bundle.putString("guidername",name);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -341,6 +330,7 @@ public class GuiderActivity extends AppCompatActivity
             }
         } else if (id == R.id.order) {
             Intent intent = new Intent(GuiderActivity.this, QueryActivity.class);
+            intent.putExtra("guidename",name);
             startActivity(intent);
         }
         else if (id == R.id.message) {
@@ -374,7 +364,7 @@ public class GuiderActivity extends AppCompatActivity
         for (int i=0;i<orderResult.size();i++){
             Map<String,String> map = orderResult.get(i);
             String days = daysBetween(map.get("begin_day"),map.get("end_day"));
-            Order order = new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"天");
+            Order order = new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days");
             list.add(order);
         }
         return list;
@@ -394,6 +384,7 @@ public class GuiderActivity extends AppCompatActivity
                         result.append(s);
                     }
                 }
+                Log.i("GetOrders","result----------->"+result.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -426,28 +417,5 @@ public class GuiderActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     *字符串的日期格式的计算
-     */
-    public static String daysBetween(String smdate,String bdate){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        try {
-            cal.setTime(sdf.parse(smdate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long time1 = cal.getTimeInMillis();
-        try {
-            cal.setTime(sdf.parse(bdate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long time2 = cal.getTimeInMillis();
-        long between_days=(time2-time1)/(1000*3600*24);
-
-        return String.valueOf(between_days);
     }
 }

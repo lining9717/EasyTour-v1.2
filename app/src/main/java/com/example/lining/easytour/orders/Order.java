@@ -25,6 +25,15 @@ public class Order {
         this.mDays = days;
     }
 
+    public Order(int mImage, String mPlace, String mPlaceDescrible, String mDate, String mDays, int mOrderID) {
+        this.mImage = mImage;
+        this.mPlace = mPlace;
+        this.mPlaceDescrible = mPlaceDescrible;
+        this.mDate = mDate;
+        this.mDays = mDays;
+        this.mOrderID = mOrderID;
+    }
+
     public Order(int mImage, String mPlace, String mPlaceDescrible, String mDate, String mDays,
                  String mUsername, String mGuidename, String mBegin_day, String mEnd_day,
                  String mTimeDescrible, int numOFPeople, int mOrderID) {

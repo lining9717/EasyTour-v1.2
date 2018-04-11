@@ -24,27 +24,6 @@
             android:onClick="btnClickViewFlipper"
             android:outAnimation="@anim/anim_left_out"></ViewFlipper>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinner_time"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"></Spinner>
-
-            <Spinner
-                android:id="@+id/spinner_place"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"></Spinner>
-        </LinearLayout>
-
         <ListView
             android:id="@+id/guider_listView"
             android:layout_width="match_parent"

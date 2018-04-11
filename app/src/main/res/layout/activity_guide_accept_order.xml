@@ -251,6 +251,7 @@
                android:layout_marginTop="30dp"
                android:layout_gravity="center"
                android:layout_marginBottom="20dp"
+               android:onClick="btnAcceptOrder"
                />
 
        </LinearLayout>

@@ -71,4 +71,5 @@
     <string name="order_detai_time_instruction">Time Instruction</string>
     <string name="order_details">Order Details</string>
     <string name="order_detail_number_od_people">Number of people</string>
+    <string name="order_detail_finished">Finished</string>
 </resources>

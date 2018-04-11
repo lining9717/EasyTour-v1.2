@@ -6,209 +6,255 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".orders.OrderDetailActivity">
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/OrderNUM_GuiderMain"
-            android:textSize="25sp"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:text="ordernum"
-            android:textSize="25sp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Order_Status"
-            android:textSize="25sp"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:scrollbars="vertical"
-            android:text="statuse"
-            android:textSize="25sp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:gravity="center|left"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:text="User Name:"
-            android:textSize="25sp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+            <ImageView
+                android:id="@+id/iv_order_detail_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logotemp"
+                />
 
-            />
-
-        <TextView
-            android:id="@+id/orderdetail_user_username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:layout_weight="1"
-            android:gravity="center|left"
-            android:singleLine="true"
-            android:text="@string/UserName_GuiderMain"
-            android:textSize="25sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:gravity="center|left"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:text="Guide Name:"
-            android:textSize="25sp"
-
-            />
-
-        <TextView
-            android:id="@+id/orderdetail_guide_guidename"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:layout_weight="1"
-            android:gravity="center|left"
-            android:singleLine="true"
-            android:text="Guide Name"
-            android:textSize="25sp" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_marginTop="20dp">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Location_GuiderMain"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/order_tv_localdes"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scrollbars="vertical"
-            android:text="@string/Description"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Time_GuiderMain"
-            android:textSize="25sp" />
-
-        <RelativeLayout
-            android:id="@+id/order_time_table"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/order_tv_Starttime"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/StartDate_GuiderMain"
-                android:textSize="20sp" />
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_id"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11223344"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="to"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
 
-                android:textSize="20sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/oreder_detail_tourist_name"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_tourist_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_contact_tourist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text=" >"
+                    android:textColor="@color/dimgray"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/order_tv_Endtime"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/End_Date_GuiderMain"
-                android:textSize="20sp" />
-        </RelativeLayout>
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_place"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
 
-        <TextView
-            android:id="@+id/order_tv_timedes"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scrollbars="vertical"
-            android:text="@string/Description"
-            android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_start_date"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_end_date"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_number_od_people"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_number_of_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detail_place_instruction"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_place_instruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Customer_NUM_GuiderMain"
-            android:textSize="25sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/order_detai_time_instruction"
+                    android:textSize="20sp"
+                    android:textColor="@color/dimgray"
+                    />
+                <TextView
+                    android:id="@+id/tv_order_detail_time_instruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:text="11111111"
+                    />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/order_tv_customernum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="3"
-            android:textSize="25sp" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_finished_order"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_selector"
+                android:textSize="25sp"
+                android:text="@string/order_detail_finished"
+                android:textColor="@color/colorTextColor"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="btnFinishedOrderOrder"
+                />
 
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
