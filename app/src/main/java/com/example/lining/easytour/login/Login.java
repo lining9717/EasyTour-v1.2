@@ -39,12 +39,9 @@ import java.util.List;
 public class Login extends Activity {
     private EditText et_account;
     private EditText et_psw;
-    private RadioButton rbt_tourist;
     private RadioButton rbt_guider;
-    private RadioGroup radio;
     private Button btn_sign_in;
     private Button btn_sign_up;
-    private Button btn_exit;
     private ProgressDialog progressDialog;
 
     @Override
@@ -77,11 +74,8 @@ public class Login extends Activity {
         et_account = findViewById(R.id.et_account);
         et_psw = findViewById(R.id.et_psw);
         rbt_guider = findViewById(R.id.rbt_guider);
-        rbt_tourist = findViewById(R.id.rbt_tourist);
-        radio = findViewById(R.id.radio);
         btn_sign_in = findViewById(R.id.btn_sign_in);
         btn_sign_up = findViewById(R.id.btn_sign_up);
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Prompt");
         progressDialog.setMessage("Connecting...");

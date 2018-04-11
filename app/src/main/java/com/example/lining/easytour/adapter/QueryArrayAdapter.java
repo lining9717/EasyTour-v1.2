@@ -70,11 +70,11 @@ public class QueryArrayAdapter extends ArrayAdapter<Order> {
 
         Order order = objects.get(position);
         if (null != order) {
-            viewHolder.getImageView().setBackgroundResource(order.getPicture());
-            viewHolder.getTitle().setText(order.getTitle());
-            viewHolder.getContent().setText(order.getContent());
-            viewHolder.getTime().setText(order.getTime());
-            viewHolder.getDate().setText(order.getDate());
+            viewHolder.getImageView().setBackgroundResource(order.getmImage());
+            viewHolder.getTitle().setText(order.getmPlace());
+            viewHolder.getContent().setText(order.getmPlaceDescrible());
+            viewHolder.getTime().setText(order.getmDays());
+            viewHolder.getDate().setText(order.getmDate());
         }
 
         return convertView;

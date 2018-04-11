@@ -31,18 +31,24 @@ import com.example.lining.easytour.R;
 import com.example.lining.easytour.adapter.SpinnerAdapter;
 import com.example.lining.easytour.login.Login;
 import com.example.lining.easytour.orders.OrderActivity;
+import com.example.lining.easytour.util.SerializableHashMap;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GuiderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -70,17 +76,16 @@ public class GuiderActivity extends AppCompatActivity
     private String tel;
     private String place;
     private GestureDetector detector;
+    private List<Map<String,String>> orderResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-
         Intent intent = getIntent();
         name = intent.getStringExtra("guidername");
         intro = intent.getStringExtra("introduce");
         tel = intent.getStringExtra("tel");
         place = intent.getStringExtra("place");
-
         if(place.equals("")){
             place = " ";
         }
@@ -94,18 +99,13 @@ public class GuiderActivity extends AppCompatActivity
         tv_intro.setText(intro+"");
         tv_tel.setText(tel+"");
         tv_place.setText(place+"");
-
+        orderResult = new ArrayList<>();
         new GetOrders().execute();
         detector = new GestureDetector(this);
-        init();
+
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(GuiderActivity.this, OrderActivity.class);
-        startActivity(intent);
-    }
-    //监听手势滑动
+
 
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -134,19 +134,30 @@ public class GuiderActivity extends AppCompatActivity
         sp_place = findViewById(R.id.spinner_place);
         initSpinner(sp_place, place);
         initSpinner(sp_time, time);
-
-
         orders_list_view = findViewById(R.id.guider_listView);
-        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuiderActivity.this,R.layout.order_item,generateListContent());
+        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuiderActivity.this,R.layout.order_item, generateListContent());
         orders_list_view.setAdapter(orders_adapter);
-
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
         viewFlipper.setOnTouchListener(this);
-
         orders_list_view.setOnItemClickListener(this);
     }
 
+
+
+
+    //点击订单，跳转到详情页面
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(GuiderActivity.this, OrderActivity.class);
+        Map<String,String> map = orderResult.get(position);
+        SerializableHashMap serializableHashMap = new SerializableHashMap();
+        serializableHashMap.setMap((HashMap<String, String>)map);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("message",serializableHashMap);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     //滑动广告
     @Override
@@ -289,18 +300,6 @@ public class GuiderActivity extends AppCompatActivity
         });
     }
 
-    private ArrayList<Order> generateListContent() {
-
-        ArrayList<Order> list = new ArrayList<>();
-
-
-
-
-
-        return list;
-    }
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -370,6 +369,17 @@ public class GuiderActivity extends AppCompatActivity
     }
 
 
+    private List<Order> generateListContent() {
+        List<Order> list = new ArrayList<>();
+        for (int i=0;i<orderResult.size();i++){
+            Map<String,String> map = orderResult.get(i);
+            String days = daysBetween(map.get("begin_day"),map.get("end_day"));
+            Order order = new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"天");
+            list.add(order);
+        }
+        return list;
+    }
+
     private class GetOrders extends AsyncTask<String,Void,String>{
         @Override
         protected String doInBackground(String... strings) {
@@ -378,47 +388,66 @@ public class GuiderActivity extends AppCompatActivity
             HttpPost httpRequest = new HttpPost(uri);
             try {
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
-                Log.i("getStatusCode():","--------------------------------------->"+httpResponse.getStatusLine().getStatusCode());
                 if (httpResponse.getStatusLine().getStatusCode() == 200) {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
                     for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
                         result.append(s);
                     }
                 }
-                //获取数据
-                JSONObject mObject = new JSONObject(result.toString());
-                JSONArray data = mObject.getJSONArray("data");
-
-
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
+            return result.toString();
         }
 
         @Override
         protected void onPostExecute(String strings) {
             super.onPostExecute(strings);
-
+            try {
+                JSONObject jsonObject = new JSONObject(strings);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                for (int i=0;i<jsonArray.length();i++){
+                    JSONObject itemObject = jsonArray.getJSONObject(i);
+                    Map<String,String> map = new HashMap<String, String>();
+                    map.put("orderID",itemObject.getString("orderID"));
+                    map.put("username",itemObject.getString("username"));
+                    map.put("guidername",itemObject.getString("guidername"));
+                    map.put("begin_day",itemObject.getString("begin_day"));
+                    map.put("end_day",itemObject.getString("end_day"));
+                    map.put("place",itemObject.getString("place"));
+                    map.put("place_descript",itemObject.getString("place_descript"));
+                    map.put("time_descript",itemObject.getString("time_descript"));
+                    map.put("num_of_people",itemObject.getString("num_of_people"));
+                    map.put("isDone",itemObject.getString("isDone"));
+                    orderResult.add(map);
+                }
+                init();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
-
-
 
     /**
      *字符串的日期格式的计算
      */
-    public static int daysBetween(String smdate,String bdate) throws ParseException {
+    public static String daysBetween(String smdate,String bdate){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        cal.setTime(sdf.parse(smdate));
+        try {
+            cal.setTime(sdf.parse(smdate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         long time1 = cal.getTimeInMillis();
-        cal.setTime(sdf.parse(bdate));
+        try {
+            cal.setTime(sdf.parse(bdate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         long time2 = cal.getTimeInMillis();
         long between_days=(time2-time1)/(1000*3600*24);
 
-        return Integer.parseInt(String.valueOf(between_days));
+        return String.valueOf(between_days);
     }
 }

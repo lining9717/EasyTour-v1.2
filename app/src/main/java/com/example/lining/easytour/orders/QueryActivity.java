@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -58,13 +59,13 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     public void btnToBeFinished(View view) {
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }
 
     public void btnFinishedOrder(View view) {
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,0,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }

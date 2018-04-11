@@ -57,20 +57,24 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".orders.OrderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme"
+            android:label="@string/order_details"
+            />
         <activity
             android:name=".util.BoardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".chat.TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".guide.GuiderSettingActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-    <activity android:name=".orders.OrderDetailActivity"
-        android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".guide.GuiderSettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".orders.OrderDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".clip.AcClipImg"
+        <activity
+            android:name=".clip.AcClipImg"
             android:theme="@style/AppTheme.NoActionBar"/>
 </application>
 

@@ -80,6 +80,7 @@ public class TimePicker extends LinearLayout {
     public TimePicker(Context context) {
         this(context, null);
         calendar = Calendar.getInstance();
+
     }
 
     public TimePicker(Context context, AttributeSet attrs) {
@@ -169,7 +170,23 @@ public class TimePicker extends LinearLayout {
     }
 
     public String toString() {
-        return getYearData().get(mYear) + "-" + getMonthData().get(mMonth) + "-" + getDayData().get(mYear);
+        //如果是当前月份
+        if(getMonthData().get(mMonth).equals("0"+(calendar.get(Calendar.MONTH)+1)))
+            return getYearData().get(mYear) + "-" + getMonthData().get(mMonth) + "-" + getDayData().get(mDay);
+        //不是当前月份
+        String select = getMonthData().get(mMonth);
+        int selectmonth = Integer.parseInt((select).substring(select.length()-1));
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, selectmonth-1);
+        int MaxDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i=1;i<=MaxDay;i++) {
+            if (i < 10)
+                list.add("0" + i);
+            else
+                list.add(i + "");
+        }
+        return getYearData().get(mYear) + "-" + getMonthData().get(mMonth) + "-" + list.get(mDay);
     }
 
     public int getDaysOfMonth(Date date) {

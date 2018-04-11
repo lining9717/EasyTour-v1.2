@@ -34,7 +34,7 @@
     <string name="StartDate_GuiderMain">2018-03-01</string>
     <string name="Time_GuiderMain">Time：</string>
     <string name="Location_GuiderMain">Location:</string>
-    <string name="OrderNUM_GuiderMain">OrderNUM：</string>
+    <string name="OrderNUM_GuiderMain">OrderID：</string>
     <string name="UserName_GuiderMain">UserName</string>
     <string name="SendOrder_TouristMain">SendOrder</string>
     <string name="Tourist_Login">Tourist</string>
@@ -62,4 +62,13 @@
     <string name="notifyMsg">need permission</string>
     <string name="cancel">cancel</string>
     <string name="setting">setting</string>
+    <string name="order_detail_id">Order ID</string>
+    <string name="oreder_detail_tourist_name">Tourist name</string>
+    <string name="order_detail_place">Place</string>
+    <string name="order_detail_start_date">Start date</string>
+    <string name="order_detail_end_date">End date</string>
+    <string name="order_detail_place_instruction">Place Instruction</string>
+    <string name="order_detai_time_instruction">Time Instruction</string>
+    <string name="order_details">Order Details</string>
+    <string name="order_detail_number_od_people">Number of people</string>
 </resources>
