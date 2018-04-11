@@ -21,7 +21,7 @@ import com.example.lining.easytour.R;
 import com.example.lining.easytour.adapter.TouristArrayAdapter;
 import com.example.lining.easytour.chat.MessageActivity;
 import com.example.lining.easytour.login.Login;
-import com.example.lining.easytour.orders.QueryActivity;
+import com.example.lining.easytour.guide.GuideQueryActivity;
 import com.example.lining.easytour.orders.SendOrderActivity;
 
 import java.util.ArrayList;
@@ -141,7 +141,7 @@ public class TouristActivity extends AppCompatActivity
 
         if (id == R.id.nav_qurryorder) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this, QueryActivity.class);
+            intent.setClass(TouristActivity.this, GuideQueryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();

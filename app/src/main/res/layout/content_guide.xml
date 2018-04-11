@@ -6,28 +6,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.lining.easytour.guide.GuiderActivity"
+    tools:context="com.example.lining.easytour.guide.GuideActivity"
     tools:showIn="@layout/app_bar_guide">
 
-    <LinearLayout
+
+    <ViewFlipper
+        android:id="@+id/guider_vf_lobby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoStart="true"
+        android:flipInterval="8000"
+        android:inAnimation="@anim/anim_right_in"
+        android:onClick="btnClickViewFlipper"
+        android:outAnimation="@anim/anim_left_out">
+
+    </ViewFlipper>
+
+    <com.example.lining.easytour.Refresh.GuideMainRefreshableView
+        android:id="@+id/refreshable_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ViewFlipper
-            android:id="@+id/guider_vf_lobby"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoStart="true"
-            android:flipInterval="8000"
-            android:inAnimation="@anim/anim_right_in"
-            android:onClick="btnClickViewFlipper"
-            android:outAnimation="@anim/anim_left_out"></ViewFlipper>
 
         <ListView
             android:id="@+id/guider_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"></ListView>
-    </LinearLayout>
+            android:layout_margin="2dp">
+        </ListView>
+
+    </com.example.lining.easytour.Refresh.GuideMainRefreshableView>
 </LinearLayout>

@@ -72,4 +72,15 @@
     <string name="order_details">Order Details</string>
     <string name="order_detail_number_od_people">Number of people</string>
     <string name="order_detail_finished">Finished</string>
+
+    <string name="order_order_title">Order</string>
+<!--下拉刷新-->
+    <string name="pull_to_refresh">pull to refresh</string>
+    <string name="release_to_refresh">release to refresh</string>
+    <string name="refreshing">refreshing...</string>
+    <string name="not_updated_yet">not updated yet</string>
+    <string name="updated_at">updated_at %1$s</string>
+    <string name="updated_just_now">updated just now</string>
+    <string name="time_error">time error</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.example.lining.easytour.orders;
+package com.example.lining.easytour.guide;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ListView;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.adapter.QueryArrayAdapter;
+import com.example.lining.easytour.orders.Order;
+import com.example.lining.easytour.orders.OrderActivity;
 import com.example.lining.easytour.util.SerializableHashMap;
 
 import org.apache.http.HttpResponse;
@@ -34,7 +36,7 @@ import java.util.Map;
 
 import static com.example.lining.easytour.util.ToolUtil.daysBetween;
 
-public class QueryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class GuideQueryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private static final int FINISHED = 0x8989;
     private static final int UNFINISHED = 0x9898;
     private ListView lv_to_be_finished;
@@ -60,7 +62,7 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(flag == UNFINISHED){
-            Intent intent = new Intent(QueryActivity.this,OrderDetailActivity.class);
+            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
             Map<String,String> map = orderResult.get(unFinishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
@@ -72,7 +74,7 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
         }
 
         if(flag == FINISHED){
-            Intent intent = new Intent(QueryActivity.this,OrderDetailActivity.class);
+            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
             Map<String,String> map = orderResult.get(finishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
@@ -91,7 +93,7 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
         TBDbutton = findViewById(R.id.btn_to_be_finished);
         Fbutton = findViewById(R.id.btn_finished_order);
         flag = UNFINISHED;
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
         lv_to_be_finished.setOnItemClickListener(this);
     }
@@ -125,14 +127,14 @@ public class QueryActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void btnToBeFinished(View view) {
         flag = UNFINISHED;
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }
 
     public void btnFinishedOrder(View view) {
         flag = FINISHED;
-        QueryArrayAdapter adapter = new QueryArrayAdapter(QueryActivity.this,R.layout.order_item,getDataFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
 
     }

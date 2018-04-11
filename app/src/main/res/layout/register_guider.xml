@@ -8,6 +8,20 @@
     android:orientation="vertical"
     android:gravity="center"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/colorLightBlueBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SingUpInformation"
+            android:textSize="35sp"
+            android:textColor="@color/colorGray"/>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,22 +31,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:padding="20dp">
-            <TextView
-                android:id="@+id/g_tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/SingUpInformation"
-                android:gravity="center"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="20dp"
-                />
+
             <ImageView
                 android:layout_marginTop="20dp"
                 android:id="@+id/register_giv_usericon"

@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 
-public class GuiderSettingActivity extends AppCompatActivity {
+public class GuideSettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class GuiderSettingActivity extends AppCompatActivity {
     }
 
     public void btnUpdate(View view) {
-        Toast.makeText(GuiderSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
+        Toast.makeText(GuideSettingActivity.this,"Updating the new information",Toast.LENGTH_SHORT).show();
     }
 
 }

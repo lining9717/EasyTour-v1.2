@@ -19,43 +19,34 @@ import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import com.example.lining.easytour.adapter.QueryArrayAdapter;
 import com.example.lining.easytour.orders.Order;
+import com.example.lining.easytour.Refresh.GuideMainRefreshableView;
 import com.example.lining.easytour.util.BoardActivity;
 import com.example.lining.easytour.chat.MessageActivity;
-import com.example.lining.easytour.orders.QueryActivity;
 import com.example.lining.easytour.R;
-import com.example.lining.easytour.adapter.SpinnerAdapter;
 import com.example.lining.easytour.login.Login;
 import com.example.lining.easytour.orders.OrderActivity;
 import com.example.lining.easytour.util.SerializableHashMap;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.example.lining.easytour.util.ToolUtil.daysBetween;
 
-public class GuiderActivity extends AppCompatActivity
+public class GuideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AdapterView.OnItemClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     private ListView orders_list_view;
@@ -63,6 +54,8 @@ public class GuiderActivity extends AppCompatActivity
     private ViewFlipper viewFlipper;
     private int order;
     private float endX;
+    private float startY;
+    private float endY;
     private String[] url = new String[]{"http://blog.sina.com.cn/s/blog_16168caaf0102wc09.html",
             "http://blog.sina.com.cn/s/blog_73be7ad10102xbcv.html",
             "http://blog.sina.com.cn/s/blog_66a5e8990100i9as.html"};
@@ -80,6 +73,8 @@ public class GuiderActivity extends AppCompatActivity
     private String place;
     private GestureDetector detector;
     private List<Map<String,String>> orderResult;
+    GuideMainRefreshableView guideMainRefreshableView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +84,8 @@ public class GuiderActivity extends AppCompatActivity
         intro = intent.getStringExtra("introduce");
         tel = intent.getStringExtra("tel");
         place = intent.getStringExtra("place");
-        if(place.equals("")){
+
+        if (place.equals("")) {
             place = " ";
         }
         navigationView = findViewById(R.id.nav_view);
@@ -98,17 +94,35 @@ public class GuiderActivity extends AppCompatActivity
         tv_intro = navigationview.findViewById(R.id.tv_intro);
         tv_tel = navigationview.findViewById(R.id.tv_tel);
         tv_place = navigationview.findViewById(R.id.tv_addr);
-        tv_name.setText(name+"");
-        tv_intro.setText(intro+"");
-        tv_tel.setText(tel+"");
-        tv_place.setText(place+"");
+
+        tv_name.setText(name + "");
+        tv_intro.setText(intro + "");
+        tv_tel.setText(tel + "");
+        tv_place.setText(place + "");
         orderResult = new ArrayList<>();
         new GetOrders().execute();
-        detector = new GestureDetector(this);
 
+        guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.refreshable_view);
+        guideMainRefreshableView.listView = (ListView) findViewById(R.id.guider_listView);
+        guideMainRefreshableView.setOnRefreshListener(new GuideMainRefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    ListViewDataUpdate();/*更新列表数据*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                guideMainRefreshableView.finishRefreshing();
+            }
+        }, 0);
+
+        detector = new GestureDetector(this);
     }
 
 
+    private void ListViewDataUpdate() {
+
+    }
 
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -123,7 +137,7 @@ public class GuiderActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         orders_list_view = findViewById(R.id.guider_listView);
-        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuiderActivity.this,R.layout.order_item, generateListContent());
+        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
         orders_list_view.setAdapter(orders_adapter);
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
@@ -131,13 +145,10 @@ public class GuiderActivity extends AppCompatActivity
         orders_list_view.setOnItemClickListener(this);
     }
 
-
-
-
     //点击订单，跳转到详情页面
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(GuiderActivity.this, OrderActivity.class);
+        Intent intent = new Intent(GuideActivity.this, OrderActivity.class);
         Map<String,String> map = orderResult.get(position);
         SerializableHashMap serializableHashMap = new SerializableHashMap();
         serializableHashMap.setMap((HashMap<String, String>)map);
@@ -153,36 +164,35 @@ public class GuiderActivity extends AppCompatActivity
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
                 startX = event.getX();
-
+                startX = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
 
                 endX = event.getX();
+                endY = event.getY();
                 order = viewFlipper.getDisplayedChild();
 
-                if(order > 0 && endX > startX){// 查看前一页的广告
+                if (order > 0 && endX > startX) {// 查看前一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_left_in));
                     viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_right_out));
                     viewFlipper.showPrevious();
-                }
+                } else if (order < url.length && endX < startX) {// 查看后一页的广告
 
-                else if(order < url.length && endX < startX){// 查看后一页的广告
-
-                viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
-                        R.anim.anim_left_in));
-                viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
-                        R.anim.anim_right_out));
-                viewFlipper.showNext();
+                    viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_left_in));
+                    viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this,
+                            R.anim.anim_right_out));
+                    viewFlipper.showNext();
                 }
                 break;
         }
         return true;
     }
+
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
@@ -225,7 +235,7 @@ public class GuiderActivity extends AppCompatActivity
                 endX = event.getX();
                 order = viewFlipper.getDisplayedChild();
 
-                if(order > 0 && endX > startX){// 查看前一页的广告
+                if (order > 0 && endX > startX) {// 查看前一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_left_in));
@@ -233,9 +243,7 @@ public class GuiderActivity extends AppCompatActivity
                             R.anim.anim_right_out));
                     viewFlipper.showPrevious();
 
-                }
-
-                else if(order < url.length && endX < startX){// 查看后一页的广告
+                } else if (order < url.length && endX < startX) {// 查看后一页的广告
 
                     viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this,
                             R.anim.anim_right_in));
@@ -271,23 +279,6 @@ public class GuiderActivity extends AppCompatActivity
         }
     }
 
-    public void initSpinner(Spinner spinner, List<String> data) {
-        final List<String> datas = data;
-        SpinnerAdapter spinner_adapter = new SpinnerAdapter(this);
-        spinner.setAdapter(spinner_adapter);
-
-        spinner_adapter.setDatas(datas);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {
@@ -329,19 +320,17 @@ public class GuiderActivity extends AppCompatActivity
                 super.onBackPressed();
             }
         } else if (id == R.id.order) {
-            Intent intent = new Intent(GuiderActivity.this, QueryActivity.class);
+            Intent intent = new Intent(GuideActivity.this, GuideQueryActivity.class);
             intent.putExtra("guidename",name);
             startActivity(intent);
-        }
-        else if (id == R.id.message) {
-            Intent intent = new Intent(GuiderActivity.this, MessageActivity.class);
+        } else if (id == R.id.message) {
+            Intent intent = new Intent(GuideActivity.this, MessageActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.setting) {
-            Intent intent = new Intent(GuiderActivity.this, GuiderSettingActivity.class);
+        } else if (id == R.id.setting) {
+            Intent intent = new Intent(GuideActivity.this, GuideSettingActivity.class);
             startActivity(intent);
         } else if (id == R.id.quite) {
-            Intent intent = new Intent(GuiderActivity.this, Login.class);
+            Intent intent = new Intent(GuideActivity.this, Login.class);
             startActivity(intent);
             finish();
         }
@@ -353,11 +342,10 @@ public class GuiderActivity extends AppCompatActivity
 
     public void btnClickViewFlipper(View view) {
         order = viewFlipper.getDisplayedChild();
-        Intent intent = new Intent(GuiderActivity.this, BoardActivity.class);
+        Intent intent = new Intent(GuideActivity.this, BoardActivity.class);
         intent.putExtra("url", url[order]);
         startActivity(intent);
     }
-
 
     private List<Order> generateListContent() {
         List<Order> list = new ArrayList<>();

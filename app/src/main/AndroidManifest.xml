@@ -31,7 +31,7 @@
             android:name=".orders.SendOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".orders.QueryActivity"
+            android:name=".guide.GuideQueryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".login.Login"
@@ -52,7 +52,7 @@
             android:name=".register.RegisterTourist"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".guide.GuiderActivity"
+            android:name=".guide.GuideActivity"
             android:label="@string/guider_market"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -67,12 +67,8 @@
             android:name=".chat.TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".guide.GuiderSettingActivity"
+            android:name=".guide.GuideSettingActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".orders.OrderDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
         <activity
             android:name=".clip.AcClipImg"
             android:theme="@style/AppTheme.NoActionBar"/>

@@ -11,10 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.lining.easytour.guide.GuiderActivity;
+import com.example.lining.easytour.guide.GuideActivity;
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.tourist.TouristActivity;
 import com.example.lining.easytour.register.Register;
@@ -231,7 +230,7 @@ public class Login extends Activity {
                 Toast.makeText(Login.this, "Password or username wrong", Toast.LENGTH_SHORT).show();
             }else{
                 //从这里传递
-                Intent intent = new Intent(Login.this, GuiderActivity.class);
+                Intent intent = new Intent(Login.this, GuideActivity.class);
                 intent.putExtra("guidername",strings[1]);
                 intent.putExtra("introduce",strings[2]);
                 intent.putExtra("tel",strings[4]);
