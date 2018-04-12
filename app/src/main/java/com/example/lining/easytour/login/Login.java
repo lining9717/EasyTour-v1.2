@@ -160,6 +160,7 @@ public class Login extends Activity {
                 intent.putExtra("username",strings[1]);
                 intent.putExtra("introduce",strings[2]);
                 intent.putExtra("tel",strings[3]);
+                intent.putExtra("photo",strings[4]);
                 startActivity(intent);
                 finish();
                 progressDialog.dismiss();
@@ -170,7 +171,7 @@ public class Login extends Activity {
     private class GuiderLogin extends AsyncTask<String, Void, String[]> {
         @Override
         protected String[] doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/guiderlogin.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/guiderlogin.php/";
             String account = et_account.getText().toString().trim();
             String psw = et_psw.getText().toString().trim();
             StringBuilder result = new StringBuilder();
@@ -234,6 +235,7 @@ public class Login extends Activity {
                 intent.putExtra("guidername",strings[1]);
                 intent.putExtra("introduce",strings[2]);
                 intent.putExtra("tel",strings[4]);
+                intent.putExtra("photo",strings[5]);
                 intent.putExtra("place",strings[6]);
                 startActivity(intent);
                 finish();

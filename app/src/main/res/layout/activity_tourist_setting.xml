@@ -7,35 +7,13 @@
     tools:context=".tourist.TouristSettingActivity">
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:src="@drawable/ic_menu_manage" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/private_setting"
-                android:textSize="35sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="30dp">
+        android:gravity="center">
             <ImageView
                 android:id="@+id/t_setting_iv_icon"
                 android:layout_width="150dp"
@@ -43,7 +21,6 @@
                 android:layout_gravity="center"
                 android:src="@drawable/logotemp">
             </ImageView>
-                <!--android:onClick="ivTChangeUserIcon"/>-->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -53,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/UserName_Setting"/>
                 <EditText
+                    android:id="@+id/et_setting_username"
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -65,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/PhoneNum_Setting"/>
                 <EditText
+                    android:id="@+id/et_setting_tel"
                     android:layout_width="200sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -78,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Description_Setting"/>
                 <EditText
+                    android:id="@+id/et_setting_intro"
                     android:layout_width="200sp"
                     android:layout_height="wrap_content"
                     android:singleLine="false"
@@ -93,7 +73,7 @@
                 android:layout_marginTop="40dp"
                 android:onClick="btnUpdate"/>
 
-        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
 

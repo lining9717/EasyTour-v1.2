@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".tourist.TouristSettingActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme"
+            android:label="@string/tourist_setting"/>
         <activity
             android:name=".chat.MessageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -69,7 +71,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".guide.GuideSettingActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme"
+            android:label="@string/tourist_setting"/>
         <activity
             android:name=".clip.AcClipImg"
             android:theme="@style/AppTheme.NoActionBar"/>

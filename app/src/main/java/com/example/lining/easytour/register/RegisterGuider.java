@@ -189,15 +189,18 @@ public class RegisterGuider extends ClipBaseActivity {
         requestParams.addBodyParameter("IDnumber",IDnumber);
         requestParams.addBodyParameter("file",file);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
+
             @Override
             public void onSuccess(String result) {
+                Log.i("guideregister","------->"+result);
                 if (result.equals("register successful")){
                     Toast.makeText(RegisterGuider.this,"Sign up successful",Toast.LENGTH_SHORT).show();
                     finish();
                 }else if(result.equals("username exists")){
                     Toast.makeText(RegisterGuider.this,"Username exists",Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(RegisterGuider.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
+                    return;
+                }else
+                    Toast.makeText(RegisterGuider.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {

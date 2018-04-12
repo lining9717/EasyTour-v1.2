@@ -25,7 +25,7 @@
     <string name="UserName_Setting">UserName</string>
     <string name="PhoneNum_Setting">Phone</string>
     <string name="Location_Setting">Location</string>
-    <string name="Description_Setting">Resume</string>
+    <string name="Description_Setting">Introduce</string>
     <string name="Update_Setting">Update</string>
     <string name="AcceptOrder_GuiderMain">Accept Order</string>
     <string name="Customer_NUM_GuiderMain">Customer NUM：</string>
@@ -82,5 +82,6 @@
     <string name="updated_at">updated_at %1$s</string>
     <string name="updated_just_now">updated just now</string>
     <string name="time_error">time error</string>
+    <string name="tourist_setting">Setting</string>
 
 </resources>

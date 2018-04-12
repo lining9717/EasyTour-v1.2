@@ -3,6 +3,7 @@ package com.example.lining.easytour.guide;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -18,18 +19,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import com.example.lining.easytour.adapter.QueryArrayAdapter;
 import com.example.lining.easytour.orders.Order;
 import com.example.lining.easytour.Refresh.GuideMainRefreshableView;
+import com.example.lining.easytour.tourist.TouristActivity;
 import com.example.lining.easytour.util.BoardActivity;
 import com.example.lining.easytour.chat.MessageActivity;
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.login.Login;
 import com.example.lining.easytour.orders.OrderActivity;
 import com.example.lining.easytour.util.SerializableHashMap;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -67,13 +71,16 @@ public class GuideActivity extends AppCompatActivity
     private TextView tv_intro;
     private TextView tv_tel;
     private TextView tv_place;
+    private ImageView iv_headPhoto;
     private String name;
     private String intro;
     private String tel;
     private String place;
+    private String photo;
     private GestureDetector detector;
     private List<Map<String,String>> orderResult;
     GuideMainRefreshableView guideMainRefreshableView;
+    private final static int REQUESTCODE_FOR_UPDATE = 1; // 返回的结果码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +91,16 @@ public class GuideActivity extends AppCompatActivity
         intro = intent.getStringExtra("introduce");
         tel = intent.getStringExtra("tel");
         place = intent.getStringExtra("place");
-
-        if (place.equals("")) {
-            place = " ";
-        }
+        photo = intent.getStringExtra("photo");
         navigationView = findViewById(R.id.nav_view);
         View navigationview = navigationView.getHeaderView(0);
         tv_name = navigationview.findViewById(R.id.tv_guide_name);
         tv_intro = navigationview.findViewById(R.id.tv_intro);
         tv_tel = navigationview.findViewById(R.id.tv_tel);
         tv_place = navigationview.findViewById(R.id.tv_addr);
+        iv_headPhoto = navigationview.findViewById(R.id.tv_photo);
 
+        Picasso.with(GuideActivity.this).load(photo).into(iv_headPhoto);   //获取头像
         tv_name.setText(name + "");
         tv_intro.setText(intro + "");
         tv_tel.setText(tel + "");
@@ -328,7 +334,12 @@ public class GuideActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.setting) {
             Intent intent = new Intent(GuideActivity.this, GuideSettingActivity.class);
-            startActivity(intent);
+            intent.putExtra("username",name);
+            intent.putExtra("intro",intro);
+            intent.putExtra("mPath",photo);
+            intent.putExtra("tel",tel);
+            intent.putExtra("place",place);
+            startActivityForResult(intent,REQUESTCODE_FOR_UPDATE);
         } else if (id == R.id.quite) {
             Intent intent = new Intent(GuideActivity.this, Login.class);
             startActivity(intent);
@@ -338,6 +349,49 @@ public class GuideActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 0)
+            return;
+        if(resultCode == 1){
+            if(requestCode == REQUESTCODE_FOR_UPDATE){
+                String newname = data.getStringExtra("newname");
+                String newtel  = data.getStringExtra("newtel");
+                String newintro = data.getStringExtra("newintro");
+                String newPhotopath = data.getStringExtra("newServerPath");
+                String newplace = data.getStringExtra("newplace");
+                name = newname;
+                tel = newtel;
+                intro = newintro;
+                photo = newPhotopath;
+                place = newplace;
+                tv_name.setText(newname+"");
+                tv_intro.setText(newintro+"");
+                tv_tel.setText(newtel+"");
+                tv_place.setText(newplace+"");
+                Picasso.with(GuideActivity.this).load(photo).into(iv_headPhoto);   //获取头像
+            }
+        }
+        if(resultCode == 2){
+            if(requestCode == REQUESTCODE_FOR_UPDATE){
+                String newname = data.getStringExtra("newname");
+                String newtel  = data.getStringExtra("newtel");
+                String newintro = data.getStringExtra("newintro");
+                String newplace = data.getStringExtra("newplace");
+                name = newname;
+                tel = newtel;
+                intro = newintro;
+                place = newplace;
+                tv_name.setText(newname+"");
+                tv_intro.setText(newtel+"");
+                tv_tel.setText(newintro+"");
+                tv_place.setText(newplace+"");
+            }
+        }
+
     }
 
     public void btnClickViewFlipper(View view) {

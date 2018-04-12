@@ -6,29 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".guide.GuideSettingActivity"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/colorLightBlueBar">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/private_setting"
-            android:textSize="35sp"
-            android:textColor="@color/colorGray"/>
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,8 +32,6 @@
                     android:src="@drawable/logotemp">
 
                 </ImageView>
-                    <!--android:onClick="ivGChangeUserIcon"-->
-                    />
                 <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
@@ -56,6 +41,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/UserName_Setting"/>
                     <EditText
+                        android:id="@+id/et_guide_setting_name"
                         android:layout_width="200sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -68,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/PhoneNum_Setting"/>
                     <EditText
+                        android:id="@+id/et_guide_setting_tel"
                         android:layout_width="200sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -80,6 +67,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Location_Setting"/>
                     <EditText
+                        android:id="@+id/et_guide_setting_place"
                         android:layout_width="200sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -92,6 +80,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Description_Setting"/>
                     <EditText
+                        android:id="@+id/et_guide_setting_intro"
                         android:layout_width="200sp"
                         android:layout_height="wrap_content"
                         android:singleLine="false"

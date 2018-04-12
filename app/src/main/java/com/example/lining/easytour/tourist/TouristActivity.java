@@ -1,7 +1,9 @@
 package com.example.lining.easytour.tourist;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import com.example.lining.easytour.chat.MessageActivity;
 import com.example.lining.easytour.login.Login;
 import com.example.lining.easytour.guide.GuideQueryActivity;
 import com.example.lining.easytour.orders.SendOrderActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +45,13 @@ public class TouristActivity extends AppCompatActivity
     private String username;
     private String introduce;
     private String tel;
+    private String photo;
     private TextView tv_name;
     private TextView tv_intro;
     private TextView tv_tel;
+    private ImageView iv_headPhoto;
     private NavigationView navigationView;
-
-
+    private final static int REQUESTCODE_FOR_UPDATE = 1; // 返回的结果码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +62,16 @@ public class TouristActivity extends AppCompatActivity
         username = intent.getStringExtra("username");
         introduce = intent.getStringExtra("introduce");
         tel = intent.getStringExtra("tel");
+        photo = intent.getStringExtra("photo");
 
         navigationView = findViewById(R.id.nav_view);
         View navigationview = navigationView.getHeaderView(0);
+        iv_headPhoto = navigationview.findViewById(R.id.tv_photo);
         tv_name = navigationview.findViewById(R.id.tv_guide_name);
         tv_intro = navigationview.findViewById(R.id.tv_intro);
         tv_tel = navigationview.findViewById(R.id.tv_tel);
 
+        Picasso.with(TouristActivity.this).load(photo).into(iv_headPhoto);   //获取头像
         tv_name.setText(username+"");
         tv_intro.setText(introduce+"");
         tv_tel.setText(tel+"");
@@ -158,7 +166,11 @@ public class TouristActivity extends AppCompatActivity
             else if (id == R.id.nav_setting) {
             Intent intent = new Intent();
             intent.setClass(TouristActivity.this, TouristSettingActivity.class);
-            startActivity(intent);
+            intent.putExtra("username",username);
+            intent.putExtra("intro",introduce);
+            intent.putExtra("mPath",photo);
+            intent.putExtra("tel",tel);
+            startActivityForResult(intent,REQUESTCODE_FOR_UPDATE);
         } else if (id == R.id.nav_quite) {
             Intent intent = new Intent(TouristActivity.this, Login.class);
             startActivity(intent);
@@ -170,4 +182,41 @@ public class TouristActivity extends AppCompatActivity
         return true;
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == 0)
+            return;
+        if(resultCode == 1){
+            if(requestCode == REQUESTCODE_FOR_UPDATE){
+                String newname = data.getStringExtra("newname");
+                String newtel  = data.getStringExtra("newtel");
+                String newintro = data.getStringExtra("newintro");
+                String newPhotopath = data.getStringExtra("newServerPath");
+                username = newname;
+                tel = newtel;
+                introduce = newintro;
+                photo = newPhotopath;
+                tv_name.setText(newname+"");
+                tv_intro.setText(newintro+"");
+                tv_tel.setText(newtel+"");
+                Picasso.with(TouristActivity.this).load(photo).into(iv_headPhoto);   //获取头像
+            }
+        }
+        if(resultCode == 2){
+            if(requestCode == REQUESTCODE_FOR_UPDATE){
+                String newname = data.getStringExtra("newname");
+                String newtel  = data.getStringExtra("newtel");
+                String newintro = data.getStringExtra("newintro");
+                username = newname;
+                tel = newtel;
+                introduce = newintro;
+                tv_name.setText(newname+"");
+                tv_intro.setText(newtel+"");
+                tv_tel.setText(newintro+"");
+            }
+        }
+    }
 }

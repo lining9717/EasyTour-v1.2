@@ -14,22 +14,11 @@ import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.photo.ClipBaseActivity;
-import com.example.lining.easytour.util.UploadImage;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -47,7 +36,6 @@ public class RegisterTourist extends ClipBaseActivity {
     private String psw;
     private String confirm_psw;
     private String tel;
-
     private String mPath;
 
     public static final String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$";
@@ -168,8 +156,9 @@ public class RegisterTourist extends ClipBaseActivity {
                     finish();
                 }else if(result.equals("username exists")){
                     Toast.makeText(RegisterTourist.this,"Username exists",Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(RegisterTourist.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
+                    return;
+                }else
+                    Toast.makeText(RegisterTourist.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
