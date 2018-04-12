@@ -36,4 +36,6 @@ dependencies {
     implementation files('libs/httpmime-4.5.5.jar')
     implementation 'org.xutils:xutils:3.3.36'
     implementation files('libs/picasso-2.5.2.jar')
+    implementation files('libs/gson-2.8.2.jar')
+
 }

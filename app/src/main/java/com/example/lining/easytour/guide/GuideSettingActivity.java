@@ -1,9 +1,10 @@
 package com.example.lining.easytour.guide;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.photo.ClipBaseActivity;
-import com.example.lining.easytour.tourist.TouristSettingActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;

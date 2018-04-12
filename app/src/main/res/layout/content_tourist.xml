@@ -8,15 +8,20 @@
     tools:context=".guide.GuideActivity"
     tools:showIn="@layout/app_bar_tourist"
  >
-    <ListView
-        android:layout_marginTop="3dp"
-        android:layout_margin="2dp"
-        android:id="@+id/tourist_listview"
+    <com.example.lining.easytour.Refresh.GuideMainRefreshableView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#00000000"
-        android:dividerHeight="2dp">
+        android:id="@+id/tourist_content_rf">
+        <ListView
+            android:layout_marginTop="3dp"
+            android:layout_margin="2dp"
+            android:id="@+id/tourist_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:dividerHeight="2dp">
+        </ListView>
+    </com.example.lining.easytour.Refresh.GuideMainRefreshableView>
 
-    </ListView>
 
 </android.support.constraint.ConstraintLayout>

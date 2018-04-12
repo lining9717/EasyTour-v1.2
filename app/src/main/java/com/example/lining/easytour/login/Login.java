@@ -82,7 +82,13 @@ public class Login extends Activity {
 
     public void touristlogin(){
         progressDialog.show();
-        new TouristLogin().execute();
+//        new TouristLogin().execute();
+        Intent intent = new Intent(Login.this, TouristActivity.class);
+        intent.putExtra("username","test");
+        intent.putExtra("introduce","test");
+        intent.putExtra("tel","test");
+        startActivity(intent);
+        finish();
     }
 
     public void guiderlogin(){

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tourist.TouristQueryActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="0.5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0.5dp"
+            >
+            <Button
+                android:id="@+id/tourist_query_btn_to_be_finished"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="To be finished"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@color/colorButtonBlue"
+                android:onClick="btnToBeFinished"
+                />
+            <Button
+                android:padding="3dp"
+                android:id="@+id/tourist_query_btn_finished_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" Finished"
+                android:textColor="@color/white"
+                android:background="@color/colorButtonGray"
+                android:textSize="18sp"
+                android:onClick="btnFinishedOrder"/>
+        </LinearLayout>
+        <com.example.lining.easytour.Refresh.GuideMainRefreshableView
+            android:id="@+id/tourist_query_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tourist_query_orders_listview"
+                android:layout_margin="2dp"
+                >
+            </ListView>
+        </com.example.lining.easytour.Refresh.GuideMainRefreshableView>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

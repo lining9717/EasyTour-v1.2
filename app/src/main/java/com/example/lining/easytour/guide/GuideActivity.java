@@ -1,9 +1,11 @@
 package com.example.lining.easytour.guide;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
+
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -26,7 +28,6 @@ import android.widget.ViewFlipper;
 import com.example.lining.easytour.adapter.QueryArrayAdapter;
 import com.example.lining.easytour.orders.Order;
 import com.example.lining.easytour.Refresh.GuideMainRefreshableView;
-import com.example.lining.easytour.tourist.TouristActivity;
 import com.example.lining.easytour.util.BoardActivity;
 import com.example.lining.easytour.chat.MessageActivity;
 import com.example.lining.easytour.R;
@@ -125,7 +126,22 @@ public class GuideActivity extends AppCompatActivity
         detector = new GestureDetector(this);
     }
 
-
+    /*
+     * 点击后退提示是否退出窗口
+     * */
+    private void showExitDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle("Warning")
+                .setMessage("Are you sure to exit")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GuideActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
     private void ListViewDataUpdate() {
 
     }
@@ -292,7 +308,8 @@ public class GuideActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            showExitDialog();
+
         }
     }
 

@@ -13,10 +13,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/appicon"
         android:name=".util.EasyTourUploadImageApplication"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/appicon"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
@@ -32,40 +32,38 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".orders.SendOrderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Send Order"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".guide.GuideQueryActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".login.Login"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".register.Register"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Register"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".register.RegisterGuider"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/SingUpInformation"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".register.RegisterTourist"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/SingUpInformation"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".guide.GuideActivity"
             android:label="@string/guider_market"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".orders.OrderActivity"
-            android:theme="@style/AppTheme"
             android:label="@string/order_details"
-            />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".util.BoardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Board"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".chat.TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -73,9 +71,20 @@
             android:name=".guide.GuideSettingActivity"
             android:theme="@style/AppTheme"
             android:label="@string/tourist_setting"/>
+
         <activity
             android:name=".clip.AcClipImg"
-            android:theme="@style/AppTheme.NoActionBar"/>
-</application>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".welcome.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".tourist.TouristQueryActivity"></activity>
+    </application>
 
 </manifest>

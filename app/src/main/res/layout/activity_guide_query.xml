@@ -9,51 +9,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="0.5dp"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_menu_gallery"
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Orders"
-            android:textSize="35sp"
-            />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:padding="0.5dp"
+        >
         <Button
             android:id="@+id/btn_to_be_finished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="To be finished"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:background="@color/colorButtonBlue"
             android:onClick="btnToBeFinished"
             />
         <Button
+            android:padding="3dp"
             android:id="@+id/btn_finished_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" Finished"
+            android:textColor="@color/white"
+            android:background="@color/colorButtonGray"
+            android:textSize="18sp"
             android:onClick="btnFinishedOrder"/>
     </LinearLayout>
-    <ListView
+    <com.example.lining.easytour.Refresh.GuideMainRefreshableView
+        android:id="@+id/guide_query_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/orders_listview"
-        android:layout_margin="2dp"
-        >
-    </ListView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/guide_orders_listview"
+            android:layout_margin="2dp"
+            >
+        </ListView>
+    </com.example.lining.easytour.Refresh.GuideMainRefreshableView>
+
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

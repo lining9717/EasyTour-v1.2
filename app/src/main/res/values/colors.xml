@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorLogoTextBlue">#293e6c</color>
     <color name="colorLightBlue">#68d0ea</color>
     <color name="colorLightGreen">#73f1a3</color>
     <color name="colorPrimary">#3F51B5</color>
@@ -20,7 +21,8 @@
     <color name="FIN">#4c93e9</color>
     <color name="colorTextColor">#f0ffffff</color>
     <color name="colorBackGroundBlue">#5b9ad4</color>
-
+    <color name="colorButtonGray">#babbbc</color>
+    <color name="colorButtonBlue">#5b9ad4</color>
 
 
 

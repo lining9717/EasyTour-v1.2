@@ -1,4 +1,4 @@
-package com.example.lining.easytour.guide;
+package com.example.lining.easytour.tourist;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -41,7 +41,7 @@ import java.util.Map;
 
 import static com.example.lining.easytour.util.ToolUtil.daysBetween;
 
-public class GuideQueryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, GestureDetector.OnGestureListener {
+public class TouristQueryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, GestureDetector.OnGestureListener {
     private static final int FINISHED = 0x8989;
     private static final int UNFINISHED = 0x9898;
     private ListView lv_to_be_finished;
@@ -57,14 +57,14 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide_query);
+        setContentView(R.layout.activity_tourist_query);
         Intent intent = getIntent();
         guidename = intent.getStringExtra("guidename");
         orderResult = new ArrayList<>();
         finishedOrders = new ArrayList<>();
         unFinishedOrders = new ArrayList<>();
-        TBDbutton = findViewById(R.id.btn_to_be_finished);
-        Fbutton = findViewById(R.id.btn_finished_order);
+        TBDbutton = findViewById(R.id.tourist_query_btn_to_be_finished);
+        Fbutton = findViewById(R.id.tourist_query_btn_finished_order);
         new GetOwnOrders().execute(guidename);
         //显示Bar的返回按钮
         ActionBar actionBar = getSupportActionBar();
@@ -72,8 +72,8 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //下拉刷新
-        guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.guide_query_rv);
-        guideMainRefreshableView.listView = (ListView) findViewById(R.id.guide_orders_listview);
+        guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.tourist_query_rv);
+        guideMainRefreshableView.listView = (ListView) findViewById(R.id.tourist_query_orders_listview);
         guideMainRefreshableView.setOnRefreshListener(new GuideMainRefreshableView.PullToRefreshListener() {
             @Override
             public void onRefresh() {
@@ -99,8 +99,8 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
             case android.R.id.home:
                 finish();
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -108,7 +108,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(flag == UNFINISHED){
-            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
+            Intent intent = new Intent(TouristQueryActivity.this,OrderActivity.class);
             Map<String,String> map = orderResult.get(unFinishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
@@ -120,7 +120,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         }
 
         if(flag == FINISHED){
-            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
+            Intent intent = new Intent(TouristQueryActivity.this,OrderActivity.class);
             Map<String,String> map = orderResult.get(finishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
@@ -138,21 +138,21 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         lv_to_be_finished = findViewById(R.id.guide_orders_listview);
 
         flag = UNFINISHED;
-        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(TouristQueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
         lv_to_be_finished.setOnItemClickListener(this);
     }
     private List<Order> getDataFinished() {
         // TODO Auto-generated method stub
         List<Order> list= new ArrayList<Order>();
-       for(int i=0;i<orderResult.size();i++){
-           Map<String,String> map = orderResult.get(i);
-           if(map.get("isDone").equals("Yes")){
-               String days = daysBetween(map.get("begin_day"),map.get("end_day"));
-               list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days"));
-               finishedOrders.add(i);
-           }
-       }
+        for(int i=0;i<orderResult.size();i++){
+            Map<String,String> map = orderResult.get(i);
+            if(map.get("isDone").equals("Yes")){
+                String days = daysBetween(map.get("begin_day"),map.get("end_day"));
+                list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days"));
+                finishedOrders.add(i);
+            }
+        }
         return list;
     }
     private List<Order> getDataToBeFinished() {
@@ -174,7 +174,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         flag = UNFINISHED;
         TBDbutton.setBackgroundColor(getResources().getColor(R.color.colorButtonBlue));
         Fbutton.setBackgroundColor(getResources().getColor(R.color.colorButtonGray));
-        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(TouristQueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
     }
 
@@ -182,7 +182,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         flag = FINISHED;
         TBDbutton.setBackgroundColor(getResources().getColor(R.color.colorButtonGray));
         Fbutton.setBackgroundColor(getResources().getColor(R.color.colorButtonBlue));
-        QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataFinished());
+        QueryArrayAdapter adapter = new QueryArrayAdapter(TouristQueryActivity.this,R.layout.order_item,getDataFinished());
         lv_to_be_finished.setAdapter(adapter);
     }
 
