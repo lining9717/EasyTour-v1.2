@@ -99,7 +99,7 @@ public class SendOrderActivity extends AppCompatActivity {
     private class ReleaseOrder extends AsyncTask<String,Void,Integer>{
         @Override
         protected Integer doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/releaseorders.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/releaseorders.php/";
             String result = null;
             HttpPost httpRequest = new HttpPost(uri);
             List params = new ArrayList();

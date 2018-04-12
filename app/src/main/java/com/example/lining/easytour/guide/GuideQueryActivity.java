@@ -143,7 +143,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     private class GetOwnOrders extends AsyncTask<String,Void,String>{
         @Override
         protected String doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/getAcceptedOrders.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/getAcceptedOrders.php/";
             StringBuilder result = new StringBuilder();
             HttpPost httpRequest = new HttpPost(uri);
             List params = new ArrayList();

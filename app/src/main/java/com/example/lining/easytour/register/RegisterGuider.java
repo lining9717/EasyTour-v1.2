@@ -22,7 +22,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,7 +51,8 @@ public class RegisterGuider extends ClipBaseActivity {
     private String realname;
     private String tel;
     private String IDnumber;
-    public static final String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    private String mPath;
+    public static final String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$";
     public static final String REGEX_ID = "^(\\d{6})(19|20)(\\d{2})(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])(\\d{3})(\\d|X|x)?$";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +106,11 @@ public class RegisterGuider extends ClipBaseActivity {
                     return;
                 }
 
-                new GuiderRegister().execute();
+                if(mPath == null){
+                    Toast.makeText(RegisterGuider.this, "Please choose your photo", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                guideregister();
             }
         });
     }
@@ -114,7 +123,7 @@ public class RegisterGuider extends ClipBaseActivity {
     @Override
     public void setImg(Bitmap img, String path) {
         ivHeadImg.setImageBitmap(img);
-        // TODO: 2018/4/9 上传头像和路径 
+        mPath = path;
     }
 
     /*
@@ -140,7 +149,6 @@ public class RegisterGuider extends ClipBaseActivity {
                 showPopupWindow(ivHeadImg);
             }
         });
-
     }
     /**
      * 校验手机号
@@ -165,52 +173,45 @@ public class RegisterGuider extends ClipBaseActivity {
         return false;
     }
 
-    private class GuiderRegister extends AsyncTask<String, Void, Integer>{
-        @Override
-        protected Integer doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/guiderregister.php/";
-            String result = null;
-            HttpPost httpRequest = new HttpPost(uri);
-            List params = new ArrayList();
-            params.add(new BasicNameValuePair("username", username));
-            params.add(new BasicNameValuePair("password", psw));
-            params.add(new BasicNameValuePair("telephone",tel));
-            params.add(new BasicNameValuePair("realname",realname));
-            params.add(new BasicNameValuePair("IDnumber",IDnumber));
-            try {
-                httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-                HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
-                // 服务器发给客户端的相应，有一个相应码： 相应码为200，正常； 相应码为404，客户端错误； 相应码为505，服务器端错误。
-                Log.i("getStatusCode():","------>"+httpResponse.getStatusLine().getStatusCode());
-                if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                    result = EntityUtils.toString(httpResponse.getEntity());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Log.i("result:", "------------>"+result);
-            if (result.equals("register successful"))
-                return 1;
-            if(result.equals("username exists"))
-                return  2;
-            return 0;
+    public void guideregister(){
+        String uri = "http://118.89.18.136/EasyTour/EasyTour-Img/guiderregister.php/";
+        File file = new File(mPath);
+        if (!file.exists()) {
+            Toast.makeText(RegisterGuider.this,"File doesn't exist",Toast.LENGTH_SHORT).show();
+            return;
         }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            if(integer == 0){
+        // 保存需上传文件信息
+        RequestParams requestParams=new RequestParams(uri);
+        requestParams.addBodyParameter("username",username);
+        requestParams.addBodyParameter("password",psw);
+        requestParams.addBodyParameter("telephone",tel);
+        requestParams.addBodyParameter("realname",realname);
+        requestParams.addBodyParameter("IDnumber",IDnumber);
+        requestParams.addBodyParameter("file",file);
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result.equals("register successful")){
+                    Toast.makeText(RegisterGuider.this,"Sign up successful",Toast.LENGTH_SHORT).show();
+                    finish();
+                }else if(result.equals("username exists")){
+                    Toast.makeText(RegisterGuider.this,"Username exists",Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(RegisterGuider.this,"Sign up Fail, Server Error",Toast.LENGTH_SHORT).show();
             }
-            if(integer == 1){
-                Toast.makeText(RegisterGuider.this,"Sign up successful",Toast.LENGTH_LONG).show();
-                finish();
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(RegisterGuider.this,"Sign up Fail",Toast.LENGTH_SHORT).show();
+                Log.i("result",ex.getMessage());
+                ex.printStackTrace();
             }
-            if(integer == 2){
-                Toast.makeText(RegisterGuider.this,"Username exists",Toast.LENGTH_SHORT).show();
+            @Override
+            public void onCancelled(CancelledException cex) {
             }
-        }
+
+            @Override
+            public void onFinished() {
+            }
+        });
     }
-
-
 }

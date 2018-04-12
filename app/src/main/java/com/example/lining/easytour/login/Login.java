@@ -93,7 +93,7 @@ public class Login extends Activity {
     private class TouristLogin extends AsyncTask<String, Void, String[]> {
         @Override
         protected String[] doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/touristlogin.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/touristlogin.php/";
             String account = et_account.getText().toString().trim();
             String psw = et_psw.getText().toString().trim();
             StringBuilder result = new StringBuilder();
