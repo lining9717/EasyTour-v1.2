@@ -82,7 +82,13 @@ public class Login extends Activity {
 
     public void touristlogin(){
         progressDialog.show();
-        new TouristLogin().execute();
+//        new TouristLogin().execute();
+        Intent intent = new Intent(Login.this, TouristActivity.class);
+        intent.putExtra("username","test");
+        intent.putExtra("introduce","test");
+        intent.putExtra("tel","test");
+        startActivity(intent);
+        finish();
     }
 
     public void guiderlogin(){
@@ -93,7 +99,7 @@ public class Login extends Activity {
     private class TouristLogin extends AsyncTask<String, Void, String[]> {
         @Override
         protected String[] doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/touristlogin.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/touristlogin.php/";
             String account = et_account.getText().toString().trim();
             String psw = et_psw.getText().toString().trim();
             StringBuilder result = new StringBuilder();
@@ -170,7 +176,7 @@ public class Login extends Activity {
     private class GuiderLogin extends AsyncTask<String, Void, String[]> {
         @Override
         protected String[] doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/guiderlogin.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/guiderlogin.php/";
             String account = et_account.getText().toString().trim();
             String psw = et_psw.getText().toString().trim();
             StringBuilder result = new StringBuilder();

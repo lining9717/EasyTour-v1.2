@@ -74,7 +74,7 @@
     <string name="order_detail_finished">Finished</string>
 
     <string name="order_order_title">Order</string>
-<!--下拉刷新-->
+    <!--下拉刷新-->
     <string name="pull_to_refresh">pull to refresh</string>
     <string name="release_to_refresh">release to refresh</string>
     <string name="refreshing">refreshing...</string>
@@ -82,5 +82,7 @@
     <string name="updated_at">updated_at %1$s</string>
     <string name="updated_just_now">updated just now</string>
     <string name="time_error">time error</string>
+    <string name="please_click_to_select_the_city">Please click to select the city</string>
+    <string name="click_here_to_choose">click here to choose</string>
 
 </resources>

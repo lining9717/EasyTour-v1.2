@@ -1,20 +1,26 @@
 package com.example.lining.easytour.tourist;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.lining.easytour.Refresh.GuideMainRefreshableView;
+import com.example.lining.easytour.guide.GuideActivity;
 import com.example.lining.easytour.util.BoardActivity;
 import com.example.lining.easytour.util.Postpaper;
 import com.example.lining.easytour.R;
@@ -29,7 +35,7 @@ import java.util.List;
 
 public class TouristActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, GestureDetector.OnGestureListener {
     private DrawerLayout drawerLayout;
     private ListView lv_list_postpaper;
 
@@ -45,8 +51,8 @@ public class TouristActivity extends AppCompatActivity
     private TextView tv_intro;
     private TextView tv_tel;
     private NavigationView navigationView;
-
-
+    private GuideMainRefreshableView guideMainRefreshableView;
+    private GestureDetector detector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +92,41 @@ public class TouristActivity extends AppCompatActivity
         lv_list_postpaper.setAdapter(adapter);
         lv_list_postpaper.setOnItemClickListener(this);
 
+        //下拉刷新
+        guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.tourist_content_rv);
+        guideMainRefreshableView.listView = (ListView) findViewById(R.id.tourist_listview);
+        guideMainRefreshableView.setOnRefreshListener(new GuideMainRefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    ListViewDataUpdate();/*更新列表数据*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                guideMainRefreshableView.finishRefreshing();
+            }
+        }, 0);
 
+        detector = new GestureDetector(this);
+
+    }
+    /*
+     * 点击后退提示是否退出窗口
+     * */
+    private void showExitDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle("Warning")
+                .setMessage("Are you sure to exit")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TouristActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+    private void ListViewDataUpdate() {
     }
 
     @Override
@@ -113,7 +153,7 @@ public class TouristActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            showExitDialog();
         }
     }
 
@@ -170,4 +210,33 @@ public class TouristActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
+    }
 }

@@ -1,8 +1,10 @@
 package com.example.lining.easytour.guide;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -119,7 +121,22 @@ public class GuideActivity extends AppCompatActivity
         detector = new GestureDetector(this);
     }
 
-
+    /*
+     * 点击后退提示是否退出窗口
+     * */
+    private void showExitDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle("Warning")
+                .setMessage("Are you sure to exit")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GuideActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
     private void ListViewDataUpdate() {
 
     }
@@ -286,7 +303,8 @@ public class GuideActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            showExitDialog();
+
         }
     }
 
@@ -361,7 +379,7 @@ public class GuideActivity extends AppCompatActivity
     private class GetOrders extends AsyncTask<String,Void,String>{
         @Override
         protected String doInBackground(String... strings) {
-            String uri = "http://118.89.18.136/EasyTour-bk/getorders.php/";
+            String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/getorders.php/";
             StringBuilder result = new StringBuilder();
             HttpPost httpRequest = new HttpPost(uri);
             try {
