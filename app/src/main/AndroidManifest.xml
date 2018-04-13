@@ -32,11 +32,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".orders.SendOrderActivity"
-            android:label="Send Order"
+            android:label="Release Order"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".guide.GuideQueryActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:label="Orders"/>
         <activity
             android:name=".login.Login"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -67,6 +68,15 @@
         <activity
             android:name=".chat.TalkActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".guide.GuideUnfinishedOrdersActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/guide_unfinished_orders"/>
+        <activity
+            android:name=".guide.GuideFinishedOrdersActicity"
+            android:theme="@style/AppTheme"
+            android:label="@string/guide_finished_orders"/>
         <activity
             android:name=".guide.GuideSettingActivity"
             android:theme="@style/AppTheme"
@@ -84,7 +94,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".tourist.TouristQueryActivity"></activity>
+        <activity
+            android:name=".tourist.TouristQueryActivity"
+            android:theme="@style/AppTheme"
+            android:label="Orders"/>
+
+        <activity
+            android:name=".tourist.TouristFinishedOrdersActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/guide_unfinished_orders"/>
+        <activity
+            android:name=".tourist.TouristUnfinishiedOrdersActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/guide_unfinished_orders"/>
+
     </application>
 
 </manifest>

@@ -96,5 +96,10 @@
     <string name="pickerview_hours">时</string>
     <string name="pickerview_minutes">分</string>
     <string name="pickerview_seconds">秒</string>
+    <string name="bt_finished">Finished</string>
+    <string name="guide_unfinished_orders">Unfinished Orders</string>
+    <string name="guide_finished_name">Guide name</string>
+    <string name="guide_finished_orders">Finished Orders</string>
+    <string name="tourist_unfinished_processing">Processing...</string>
 
 </resources>

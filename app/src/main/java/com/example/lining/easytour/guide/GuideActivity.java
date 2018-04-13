@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -81,7 +82,9 @@ public class GuideActivity extends AppCompatActivity
     private GestureDetector detector;
     private List<Map<String,String>> orderResult;
     GuideMainRefreshableView guideMainRefreshableView;
-    private final static int REQUESTCODE_FOR_UPDATE = 1; // 返回的结果码
+    private final static int REQUESTCODE_FOR_UPDATE = 0x1111; // 返回的结果码
+    private final static int REQUSETCODE_FOR_REFRESH_LISTVIEW = 0x1112;
+    private Handler handler_refresh_listview;
 
 
     @Override
@@ -108,6 +111,7 @@ public class GuideActivity extends AppCompatActivity
         tv_tel.setText(tel + "");
         tv_place.setText(place + "");
         orderResult = new ArrayList<>();
+        handler_refresh_listview = new Handler();
         new GetOrders().execute();
 
         guideMainRefreshableView = (GuideMainRefreshableView) findViewById(R.id.refreshable_view);
@@ -117,6 +121,7 @@ public class GuideActivity extends AppCompatActivity
             public void onRefresh() {
                 try {
                     ListViewDataUpdate();/*更新列表数据*/
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -143,6 +148,7 @@ public class GuideActivity extends AppCompatActivity
                 .setNegativeButton("No", null)
                 .show();
     }
+
     private void ListViewDataUpdate() {
         orderResult.clear();
         String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/getorders.php/";
@@ -156,7 +162,7 @@ public class GuideActivity extends AppCompatActivity
                     result.append(s);
                 }
             }
-            Log.i("GetOrders","result----------->"+result.toString());
+            Log.i("ListViewDataUpdate","result----------->"+result.toString());
             JSONObject jsonObject = new JSONObject(result.toString());
             JSONArray jsonArray = jsonObject.getJSONArray("data");
             for (int i=0;i<jsonArray.length();i++){
@@ -174,12 +180,20 @@ public class GuideActivity extends AppCompatActivity
                 map.put("isDone",itemObject.getString("isDone"));
                 orderResult.add(map);
             }
-            QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
-            orders_list_view.setAdapter(orders_adapter);
+            handler_refresh_listview.post(run_refresh_listview);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private Runnable run_refresh_listview = new Runnable() {
+        @Override
+        public void run() {
+            QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
+            orders_list_view.setAdapter(orders_adapter);
+        }
+    };
+
 
     public void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -198,7 +212,6 @@ public class GuideActivity extends AppCompatActivity
         orders_list_view.setAdapter(orders_adapter);
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);
-        viewFlipper.setOnTouchListener(this);
         orders_list_view.setOnItemClickListener(this);
     }
 
@@ -213,7 +226,7 @@ public class GuideActivity extends AppCompatActivity
         bundle.putSerializable("message",serializableHashMap);
         bundle.putString("guidername",name);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent,REQUSETCODE_FOR_REFRESH_LISTVIEW);
     }
 
     //滑动广告
@@ -409,6 +422,7 @@ public class GuideActivity extends AppCompatActivity
         if(resultCode == 0)
             return;
         if(resultCode == 1){
+            //刷新包括头像的个人信息
             if(requestCode == REQUESTCODE_FOR_UPDATE){
                 String newname = data.getStringExtra("newname");
                 String newtel  = data.getStringExtra("newtel");
@@ -426,8 +440,19 @@ public class GuideActivity extends AppCompatActivity
                 tv_place.setText(newplace+"");
                 Picasso.with(GuideActivity.this).load(photo).into(iv_headPhoto);   //获取头像
             }
+            //接收订单后刷新listview
+            if(requestCode == REQUSETCODE_FOR_REFRESH_LISTVIEW){
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ListViewDataUpdate();
+                    }
+                });
+                thread.start();
+            }
         }
         if(resultCode == 2){
+            //刷新不包括头像的个人信息
             if(requestCode == REQUESTCODE_FOR_UPDATE){
                 String newname = data.getStringExtra("newname");
                 String newtel  = data.getStringExtra("newtel");
@@ -444,6 +469,8 @@ public class GuideActivity extends AppCompatActivity
             }
         }
 
+
+
     }
 
     public void btnClickViewFlipper(View view) {
@@ -458,7 +485,8 @@ public class GuideActivity extends AppCompatActivity
         for (int i=0;i<orderResult.size();i++){
             Map<String,String> map = orderResult.get(i);
             String days = daysBetween(map.get("begin_day"),map.get("end_day"));
-            Order order = new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days");
+            int day = Integer.parseInt(days)+1;
+            Order order = new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),day+(day>1?" days":" day"));
             list.add(order);
         }
         return list;

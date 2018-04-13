@@ -29,6 +29,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="25sp" />
             <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_send_order_location"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

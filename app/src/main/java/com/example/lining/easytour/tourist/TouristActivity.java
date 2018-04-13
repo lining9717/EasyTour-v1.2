@@ -192,11 +192,11 @@ public class TouristActivity extends AppCompatActivity
 
         if (id == R.id.nav_qurryorder) {
             Intent intent = new Intent();
-            intent.setClass(TouristActivity.this, GuideQueryActivity.class);
+            intent.setClass(TouristActivity.this, TouristQueryActivity.class);
+            intent.putExtra("touristname",username);
             startActivity(intent);
         } else if (id == R.id.nav_sendorder) {
             Intent intent = new Intent();
-
             intent.setClass(TouristActivity.this,SendOrderActivity.class);
             intent.putExtra("username",username);
             startActivity(intent);

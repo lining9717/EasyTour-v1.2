@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -53,6 +54,9 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     private int flag;
     private GuideMainRefreshableView guideMainRefreshableView;
     private GestureDetector detector;
+    private final static int REQUESTCODE_UNFINISHED = 0x1234;
+    private Handler handler_refresh_listview;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
         unFinishedOrders = new ArrayList<>();
         TBDbutton = findViewById(R.id.btn_to_be_finished);
         Fbutton = findViewById(R.id.btn_finished_order);
+        handler_refresh_listview = new Handler();
         new GetOwnOrders().execute(guidename);
         //显示Bar的返回按钮
         ActionBar actionBar = getSupportActionBar();
@@ -91,7 +96,62 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     }
 
     private void ListViewDataUpdate() {
+        unFinishedOrders.clear();
+        finishedOrders.clear();
+        orderResult.clear();
+        String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/getAcceptedOrders.php/";
+        StringBuilder result = new StringBuilder();
+        HttpPost httpRequest = new HttpPost(uri);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("guidername", guidename));
+        try {
+            httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
+                    result.append(s);
+                }
+            }
+            Log.i("GuideQueryActivity","ListViewDataUpdate result----------->"+result.toString());
+
+            JSONObject jsonObject = new JSONObject(result.toString());
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject itemObject = jsonArray.getJSONObject(i);
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("orderID",itemObject.getString("orderID"));
+                map.put("username",itemObject.getString("username"));
+                map.put("guidername",itemObject.getString("guidername"));
+                map.put("begin_day",itemObject.getString("begin_day"));
+                map.put("end_day",itemObject.getString("end_day"));
+                map.put("place",itemObject.getString("place"));
+                map.put("place_descript",itemObject.getString("place_descript"));
+                map.put("time_descript",itemObject.getString("time_descript"));
+                map.put("num_of_people",itemObject.getString("num_of_people"));
+                map.put("isDone",itemObject.getString("isDone"));
+                orderResult.add(map);
+            }
+            handler_refresh_listview.post(run_refresh_listview);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
+    private Runnable run_refresh_listview = new Runnable() {
+        @Override
+        public void run() {
+             if(flag == UNFINISHED){
+                 QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
+                 lv_to_be_finished.setAdapter(adapter);
+             }
+             if(flag == FINISHED){
+                 QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataFinished());
+                 lv_to_be_finished.setAdapter(adapter);
+             }
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,19 +168,18 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(flag == UNFINISHED){
-            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
+            Intent intent = new Intent(GuideQueryActivity.this,GuideUnfinishedOrdersActivity.class);
             Map<String,String> map = orderResult.get(unFinishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
             Bundle bundle = new Bundle();
             bundle.putSerializable("message",serializableHashMap);
-            bundle.putString("guidername",guidename);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent,REQUESTCODE_UNFINISHED);
         }
 
         if(flag == FINISHED){
-            Intent intent = new Intent(GuideQueryActivity.this,OrderActivity.class);
+            Intent intent = new Intent(GuideQueryActivity.this,GuideFinishedOrdersActicity.class);
             Map<String,String> map = orderResult.get(finishedOrders.get(position));
             SerializableHashMap serializableHashMap = new SerializableHashMap();
             serializableHashMap.setMap((HashMap<String, String>)map);
@@ -130,13 +189,26 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
             intent.putExtras(bundle);
             startActivity(intent);
         }
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 0)
+            return;
+        if(resultCode == 1 && requestCode == REQUESTCODE_UNFINISHED){
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ListViewDataUpdate();
+                }
+            });
+            thread.start();
+        }
     }
 
     public void init(){
         lv_to_be_finished = findViewById(R.id.guide_orders_listview);
-
         flag = UNFINISHED;
         QueryArrayAdapter adapter = new QueryArrayAdapter(GuideQueryActivity.this,R.layout.order_item,getDataToBeFinished());
         lv_to_be_finished.setAdapter(adapter);
@@ -149,7 +221,8 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
            Map<String,String> map = orderResult.get(i);
            if(map.get("isDone").equals("Yes")){
                String days = daysBetween(map.get("begin_day"),map.get("end_day"));
-               list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days"));
+               int day = Integer.parseInt(days)+1;
+               list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),day+(day>1?" days":" day")));
                finishedOrders.add(i);
            }
        }
@@ -162,7 +235,8 @@ public class GuideQueryActivity extends AppCompatActivity implements AdapterView
             Map<String,String> map = orderResult.get(i);
             if(map.get("isDone").equals("No")){
                 String days = daysBetween(map.get("begin_day"),map.get("end_day"));
-                list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),days+"days"));
+                int day = Integer.parseInt(days)+1;
+                list.add(new Order(R.drawable.logotemp,map.get("place"),map.get("place_descript"),map.get("begin_day"),day+(day>1?" days":" day")));
                 unFinishedOrders.add(i);
             }
         }
