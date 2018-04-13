@@ -33,7 +33,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="tvChooseLocation"/>
+                android:onClick="tvChooseLocation"
+                android:hint="click here"
+                android:textSize="25sp"/>
         </LinearLayout>
 
 
