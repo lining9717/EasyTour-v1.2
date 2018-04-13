@@ -39,8 +39,8 @@
     <string name="SendOrder_TouristMain">SendOrder</string>
     <string name="Tourist_Login">Tourist</string>
     <string name="Guider_Login">Guide</string>
-    <string name="SingUp_Login">SingUp</string>
-    <string name="SingIn_Login">SingIn</string>
+    <string name="SingUp_Login">Sing Up</string>
+    <string name="SingIn_Login">Sing In</string>
     <string name="SingUpInformation">Information</string>
     <string name="password">PassWord</string>
     <string name="confirm_password">Confirm PassWord</string>
@@ -85,5 +85,6 @@
     <string name="tourist_setting">Setting</string>
     <string name="please_click_to_select_the_city">Please click to select the city</string>
     <string name="click_here_to_choose">click here to choose</string>
+    <string name="welcome">We\'ll make your love travel</string>
 
 </resources>

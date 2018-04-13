@@ -83,6 +83,7 @@ public class GuideActivity extends AppCompatActivity
     GuideMainRefreshableView guideMainRefreshableView;
     private final static int REQUESTCODE_FOR_UPDATE = 1; // 返回的结果码
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +132,7 @@ public class GuideActivity extends AppCompatActivity
      * */
     private void showExitDialog(){
         new AlertDialog.Builder(this)
-                .setTitle("Warning")
+                .setTitle("Promoting")
                 .setMessage("Are you sure to exit")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     @Override
@@ -143,7 +144,41 @@ public class GuideActivity extends AppCompatActivity
                 .show();
     }
     private void ListViewDataUpdate() {
-
+        orderResult.clear();
+        String uri = "http://118.89.18.136/EasyTour/EasyTour-bk/getorders.php/";
+        StringBuilder result = new StringBuilder();
+        HttpPost httpRequest = new HttpPost(uri);
+        try {
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                for(String s=bufferedReader.readLine();s!=null;s=bufferedReader.readLine()){
+                    result.append(s);
+                }
+            }
+            Log.i("GetOrders","result----------->"+result.toString());
+            JSONObject jsonObject = new JSONObject(result.toString());
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject itemObject = jsonArray.getJSONObject(i);
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("orderID",itemObject.getString("orderID"));
+                map.put("username",itemObject.getString("username"));
+                map.put("guidername",itemObject.getString("guidername"));
+                map.put("begin_day",itemObject.getString("begin_day"));
+                map.put("end_day",itemObject.getString("end_day"));
+                map.put("place",itemObject.getString("place"));
+                map.put("place_descript",itemObject.getString("place_descript"));
+                map.put("time_descript",itemObject.getString("time_descript"));
+                map.put("num_of_people",itemObject.getString("num_of_people"));
+                map.put("isDone",itemObject.getString("isDone"));
+                orderResult.add(map);
+            }
+            QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
+            orders_list_view.setAdapter(orders_adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void init() {
@@ -159,7 +194,7 @@ public class GuideActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         orders_list_view = findViewById(R.id.guider_listView);
-        QueryArrayAdapter orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
+        QueryArrayAdapter orders_adapter;orders_adapter = new QueryArrayAdapter(GuideActivity.this,R.layout.order_item, generateListContent());
         orders_list_view.setAdapter(orders_adapter);
         viewFlipper = (ViewFlipper) findViewById(R.id.guider_vf_lobby);
         setViewFlipper(viewFlipper);

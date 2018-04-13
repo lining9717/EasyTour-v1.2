@@ -32,6 +32,10 @@ public class QueryArrayAdapter extends ArrayAdapter<Order> {
     }
 
 
+    public void setObjects(List<Order> objects) {
+        this.objects = objects;
+    }
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub

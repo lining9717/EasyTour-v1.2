@@ -126,7 +126,7 @@ public class TouristActivity extends AppCompatActivity
      * */
     private void showExitDialog(){
         new AlertDialog.Builder(this)
-                .setTitle("Warning")
+                .setTitle("Promoting")
                 .setMessage("Are you sure to exit")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     @Override
