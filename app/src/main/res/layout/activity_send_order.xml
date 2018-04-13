@@ -28,18 +28,12 @@
                 android:text="@string/send_order_location"
                 android:layout_gravity="center_vertical"
                 android:textSize="25sp" />
-            <Spinner
-                android:id="@+id/spin_provence"
+            <TextView
+                android:id="@+id/tv_send_order_location"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-            </Spinner>
-            <Spinner
-                android:id="@+id/spin_city"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-            </Spinner>
+                android:layout_weight="1"
+                android:onClick="tvChooseLocation"/>
         </LinearLayout>
 
 
