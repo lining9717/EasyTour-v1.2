@@ -2,6 +2,7 @@ package com.example.lining.easytour.orders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +15,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.pickerview.GetJsonDataUtil;
 import com.example.lining.easytour.pickerview.JsonBean;
+import com.example.lining.easytour.pickerview.pickerview.builder.OptionsPickerBuilder;
+import com.example.lining.easytour.pickerview.pickerview.listener.OnOptionsSelectListener;
+import com.example.lining.easytour.pickerview.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 
 import org.apache.http.HttpResponse;
@@ -38,6 +43,7 @@ public class SendOrderActivity extends AppCompatActivity {
     private String[] Province;
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private Thread thread;
     private static final int MSG_LOAD_DATA = 0x0001;
     private static final int MSG_LOAD_SUCCESS = 0x0002;
@@ -53,11 +59,10 @@ public class SendOrderActivity extends AppCompatActivity {
     private String endtime;
     private TimePicker startday;
     private TimePicker endday;
-    private Spinner spinner_province;
-    private Spinner spinner_city;
     private Spinner spinner_number;
     private EditText et_location_des;
     private EditText et_time_des;
+    private TextView location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +71,6 @@ public class SendOrderActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
         startday = findViewById(R.id.start_time);
         endday = findViewById(R.id.end_time);
-        spinner_province = findViewById(R.id.spin_provence);
-        spinner_city =  findViewById(R.id.spin_city);
         spinner_number = findViewById(R.id.spin_number);
         et_location_des = findViewById(R.id.descript_location);
         et_time_des = findViewById(R.id.descript_time);
@@ -120,7 +123,6 @@ public class SendOrderActivity extends AppCompatActivity {
                 case MSG_LOAD_SUCCESS:
                     Toast.makeText(SendOrderActivity.this, "Parse Succeed", Toast.LENGTH_SHORT).show();
                     isLoaded = true;
-                    dataLoadToSpiner();
                     break;
 
                 case MSG_LOAD_FAILED:
@@ -130,21 +132,7 @@ public class SendOrderActivity extends AppCompatActivity {
         }
     };
 
-    private void dataLoadToSpiner() {
-        List<String> prolist = new ArrayList<String>();
-//        for(String str : Province){
-//            prolist.add(str);
-//        }
-        ArrayAdapter<String> adapter_pro=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,prolist);
-        spinner_province.setAdapter(adapter_pro);
 
-        List<String> citylist = new ArrayList<String>();
-//        for(String str : City){
-//            citylist.add(str);
-//        }
-        ArrayAdapter<String> adapter_city=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,citylist);
-        spinner_city.setAdapter(adapter_city);
-    }
 
     private void initJsonData() {//解析数据
 
@@ -167,22 +155,22 @@ public class SendOrderActivity extends AppCompatActivity {
 
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
             ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
-//            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
 
-//            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-//                String CityName = jsonBean.get(i).getCityList().get(c).getName();
-//                CityList.add(CityName);//添加城市
-//                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
-//
-//                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-//                if (jsonBean.get(i).getCityList().get(c).getArea() == null
-//                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
-//                    City_AreaList.add("");
-//                } else {
-//                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
-//                }
-//                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
-//            }
+            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+                String CityName = jsonBean.get(i).getCityList().get(c).getName();
+                CityList.add(CityName);//添加城市
+                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
+
+                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                if (jsonBean.get(i).getCityList().get(c).getArea() == null
+                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
+                    City_AreaList.add("");
+                } else {
+                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                }
+                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
+            }
 
             /**
              * 添加城市数据
@@ -192,12 +180,20 @@ public class SendOrderActivity extends AppCompatActivity {
             /**
              * 添加地区数据
              */
-//            options3Items.add(Province_AreaList);
+            options3Items.add(Province_AreaList);
         }
 
         mHandler.sendEmptyMessage(MSG_LOAD_SUCCESS);
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
+    }
+
     public ArrayList<JsonBean> parseData(String result) {//Gson 解析
         ArrayList<JsonBean> detail = new ArrayList<>();
         try {
@@ -215,7 +211,7 @@ public class SendOrderActivity extends AppCompatActivity {
     }
 
     public void btnSendOrder(View view) {
-         place = spinner_province.getSelectedItem().toString()+" "+spinner_city.getSelectedItem().toString();
+         place = location.getText().toString();
          place_description = et_location_des.getText().toString();
          time_description = et_time_des.getText().toString();
          numofpeople = spinner_number.getSelectedItem().toString();
@@ -230,6 +226,36 @@ public class SendOrderActivity extends AppCompatActivity {
             return;
         }
         new ReleaseOrder().execute();
+    }
+//点击相应弹出界面
+    public void tvChooseLocation(View view) {
+        showPickerView();
+    }
+    private void showPickerView() {// 弹出选择器
+
+        location = findViewById(R.id.tv_send_order_location);
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String tx = options1Items.get(options1).getPickerViewText() +
+                        options2Items.get(options1).get(options2) +
+                        options3Items.get(options1).get(options2).get(options3);
+
+                location.setText(tx);
+            }
+        })
+
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
     }
 
     private class ReleaseOrder extends AsyncTask<String,Void,Integer>{
