@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.pickerview.GetJsonDataUtil;
-import com.example.lining.easytour.pickerview.JsonBean;
+import com.example.lining.easytour.pickerview.bean.JsonBean;
 import com.example.lining.easytour.pickerview.pickerview.builder.OptionsPickerBuilder;
 import com.example.lining.easytour.pickerview.pickerview.listener.OnOptionsSelectListener;
 import com.example.lining.easytour.pickerview.pickerview.view.OptionsPickerView;
