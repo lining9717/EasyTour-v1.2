@@ -1,6 +1,7 @@
-package com.example.lining.easytour.pickerview;
+package com.example.lining.easytour.pickerview.bean;
 
 
+import com.example.lining.easytour.pickerview.contrarywind.interfaces.IPickerViewData;
 
 import java.util.List;
 

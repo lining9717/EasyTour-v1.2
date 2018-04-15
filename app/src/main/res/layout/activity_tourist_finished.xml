@@ -20,7 +20,12 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logotemp" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +49,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +81,12 @@
 
 
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +115,12 @@
                     android:layout_height="25dp"
                     android:src="@drawable/message"/>
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,7 +146,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,7 +176,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,7 +206,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,7 +236,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -226,7 +266,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -251,7 +296,12 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
