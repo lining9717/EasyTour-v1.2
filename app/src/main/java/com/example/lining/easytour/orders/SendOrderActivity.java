@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.lining.easytour.R;
 import com.example.lining.easytour.pickerview.GetJsonDataUtil;
-import com.example.lining.easytour.pickerview.JsonBean;
+import com.example.lining.easytour.pickerview.bean.JsonBean;
 import com.example.lining.easytour.pickerview.pickerview.builder.OptionsPickerBuilder;
 import com.example.lining.easytour.pickerview.pickerview.listener.OnOptionsSelectListener;
 import com.example.lining.easytour.pickerview.pickerview.view.OptionsPickerView;
@@ -107,8 +107,7 @@ public class SendOrderActivity extends AppCompatActivity {
             switch (msg.what) {
                 case MSG_LOAD_DATA:
                     if (thread == null) {//如果已创建就不再重新创建子线程了
-
-                        Toast.makeText(SendOrderActivity.this, "Begin Parse Data", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SendOrderActivity.this, "Begin Parse Data", Toast.LENGTH_SHORT).show();
                         thread = new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -121,12 +120,12 @@ public class SendOrderActivity extends AppCompatActivity {
                     break;
 
                 case MSG_LOAD_SUCCESS:
-                    Toast.makeText(SendOrderActivity.this, "Parse Succeed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SendOrderActivity.this, "Parse Succeed", Toast.LENGTH_SHORT).show();
                     isLoaded = true;
                     break;
 
                 case MSG_LOAD_FAILED:
-                    Toast.makeText(SendOrderActivity.this, "Parse Failed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SendOrderActivity.this, "Parse Failed", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

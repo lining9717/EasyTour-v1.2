@@ -50,7 +50,12 @@
             android:singleLine="false"
             android:maxLength="50"
             />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +79,12 @@
 
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,6 +108,7 @@
 
 
         </LinearLayout>
+
         <EditText
             android:id="@+id/descript_time"
             android:layout_width="match_parent"
@@ -106,6 +118,12 @@
             android:scrollbars="vertical"
             android:singleLine="false"
             android:maxLength="50"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
